@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import "FFBaseViewController.h"
 #import "FFBaseView.h"
 
 @interface AppDelegate ()
@@ -29,6 +30,10 @@
     view.ffRight = 50;
     view.ffBottom = 60;
     [self.window addSubview:view];
+    
+    FFBaseViewController *viewController = [[FFBaseViewController alloc] init];
+    viewController.view.backgroundColor = [UIColor orangeColor];
+    self.window.rootViewController = viewController;
 
     return YES;
 }
