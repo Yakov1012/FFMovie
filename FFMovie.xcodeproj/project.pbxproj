@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		665E3C381BD1297800282D71 /* FFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C371BD1297800282D71 /* FFBaseModel.m */; settings = {ASSET_TAGS = (); }; };
+		665E3C391BD1297800282D71 /* FFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C371BD1297800282D71 /* FFBaseModel.m */; settings = {ASSET_TAGS = (); }; };
 		66A80F581BD095BD0094CF29 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66A80F571BD095BD0094CF29 /* Images.xcassets */; };
 		66A80F671BD095BD0094CF29 /* FFMovieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A80F661BD095BD0094CF29 /* FFMovieTests.m */; };
 		66A80F921BD09EC90094CF29 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A80F8E1BD09EC90094CF29 /* AppDelegate.m */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		665E3C361BD1297800282D71 /* FFBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseModel.h; sourceTree = "<group>"; };
+		665E3C371BD1297800282D71 /* FFBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseModel.m; sourceTree = "<group>"; };
 		66A80F471BD095BD0094CF29 /* FFMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A80F4B1BD095BD0094CF29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66A80F571BD095BD0094CF29 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 		66BE40671BD0DC6E00C4AF3F /* Else(其他) */ = {
 			isa = PBXGroup;
 			children = (
+				665E3C361BD1297800282D71 /* FFBaseModel.h */,
+				665E3C371BD1297800282D71 /* FFBaseModel.m */,
 			);
 			path = "Else(其他)";
 			sourceTree = "<group>";
@@ -492,6 +498,7 @@
 			files = (
 				66BE406F1BD0EF1100C4AF3F /* FFBaseViewController.m in Sources */,
 				66BE40641BD0DBE900C4AF3F /* UIView+FFExtension.m in Sources */,
+				665E3C381BD1297800282D71 /* FFBaseModel.m in Sources */,
 				66BE406B1BD0DD0600C4AF3F /* FFBaseView.m in Sources */,
 				66A80F941BD09EC90094CF29 /* main.m in Sources */,
 				66A80F921BD09EC90094CF29 /* AppDelegate.m in Sources */,
@@ -506,6 +513,7 @@
 				66A80F951BD09EC90094CF29 /* main.m in Sources */,
 				66BE40651BD0DBE900C4AF3F /* UIView+FFExtension.m in Sources */,
 				66A80F671BD095BD0094CF29 /* FFMovieTests.m in Sources */,
+				665E3C391BD1297800282D71 /* FFBaseModel.m in Sources */,
 				66BE406C1BD0DD0600C4AF3F /* FFBaseView.m in Sources */,
 				66BE40701BD0EF1100C4AF3F /* FFBaseViewController.m in Sources */,
 			);
