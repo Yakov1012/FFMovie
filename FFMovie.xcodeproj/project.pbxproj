@@ -13,6 +13,10 @@
 		66A80F931BD09EC90094CF29 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A80F8E1BD09EC90094CF29 /* AppDelegate.m */; };
 		66A80F941BD09EC90094CF29 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A80F8F1BD09EC90094CF29 /* main.m */; };
 		66A80F951BD09EC90094CF29 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A80F8F1BD09EC90094CF29 /* main.m */; };
+		66BE40641BD0DBE900C4AF3F /* UIView+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 66BE40631BD0DBE900C4AF3F /* UIView+FFExtension.m */; };
+		66BE40651BD0DBE900C4AF3F /* UIView+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 66BE40631BD0DBE900C4AF3F /* UIView+FFExtension.m */; };
+		66BE406B1BD0DD0600C4AF3F /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66BE406A1BD0DD0600C4AF3F /* FFBaseView.m */; };
+		66BE406C1BD0DD0600C4AF3F /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66BE406A1BD0DD0600C4AF3F /* FFBaseView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,10 @@
 		66A80F8D1BD09EC90094CF29 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		66A80F8E1BD09EC90094CF29 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		66A80F8F1BD09EC90094CF29 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		66BE40621BD0DBE900C4AF3F /* UIView+FFExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FFExtension.h"; sourceTree = "<group>"; };
+		66BE40631BD0DBE900C4AF3F /* UIView+FFExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FFExtension.m"; sourceTree = "<group>"; };
+		66BE40691BD0DD0600C4AF3F /* FFBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseView.h; sourceTree = "<group>"; };
+		66BE406A1BD0DD0600C4AF3F /* FFBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				66A80F741BD09EC90094CF29 /* Board(版块) */,
+				66BE40661BD0DC6400C4AF3F /* Else(其他) */,
 				66A80F751BD09EC90094CF29 /* Found(发现) */,
 				66A80F761BD09EC90094CF29 /* Home(首页) */,
 				66A80F771BD09EC90094CF29 /* Message(消息) */,
@@ -189,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				66A80F7C1BD09EC90094CF29 /* Board(版块) */,
+				66BE40671BD0DC6E00C4AF3F /* Else(其他) */,
 				66A80F7D1BD09EC90094CF29 /* Found(发现) */,
 				66A80F7E1BD09EC90094CF29 /* Home(首页) */,
 				66A80F7F1BD09EC90094CF29 /* Message(消息) */,
@@ -252,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				66A80F841BD09EC90094CF29 /* Board(版块) */,
+				66BE40681BD0DC7800C4AF3F /* Else(其他) */,
 				66A80F851BD09EC90094CF29 /* Found(发现) */,
 				66A80F861BD09EC90094CF29 /* Home(首页) */,
 				66A80F871BD09EC90094CF29 /* Message(消息) */,
@@ -314,6 +325,7 @@
 		66A80F8B1BD09EC90094CF29 /* Expand(拓展) */ = {
 			isa = PBXGroup;
 			children = (
+				66BE40611BD0DBE900C4AF3F /* UIView+FFExtension */,
 			);
 			path = "Expand(拓展)";
 			sourceTree = "<group>";
@@ -340,6 +352,38 @@
 			children = (
 			);
 			path = "Vender(第三方)";
+			sourceTree = "<group>";
+		};
+		66BE40611BD0DBE900C4AF3F /* UIView+FFExtension */ = {
+			isa = PBXGroup;
+			children = (
+				66BE40621BD0DBE900C4AF3F /* UIView+FFExtension.h */,
+				66BE40631BD0DBE900C4AF3F /* UIView+FFExtension.m */,
+			);
+			path = "UIView+FFExtension";
+			sourceTree = "<group>";
+		};
+		66BE40661BD0DC6400C4AF3F /* Else(其他) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Else(其他)";
+			sourceTree = "<group>";
+		};
+		66BE40671BD0DC6E00C4AF3F /* Else(其他) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Else(其他)";
+			sourceTree = "<group>";
+		};
+		66BE40681BD0DC7800C4AF3F /* Else(其他) */ = {
+			isa = PBXGroup;
+			children = (
+				66BE40691BD0DD0600C4AF3F /* FFBaseView.h */,
+				66BE406A1BD0DD0600C4AF3F /* FFBaseView.m */,
+			);
+			path = "Else(其他)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,6 +484,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66BE40641BD0DBE900C4AF3F /* UIView+FFExtension.m in Sources */,
+				66BE406B1BD0DD0600C4AF3F /* FFBaseView.m in Sources */,
 				66A80F941BD09EC90094CF29 /* main.m in Sources */,
 				66A80F921BD09EC90094CF29 /* AppDelegate.m in Sources */,
 			);
@@ -451,7 +497,9 @@
 			files = (
 				66A80F931BD09EC90094CF29 /* AppDelegate.m in Sources */,
 				66A80F951BD09EC90094CF29 /* main.m in Sources */,
+				66BE40651BD0DBE900C4AF3F /* UIView+FFExtension.m in Sources */,
 				66A80F671BD095BD0094CF29 /* FFMovieTests.m in Sources */,
+				66BE406C1BD0DD0600C4AF3F /* FFBaseView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
