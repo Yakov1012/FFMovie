@@ -65,6 +65,20 @@
 		6671250E1BD4D26D0079C884 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 667124FC1BD4D26D0079C884 /* AFURLResponseSerialization.m */; settings = {ASSET_TAGS = (); }; };
 		6671250F1BD4D26D0079C884 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 667124FE1BD4D26D0079C884 /* AFURLSessionManager.m */; settings = {ASSET_TAGS = (); }; };
 		667125101BD4D26D0079C884 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 667124FE1BD4D26D0079C884 /* AFURLSessionManager.m */; settings = {ASSET_TAGS = (); }; };
+		667125131BD4D9E50079C884 /* FFBaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125121BD4D9E50079C884 /* FFBaseTabBarController.m */; settings = {ASSET_TAGS = (); }; };
+		667125141BD4D9E50079C884 /* FFBaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125121BD4D9E50079C884 /* FFBaseTabBarController.m */; settings = {ASSET_TAGS = (); }; };
+		667125171BD4DA040079C884 /* FFBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125161BD4DA040079C884 /* FFBaseNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		667125181BD4DA040079C884 /* FFBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125161BD4DA040079C884 /* FFBaseNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		6671251B1BD4DA390079C884 /* FFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6671251A1BD4DA390079C884 /* FFTabBarController.m */; settings = {ASSET_TAGS = (); }; };
+		6671251C1BD4DA390079C884 /* FFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6671251A1BD4DA390079C884 /* FFTabBarController.m */; settings = {ASSET_TAGS = (); }; };
+		667125241BD4DD8C0079C884 /* UITabBar+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125231BD4DD8C0079C884 /* UITabBar+FFExtension.m */; settings = {ASSET_TAGS = (); }; };
+		667125251BD4DD8C0079C884 /* UITabBar+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125231BD4DD8C0079C884 /* UITabBar+FFExtension.m */; settings = {ASSET_TAGS = (); }; };
+		667125281BD4E6630079C884 /* FFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125271BD4E6630079C884 /* FFNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		667125291BD4E6630079C884 /* FFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125271BD4E6630079C884 /* FFNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		667125321BD4EBF00079C884 /* TabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 667125311BD4EBF00079C884 /* TabBarBackground@2x.png */; settings = {ASSET_TAGS = (); }; };
+		667125331BD4EBF00079C884 /* TabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 667125311BD4EBF00079C884 /* TabBarBackground@2x.png */; settings = {ASSET_TAGS = (); }; };
+		667125371BD4ECFD0079C884 /* FFImageUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125361BD4ECFD0079C884 /* FFImageUtils.m */; settings = {ASSET_TAGS = (); }; };
+		667125381BD4ECFD0079C884 /* FFImageUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 667125361BD4ECFD0079C884 /* FFImageUtils.m */; settings = {ASSET_TAGS = (); }; };
 		66A80F671BD095BD0094CF29 /* FFMovieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A80F661BD095BD0094CF29 /* FFMovieTests.m */; };
 		66A812F91BD4813B00D3086C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66A812F71BD4813B00D3086C /* Info.plist */; };
 		66A812FF1BD4AAE700D3086C /* FFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A812FE1BD4AAE700D3086C /* FFBaseViewController.m */; };
@@ -143,6 +157,19 @@
 		667124FC1BD4D26D0079C884 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		667124FD1BD4D26D0079C884 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		667124FE1BD4D26D0079C884 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		667125111BD4D9E50079C884 /* FFBaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseTabBarController.h; sourceTree = "<group>"; };
+		667125121BD4D9E50079C884 /* FFBaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseTabBarController.m; sourceTree = "<group>"; };
+		667125151BD4DA040079C884 /* FFBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseNavigationController.h; sourceTree = "<group>"; };
+		667125161BD4DA040079C884 /* FFBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseNavigationController.m; sourceTree = "<group>"; };
+		667125191BD4DA390079C884 /* FFTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTabBarController.h; sourceTree = "<group>"; };
+		6671251A1BD4DA390079C884 /* FFTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFTabBarController.m; sourceTree = "<group>"; };
+		667125221BD4DD8C0079C884 /* UITabBar+FFExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+FFExtension.h"; sourceTree = "<group>"; };
+		667125231BD4DD8C0079C884 /* UITabBar+FFExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+FFExtension.m"; sourceTree = "<group>"; };
+		667125261BD4E6630079C884 /* FFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFNavigationController.h; sourceTree = "<group>"; };
+		667125271BD4E6630079C884 /* FFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFNavigationController.m; sourceTree = "<group>"; };
+		667125311BD4EBF00079C884 /* TabBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarBackground@2x.png"; sourceTree = "<group>"; };
+		667125351BD4ECFD0079C884 /* FFImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFImageUtils.h; sourceTree = "<group>"; };
+		667125361BD4ECFD0079C884 /* FFImageUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFImageUtils.m; sourceTree = "<group>"; };
 		66A80F471BD095BD0094CF29 /* FFMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A80F601BD095BD0094CF29 /* FFMovieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FFMovieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A80F651BD095BD0094CF29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,6 +268,7 @@
 		665E3C791BD12C7400282D71 /* Expand(拓展) */ = {
 			isa = PBXGroup;
 			children = (
+				6671251D1BD4DD280079C884 /* UITabBar+FFExtension */,
 				665E3C7A1BD12C7400282D71 /* UIView+FFExtension */,
 			);
 			path = "Expand(拓展)";
@@ -269,6 +297,7 @@
 		665E3C831BD12C7400282D71 /* Vender(第三方) */ = {
 			isa = PBXGroup;
 			children = (
+				667125341BD4ECBA0079C884 /* FFImageUtils */,
 				667124EB1BD4D26D0079C884 /* AFNetworking */,
 			);
 			path = "Vender(第三方)";
@@ -298,6 +327,33 @@
 				667124FE1BD4D26D0079C884 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		6671251D1BD4DD280079C884 /* UITabBar+FFExtension */ = {
+			isa = PBXGroup;
+			children = (
+				667125221BD4DD8C0079C884 /* UITabBar+FFExtension.h */,
+				667125231BD4DD8C0079C884 /* UITabBar+FFExtension.m */,
+			);
+			name = "UITabBar+FFExtension";
+			path = "UITabBar+YTExtension";
+			sourceTree = "<group>";
+		};
+		667125301BD4EBF00079C884 /* Other(其他) */ = {
+			isa = PBXGroup;
+			children = (
+				667125311BD4EBF00079C884 /* TabBarBackground@2x.png */,
+			);
+			path = "Other(其他)";
+			sourceTree = "<group>";
+		};
+		667125341BD4ECBA0079C884 /* FFImageUtils */ = {
+			isa = PBXGroup;
+			children = (
+				667125351BD4ECFD0079C884 /* FFImageUtils.h */,
+				667125361BD4ECFD0079C884 /* FFImageUtils.m */,
+			);
+			path = FFImageUtils;
 			sourceTree = "<group>";
 		};
 		66A80F3E1BD095BD0094CF29 = {
@@ -338,6 +394,7 @@
 		66A812BF1BD47B0000D3086C /* Resource(资源) */ = {
 			isa = PBXGroup;
 			children = (
+				667125301BD4EBF00079C884 /* Other(其他) */,
 			);
 			path = "Resource(资源)";
 			sourceTree = "<group>";
@@ -353,8 +410,16 @@
 		66A812FC1BD4AAE700D3086C /* Other(其他) */ = {
 			isa = PBXGroup;
 			children = (
+				667125151BD4DA040079C884 /* FFBaseNavigationController.h */,
+				667125161BD4DA040079C884 /* FFBaseNavigationController.m */,
+				667125111BD4D9E50079C884 /* FFBaseTabBarController.h */,
+				667125121BD4D9E50079C884 /* FFBaseTabBarController.m */,
 				66A812FD1BD4AAE700D3086C /* FFBaseViewController.h */,
 				66A812FE1BD4AAE700D3086C /* FFBaseViewController.m */,
+				667125261BD4E6630079C884 /* FFNavigationController.h */,
+				667125271BD4E6630079C884 /* FFNavigationController.m */,
+				667125191BD4DA390079C884 /* FFTabBarController.h */,
+				6671251A1BD4DA390079C884 /* FFTabBarController.m */,
 			);
 			path = "Other(其他)";
 			sourceTree = "<group>";
@@ -594,6 +659,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				667125321BD4EBF00079C884 /* TabBarBackground@2x.png in Resources */,
 				665E3C8C1BD12C7400282D71 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +670,7 @@
 			files = (
 				66A812F91BD4813B00D3086C /* Info.plist in Resources */,
 				665E3C8D1BD12C7400282D71 /* Images.xcassets in Resources */,
+				667125331BD4EBF00079C884 /* TabBarBackground@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +683,7 @@
 			files = (
 				667125091BD4D26D0079C884 /* AFURLConnectionOperation.m in Sources */,
 				66A813041BD4AAF300D3086C /* FFBaseModel.m in Sources */,
+				667125241BD4DD8C0079C884 /* UITabBar+FFExtension.m in Sources */,
 				667124B51BD4D0D00079C884 /* MovieViewController.m in Sources */,
 				667124FF1BD4D26D0079C884 /* AFHTTPRequestOperation.m in Sources */,
 				6671250D1BD4D26D0079C884 /* AFURLResponseSerialization.m in Sources */,
@@ -624,7 +692,10 @@
 				667124B11BD4D0C70079C884 /* MoreViewController.m in Sources */,
 				665E3C8A1BD12C7400282D71 /* UIView+FFExtension.m in Sources */,
 				667124AD1BD4D0B40079C884 /* CinemaViewController.m in Sources */,
+				667125131BD4D9E50079C884 /* FFBaseTabBarController.m in Sources */,
 				66A812FF1BD4AAE700D3086C /* FFBaseViewController.m in Sources */,
+				6671251B1BD4DA390079C884 /* FFTabBarController.m in Sources */,
+				667125371BD4ECFD0079C884 /* FFImageUtils.m in Sources */,
 				665E3C921BD12C7400282D71 /* main.m in Sources */,
 				667125071BD4D26D0079C884 /* AFSecurityPolicy.m in Sources */,
 				6671250F1BD4D26D0079C884 /* AFURLSessionManager.m in Sources */,
@@ -634,6 +705,7 @@
 				667124E91BD4D1EB0079C884 /* Top250TableViewCell.m in Sources */,
 				667125051BD4D26D0079C884 /* AFNetworkReachabilityManager.m in Sources */,
 				66A813091BD4AB0000D3086C /* FFBaseView.m in Sources */,
+				667125281BD4E6630079C884 /* FFNavigationController.m in Sources */,
 				667125011BD4D26D0079C884 /* AFHTTPRequestOperationManager.m in Sources */,
 				6671250B1BD4D26D0079C884 /* AFURLRequestSerialization.m in Sources */,
 				667124CD1BD4D12F0079C884 /* NewsModel.m in Sources */,
@@ -641,6 +713,7 @@
 				665E3C901BD12C7400282D71 /* AppDelegate.m in Sources */,
 				667124C11BD4D1050079C884 /* CinemaModel.m in Sources */,
 				667124BD1BD4D0E60079C884 /* Top250ViewController.m in Sources */,
+				667125171BD4DA040079C884 /* FFBaseNavigationController.m in Sources */,
 				667124C51BD4D1100079C884 /* MoreModel.m in Sources */,
 				667124E11BD4D1C90079C884 /* MovieTableViewCell.m in Sources */,
 				667124DD1BD4D1BD0079C884 /* MoreTableViewCell.m in Sources */,
@@ -663,7 +736,10 @@
 				667124CE1BD4D12F0079C884 /* NewsModel.m in Sources */,
 				667125101BD4D26D0079C884 /* AFURLSessionManager.m in Sources */,
 				667124C61BD4D1100079C884 /* MoreModel.m in Sources */,
+				667125381BD4ECFD0079C884 /* FFImageUtils.m in Sources */,
+				667125251BD4DD8C0079C884 /* UITabBar+FFExtension.m in Sources */,
 				667124E61BD4D1DC0079C884 /* NewsTableViewCell.m in Sources */,
+				667125141BD4D9E50079C884 /* FFBaseTabBarController.m in Sources */,
 				665E3C8B1BD12C7400282D71 /* UIView+FFExtension.m in Sources */,
 				66A813051BD4AAF300D3086C /* FFBaseModel.m in Sources */,
 				667124BA1BD4D0D90079C884 /* NewsViewController.m in Sources */,
@@ -676,11 +752,14 @@
 				667124B21BD4D0C70079C884 /* MoreViewController.m in Sources */,
 				665E3C931BD12C7400282D71 /* main.m in Sources */,
 				667125061BD4D26D0079C884 /* AFNetworkReachabilityManager.m in Sources */,
+				667125291BD4E6630079C884 /* FFNavigationController.m in Sources */,
 				667124AE1BD4D0B40079C884 /* CinemaViewController.m in Sources */,
 				667124D61BD4D18D0079C884 /* FFBaseTableViewCell.m in Sources */,
 				66A813001BD4AAE700D3086C /* FFBaseViewController.m in Sources */,
 				667124EA1BD4D1EB0079C884 /* Top250TableViewCell.m in Sources */,
+				6671251C1BD4DA390079C884 /* FFTabBarController.m in Sources */,
 				667124CA1BD4D1250079C884 /* MovieModel.m in Sources */,
+				667125181BD4DA040079C884 /* FFBaseNavigationController.m in Sources */,
 				6671250C1BD4D26D0079C884 /* AFURLRequestSerialization.m in Sources */,
 				66A8130A1BD4AB0000D3086C /* FFBaseView.m in Sources */,
 				667125041BD4D26D0079C884 /* AFHTTPSessionManager.m in Sources */,
@@ -823,6 +902,8 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/FFMovie/Other(其他)/FFMovie-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -843,6 +924,8 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/FFMovie/Other(其他)/FFMovie-Prefix.pch";
 				INFOPLIST_FILE = FFMovieTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.etop.$(PRODUCT_NAME:rfc1034identifier)";
