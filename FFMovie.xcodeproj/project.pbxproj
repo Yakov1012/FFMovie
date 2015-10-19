@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		665E3C841BD12C7400282D71 /* FFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C621BD12C7400282D71 /* FFBaseViewController.m */; };
-		665E3C851BD12C7400282D71 /* FFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C621BD12C7400282D71 /* FFBaseViewController.m */; };
-		665E3C861BD12C7400282D71 /* FFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C6B1BD12C7400282D71 /* FFBaseModel.m */; };
-		665E3C871BD12C7400282D71 /* FFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C6B1BD12C7400282D71 /* FFBaseModel.m */; };
-		665E3C881BD12C7400282D71 /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C741BD12C7400282D71 /* FFBaseView.m */; };
-		665E3C891BD12C7400282D71 /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C741BD12C7400282D71 /* FFBaseView.m */; };
 		665E3C8A1BD12C7400282D71 /* UIView+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C7C1BD12C7400282D71 /* UIView+FFExtension.m */; };
 		665E3C8B1BD12C7400282D71 /* UIView+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C7C1BD12C7400282D71 /* UIView+FFExtension.m */; };
 		665E3C8C1BD12C7400282D71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665E3C7D1BD12C7400282D71 /* Images.xcassets */; };
@@ -23,6 +17,12 @@
 		665E3C931BD12C7400282D71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C821BD12C7400282D71 /* main.m */; };
 		66A80F671BD095BD0094CF29 /* FFMovieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A80F661BD095BD0094CF29 /* FFMovieTests.m */; };
 		66A812F91BD4813B00D3086C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66A812F71BD4813B00D3086C /* Info.plist */; };
+		66A812FF1BD4AAE700D3086C /* FFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A812FE1BD4AAE700D3086C /* FFBaseViewController.m */; };
+		66A813001BD4AAE700D3086C /* FFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A812FE1BD4AAE700D3086C /* FFBaseViewController.m */; };
+		66A813041BD4AAF300D3086C /* FFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813031BD4AAF300D3086C /* FFBaseModel.m */; };
+		66A813051BD4AAF300D3086C /* FFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813031BD4AAF300D3086C /* FFBaseModel.m */; };
+		66A813091BD4AB0000D3086C /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813081BD4AB0000D3086C /* FFBaseView.m */; };
+		66A8130A1BD4AB0000D3086C /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813081BD4AB0000D3086C /* FFBaseView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,12 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		665E3C611BD12C7400282D71 /* FFBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseViewController.h; sourceTree = "<group>"; };
-		665E3C621BD12C7400282D71 /* FFBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseViewController.m; sourceTree = "<group>"; };
-		665E3C6A1BD12C7400282D71 /* FFBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseModel.h; sourceTree = "<group>"; };
-		665E3C6B1BD12C7400282D71 /* FFBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseModel.m; sourceTree = "<group>"; };
-		665E3C731BD12C7400282D71 /* FFBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseView.h; sourceTree = "<group>"; };
-		665E3C741BD12C7400282D71 /* FFBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseView.m; sourceTree = "<group>"; };
 		665E3C7B1BD12C7400282D71 /* UIView+FFExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FFExtension.h"; sourceTree = "<group>"; };
 		665E3C7C1BD12C7400282D71 /* UIView+FFExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FFExtension.m"; sourceTree = "<group>"; };
 		665E3C7D1BD12C7400282D71 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -54,6 +48,12 @@
 		66A80F661BD095BD0094CF29 /* FFMovieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFMovieTests.m; sourceTree = "<group>"; };
 		66A812F71BD4813B00D3086C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66A812FB1BD49FAE00D3086C /* FFMovie-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FFMovie-Prefix.pch"; sourceTree = "<group>"; };
+		66A812FD1BD4AAE700D3086C /* FFBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseViewController.h; sourceTree = "<group>"; };
+		66A812FE1BD4AAE700D3086C /* FFBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseViewController.m; sourceTree = "<group>"; };
+		66A813021BD4AAF300D3086C /* FFBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseModel.h; sourceTree = "<group>"; };
+		66A813031BD4AAF300D3086C /* FFBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseModel.m; sourceTree = "<group>"; };
+		66A813071BD4AB0000D3086C /* FFBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseView.h; sourceTree = "<group>"; };
+		66A813081BD4AB0000D3086C /* FFBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,172 +101,40 @@
 		665E3C5E1BD12C7400282D71 /* Controller(控制器) */ = {
 			isa = PBXGroup;
 			children = (
-				665E3C5F1BD12C7400282D71 /* Cinema(影院) */,
-				665E3C601BD12C7400282D71 /* Else(其他) */,
-				665E3C631BD12C7400282D71 /* More(更多) */,
-				665E3C641BD12C7400282D71 /* Movie(电影) */,
-				665E3C651BD12C7400282D71 /* News(新闻) */,
-				665E3C661BD12C7400282D71 /* Top250(影片推荐) */,
+				66A8130B1BD4AC5300D3086C /* Cinema(影院) */,
+				66A8130C1BD4AC5300D3086C /* More(更多) */,
+				66A8130D1BD4AC5300D3086C /* Movie(电影) */,
+				66A8130E1BD4AC5300D3086C /* News(新闻) */,
+				66A8130F1BD4AC5300D3086C /* Top250(影片推荐) */,
+				66A812FC1BD4AAE700D3086C /* Other(其他) */,
 			);
 			path = "Controller(控制器)";
-			sourceTree = "<group>";
-		};
-		665E3C5F1BD12C7400282D71 /* Cinema(影院) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Cinema(影院)";
-			sourceTree = "<group>";
-		};
-		665E3C601BD12C7400282D71 /* Else(其他) */ = {
-			isa = PBXGroup;
-			children = (
-				665E3C611BD12C7400282D71 /* FFBaseViewController.h */,
-				665E3C621BD12C7400282D71 /* FFBaseViewController.m */,
-			);
-			path = "Else(其他)";
-			sourceTree = "<group>";
-		};
-		665E3C631BD12C7400282D71 /* More(更多) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "More(更多)";
-			sourceTree = "<group>";
-		};
-		665E3C641BD12C7400282D71 /* Movie(电影) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Movie(电影)";
-			sourceTree = "<group>";
-		};
-		665E3C651BD12C7400282D71 /* News(新闻) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "News(新闻)";
-			sourceTree = "<group>";
-		};
-		665E3C661BD12C7400282D71 /* Top250(影片推荐) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Top250(影片推荐)";
 			sourceTree = "<group>";
 		};
 		665E3C671BD12C7400282D71 /* Model(模型) */ = {
 			isa = PBXGroup;
 			children = (
-				665E3C681BD12C7400282D71 /* Cinema(影院) */,
-				665E3C691BD12C7400282D71 /* Else(其他) */,
-				665E3C6C1BD12C7400282D71 /* More(更多) */,
-				665E3C6D1BD12C7400282D71 /* Movie(电影) */,
-				665E3C6E1BD12C7400282D71 /* News(新闻) */,
-				665E3C6F1BD12C7400282D71 /* Top250(影片推荐) */,
+				66A813101BD4AC6000D3086C /* Cinema(影院) */,
+				66A813111BD4AC6000D3086C /* More(更多) */,
+				66A813121BD4AC6000D3086C /* Movie(电影) */,
+				66A813131BD4AC6000D3086C /* News(新闻) */,
+				66A813011BD4AAF300D3086C /* Other(其他) */,
+				66A813141BD4AC6000D3086C /* Top250(影片推荐) */,
 			);
 			path = "Model(模型)";
-			sourceTree = "<group>";
-		};
-		665E3C681BD12C7400282D71 /* Cinema(影院) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Cinema(影院)";
-			sourceTree = "<group>";
-		};
-		665E3C691BD12C7400282D71 /* Else(其他) */ = {
-			isa = PBXGroup;
-			children = (
-				665E3C6A1BD12C7400282D71 /* FFBaseModel.h */,
-				665E3C6B1BD12C7400282D71 /* FFBaseModel.m */,
-			);
-			path = "Else(其他)";
-			sourceTree = "<group>";
-		};
-		665E3C6C1BD12C7400282D71 /* More(更多) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "More(更多)";
-			sourceTree = "<group>";
-		};
-		665E3C6D1BD12C7400282D71 /* Movie(电影) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Movie(电影)";
-			sourceTree = "<group>";
-		};
-		665E3C6E1BD12C7400282D71 /* News(新闻) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "News(新闻)";
-			sourceTree = "<group>";
-		};
-		665E3C6F1BD12C7400282D71 /* Top250(影片推荐) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Top250(影片推荐)";
 			sourceTree = "<group>";
 		};
 		665E3C701BD12C7400282D71 /* View(视图) */ = {
 			isa = PBXGroup;
 			children = (
-				665E3C711BD12C7400282D71 /* Cinema(影院) */,
-				665E3C721BD12C7400282D71 /* Else(其他) */,
-				665E3C751BD12C7400282D71 /* More(更多) */,
-				665E3C761BD12C7400282D71 /* Movie(电影) */,
-				665E3C771BD12C7400282D71 /* News(新闻) */,
-				665E3C781BD12C7400282D71 /* Top250(影片推荐) */,
+				66A813151BD4AC6A00D3086C /* Cinema(影院) */,
+				66A813161BD4AC6A00D3086C /* More(更多) */,
+				66A813171BD4AC6A00D3086C /* Movie(电影) */,
+				66A813181BD4AC6A00D3086C /* News(新闻) */,
+				66A813061BD4AB0000D3086C /* Other(其他) */,
+				66A813191BD4AC6A00D3086C /* Top250(影片推荐) */,
 			);
 			path = "View(视图)";
-			sourceTree = "<group>";
-		};
-		665E3C711BD12C7400282D71 /* Cinema(影院) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Cinema(影院)";
-			sourceTree = "<group>";
-		};
-		665E3C721BD12C7400282D71 /* Else(其他) */ = {
-			isa = PBXGroup;
-			children = (
-				665E3C731BD12C7400282D71 /* FFBaseView.h */,
-				665E3C741BD12C7400282D71 /* FFBaseView.m */,
-			);
-			path = "Else(其他)";
-			sourceTree = "<group>";
-		};
-		665E3C751BD12C7400282D71 /* More(更多) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "More(更多)";
-			sourceTree = "<group>";
-		};
-		665E3C761BD12C7400282D71 /* Movie(电影) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Movie(电影)";
-			sourceTree = "<group>";
-		};
-		665E3C771BD12C7400282D71 /* News(新闻) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "News(新闻)";
-			sourceTree = "<group>";
-		};
-		665E3C781BD12C7400282D71 /* Top250(影片推荐) */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Top250(影片推荐)";
 			sourceTree = "<group>";
 		};
 		665E3C791BD12C7400282D71 /* Expand(拓展) */ = {
@@ -352,6 +220,138 @@
 				66A812F71BD4813B00D3086C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		66A812FC1BD4AAE700D3086C /* Other(其他) */ = {
+			isa = PBXGroup;
+			children = (
+				66A812FD1BD4AAE700D3086C /* FFBaseViewController.h */,
+				66A812FE1BD4AAE700D3086C /* FFBaseViewController.m */,
+			);
+			path = "Other(其他)";
+			sourceTree = "<group>";
+		};
+		66A813011BD4AAF300D3086C /* Other(其他) */ = {
+			isa = PBXGroup;
+			children = (
+				66A813021BD4AAF300D3086C /* FFBaseModel.h */,
+				66A813031BD4AAF300D3086C /* FFBaseModel.m */,
+			);
+			path = "Other(其他)";
+			sourceTree = "<group>";
+		};
+		66A813061BD4AB0000D3086C /* Other(其他) */ = {
+			isa = PBXGroup;
+			children = (
+				66A813071BD4AB0000D3086C /* FFBaseView.h */,
+				66A813081BD4AB0000D3086C /* FFBaseView.m */,
+			);
+			path = "Other(其他)";
+			sourceTree = "<group>";
+		};
+		66A8130B1BD4AC5300D3086C /* Cinema(影院) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Cinema(影院)";
+			sourceTree = "<group>";
+		};
+		66A8130C1BD4AC5300D3086C /* More(更多) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "More(更多)";
+			sourceTree = "<group>";
+		};
+		66A8130D1BD4AC5300D3086C /* Movie(电影) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Movie(电影)";
+			sourceTree = "<group>";
+		};
+		66A8130E1BD4AC5300D3086C /* News(新闻) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "News(新闻)";
+			sourceTree = "<group>";
+		};
+		66A8130F1BD4AC5300D3086C /* Top250(影片推荐) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Top250(影片推荐)";
+			sourceTree = "<group>";
+		};
+		66A813101BD4AC6000D3086C /* Cinema(影院) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Cinema(影院)";
+			sourceTree = "<group>";
+		};
+		66A813111BD4AC6000D3086C /* More(更多) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "More(更多)";
+			sourceTree = "<group>";
+		};
+		66A813121BD4AC6000D3086C /* Movie(电影) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Movie(电影)";
+			sourceTree = "<group>";
+		};
+		66A813131BD4AC6000D3086C /* News(新闻) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "News(新闻)";
+			sourceTree = "<group>";
+		};
+		66A813141BD4AC6000D3086C /* Top250(影片推荐) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Top250(影片推荐)";
+			sourceTree = "<group>";
+		};
+		66A813151BD4AC6A00D3086C /* Cinema(影院) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Cinema(影院)";
+			sourceTree = "<group>";
+		};
+		66A813161BD4AC6A00D3086C /* More(更多) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "More(更多)";
+			sourceTree = "<group>";
+		};
+		66A813171BD4AC6A00D3086C /* Movie(电影) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Movie(电影)";
+			sourceTree = "<group>";
+		};
+		66A813181BD4AC6A00D3086C /* News(新闻) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "News(新闻)";
+			sourceTree = "<group>";
+		};
+		66A813191BD4AC6A00D3086C /* Top250(影片推荐) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Top250(影片推荐)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,11 +454,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66A813041BD4AAF300D3086C /* FFBaseModel.m in Sources */,
 				665E3C8A1BD12C7400282D71 /* UIView+FFExtension.m in Sources */,
-				665E3C861BD12C7400282D71 /* FFBaseModel.m in Sources */,
-				665E3C881BD12C7400282D71 /* FFBaseView.m in Sources */,
-				665E3C841BD12C7400282D71 /* FFBaseViewController.m in Sources */,
+				66A812FF1BD4AAE700D3086C /* FFBaseViewController.m in Sources */,
 				665E3C921BD12C7400282D71 /* main.m in Sources */,
+				66A813091BD4AB0000D3086C /* FFBaseView.m in Sources */,
 				665E3C901BD12C7400282D71 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,12 +468,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				66A80F671BD095BD0094CF29 /* FFMovieTests.m in Sources */,
-				665E3C891BD12C7400282D71 /* FFBaseView.m in Sources */,
 				665E3C911BD12C7400282D71 /* AppDelegate.m in Sources */,
-				665E3C851BD12C7400282D71 /* FFBaseViewController.m in Sources */,
 				665E3C8B1BD12C7400282D71 /* UIView+FFExtension.m in Sources */,
+				66A813051BD4AAF300D3086C /* FFBaseModel.m in Sources */,
 				665E3C931BD12C7400282D71 /* main.m in Sources */,
-				665E3C871BD12C7400282D71 /* FFBaseModel.m in Sources */,
+				66A813001BD4AAE700D3086C /* FFBaseViewController.m in Sources */,
+				66A8130A1BD4AB0000D3086C /* FFBaseView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
