@@ -17,12 +17,12 @@
 		665E3C8B1BD12C7400282D71 /* UIView+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C7C1BD12C7400282D71 /* UIView+FFExtension.m */; };
 		665E3C8C1BD12C7400282D71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665E3C7D1BD12C7400282D71 /* Images.xcassets */; };
 		665E3C8D1BD12C7400282D71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665E3C7D1BD12C7400282D71 /* Images.xcassets */; };
-		665E3C8F1BD12C7400282D71 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 665E3C7E1BD12C7400282D71 /* Info.plist */; };
 		665E3C901BD12C7400282D71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C811BD12C7400282D71 /* AppDelegate.m */; };
 		665E3C911BD12C7400282D71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C811BD12C7400282D71 /* AppDelegate.m */; };
 		665E3C921BD12C7400282D71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C821BD12C7400282D71 /* main.m */; };
 		665E3C931BD12C7400282D71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C821BD12C7400282D71 /* main.m */; };
 		66A80F671BD095BD0094CF29 /* FFMovieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A80F661BD095BD0094CF29 /* FFMovieTests.m */; };
+		66A812F91BD4813B00D3086C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66A812F71BD4813B00D3086C /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +45,14 @@
 		665E3C7B1BD12C7400282D71 /* UIView+FFExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FFExtension.h"; sourceTree = "<group>"; };
 		665E3C7C1BD12C7400282D71 /* UIView+FFExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FFExtension.m"; sourceTree = "<group>"; };
 		665E3C7D1BD12C7400282D71 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		665E3C7E1BD12C7400282D71 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		665E3C801BD12C7400282D71 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		665E3C811BD12C7400282D71 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		665E3C821BD12C7400282D71 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		665E3C821BD12C7400282D71 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Other(其他)/main.m"; sourceTree = "<group>"; };
 		66A80F471BD095BD0094CF29 /* FFMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A80F601BD095BD0094CF29 /* FFMovieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FFMovieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A80F651BD095BD0094CF29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66A80F661BD095BD0094CF29 /* FFMovieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFMovieTests.m; sourceTree = "<group>"; };
+		66A812F71BD4813B00D3086C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 				665E3C7D1BD12C7400282D71 /* Images.xcassets */,
 				665E3C7F1BD12C7400282D71 /* Other(其他) */,
 				66A812BF1BD47B0000D3086C /* Resource(资源) */,
-				665E3CBA1BD12FEC00282D71 /* Supporting Files */,
+				66A812F61BD480E100D3086C /* Supporting Files */,
 				665E3C831BD12C7400282D71 /* Vender(第三方) */,
 			);
 			path = FFMovie;
@@ -290,7 +290,6 @@
 			children = (
 				665E3C801BD12C7400282D71 /* AppDelegate.h */,
 				665E3C811BD12C7400282D71 /* AppDelegate.m */,
-				665E3C821BD12C7400282D71 /* main.m */,
 			);
 			path = "Other(其他)";
 			sourceTree = "<group>";
@@ -300,14 +299,6 @@
 			children = (
 			);
 			path = "Vender(第三方)";
-			sourceTree = "<group>";
-		};
-		665E3CBA1BD12FEC00282D71 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				665E3C7E1BD12C7400282D71 /* Info.plist */,
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		66A80F3E1BD095BD0094CF29 = {
@@ -350,6 +341,15 @@
 			children = (
 			);
 			path = "Resource(资源)";
+			sourceTree = "<group>";
+		};
+		66A812F61BD480E100D3086C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				66A812F71BD4813B00D3086C /* Info.plist */,
+				665E3C821BD12C7400282D71 /* main.m */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,7 +440,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				665E3C8F1BD12C7400282D71 /* Info.plist in Resources */,
+				66A812F91BD4813B00D3086C /* Info.plist in Resources */,
 				665E3C8D1BD12C7400282D71 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,12 +572,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shenzhen Etop Information Co., Ltd. (QTR3NT98RR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhong Ping (5ST6Q5GU79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhong Ping (5ST6Q5GU79)";
 				INFOPLIST_FILE = FFMovie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.szhome.SZHomeForum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "21f58a0f-a7ed-45dd-b3e8-6f8115897817";
+				PROVISIONING_PROFILE = "fd7a19ba-805e-4540-8477-e997982e30bf";
 			};
 			name = Debug;
 		};
@@ -586,11 +587,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhong Ping (5ST6Q5GU79)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhong Ping (5ST6Q5GU79)";
 				INFOPLIST_FILE = FFMovie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.szhome.SZHomeForum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "21f58a0f-a7ed-45dd-b3e8-6f8115897817";
+				PROVISIONING_PROFILE = "fd7a19ba-805e-4540-8477-e997982e30bf";
 			};
 			name = Release;
 		};
