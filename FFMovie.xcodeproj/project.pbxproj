@@ -47,12 +47,13 @@
 		665E3C7D1BD12C7400282D71 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		665E3C801BD12C7400282D71 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		665E3C811BD12C7400282D71 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		665E3C821BD12C7400282D71 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Other(其他)/main.m"; sourceTree = "<group>"; };
+		665E3C821BD12C7400282D71 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66A80F471BD095BD0094CF29 /* FFMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A80F601BD095BD0094CF29 /* FFMovieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FFMovieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A80F651BD095BD0094CF29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66A80F661BD095BD0094CF29 /* FFMovieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFMovieTests.m; sourceTree = "<group>"; };
 		66A812F71BD4813B00D3086C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66A812FB1BD49FAE00D3086C /* FFMovie-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FFMovie-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +291,8 @@
 			children = (
 				665E3C801BD12C7400282D71 /* AppDelegate.h */,
 				665E3C811BD12C7400282D71 /* AppDelegate.m */,
+				665E3C821BD12C7400282D71 /* main.m */,
+				66A812FB1BD49FAE00D3086C /* FFMovie-Prefix.pch */,
 			);
 			path = "Other(其他)";
 			sourceTree = "<group>";
@@ -347,7 +350,6 @@
 			isa = PBXGroup;
 			children = (
 				66A812F71BD4813B00D3086C /* Info.plist */,
-				665E3C821BD12C7400282D71 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -574,6 +576,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhong Ping (5ST6Q5GU79)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhong Ping (5ST6Q5GU79)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/FFMovie/Other(其他)/FFMovie-Prefix.pch";
 				INFOPLIST_FILE = FFMovie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.szhome.SZHomeForum;
@@ -589,6 +593,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhong Ping (5ST6Q5GU79)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhong Ping (5ST6Q5GU79)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/FFMovie/Other(其他)/FFMovie-Prefix.pch";
 				INFOPLIST_FILE = FFMovie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.szhome.SZHomeForum;
