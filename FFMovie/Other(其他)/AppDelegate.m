@@ -24,12 +24,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    // 设置主题(注：需放在rootViewController之前设置好)
+    [self setUpSkin];
 
     FFTabBarController *rootViewController = [[FFTabBarController alloc] init];
     self.window.rootViewController = rootViewController;
     
-    // 设置主题
-    [self setUpSkin];
+    
 
     return YES;
 }

@@ -28,9 +28,9 @@
     self.tabBar.clipsToBounds = YES;
 
     // 常态字体
-    self.normanlFont = [UIFont systemFontOfSize:12.0];
+    self.normalFont = [UIFont systemFontOfSize:12.0];
     // 常态颜色
-    self.normanlColor = [UIColor colorWithRed:0.50 green:0.50 blue:0.50 alpha:1.00];
+    self.normalColor = [UIColor colorWithRed:0.50 green:0.50 blue:0.50 alpha:1.00];
     // 选中颜色
     self.selectedColor = [UIColor colorWithRed:0.00 green:0.40 blue:1.00 alpha:1.00];
 }
@@ -56,20 +56,14 @@
             break;
         }
 
-        NSDictionary *dict = items[index];
-        NSString *title = dict[@"Title"];
-        UIImage *image = dict[@"Image"];
-        UIImage *selectedImage = dict[@"SelectedImage"];
+        NSDictionary *dic = items[index];
+        NSString *title = dic[@"Title"];
+        UIImage *image = dic[@"Image"];
+        UIImage *selectedImage = dic[@"SelectedImage"];
 
         [item setTitle:title];
         [item setImage:translucent ? [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] : image];
         [item setSelectedImage:translucent ? [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] : selectedImage];
-
-        title = nil;
-        image = nil;
-        selectedImage = nil;
-        dict = nil;
-
         index++;
     }
 }
@@ -128,8 +122,8 @@
  *
  *  @param normanlFont <#normanlFont description#>
  */
-- (void)setNormanlFont:(UIFont *)normanlFont {
-    _normanlFont = normanlFont;
+- (void)setNormalFont:(UIFont *)normalFont {
+    _normalFont = normalFont;
 
     [self setTabBarItemAttributes];
 }
@@ -150,8 +144,8 @@
  *
  *  @param normanlColor <#normanlColor description#>
  */
-- (void)setNormanlColor:(UIColor *)normanlColor {
-    _normanlColor = normanlColor;
+- (void)setNormalColor:(UIColor *)normalColor {
+    _normalColor = normalColor;
 
     [self setTabBarItemAttributes];
 }
@@ -172,7 +166,7 @@
  */
 - (void)setTabBarItemAttributes {
     for (UITabBarItem *item in self.tabBar.items) {
-        [item setTitleTextAttributes:@{ NSFontAttributeName: self.normanlFont, NSForegroundColorAttributeName: self.normanlColor } forState:UIControlStateNormal];
+        [item setTitleTextAttributes:@{ NSFontAttributeName: self.normalFont, NSForegroundColorAttributeName: self.normalColor } forState:UIControlStateNormal];
         [item setTitleTextAttributes:@{ NSFontAttributeName: self.selectedColor, NSForegroundColorAttributeName: self.selectedColor } forState:UIControlStateSelected];
     }
 }

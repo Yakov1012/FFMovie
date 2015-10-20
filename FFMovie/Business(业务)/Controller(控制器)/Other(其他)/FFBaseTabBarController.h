@@ -11,11 +11,11 @@
 @interface FFBaseTabBarController : UITabBarController
 
 /// TabBarItem文字常态字体
-@property (strong, nonatomic) UIFont *normanlFont;
+@property (strong, nonatomic) UIFont *normalFont;
 /// TabBarItem文字选中字体
 @property (strong, nonatomic) UIFont *selectedFont;
 /// TabBarItem文字常态颜色
-@property (strong, nonatomic) UIColor *normanlColor;
+@property (strong, nonatomic) UIColor *normalColor;
 /// TabBarItem文字选中颜色
 @property (strong, nonatomic) UIColor *selectedColor;
 

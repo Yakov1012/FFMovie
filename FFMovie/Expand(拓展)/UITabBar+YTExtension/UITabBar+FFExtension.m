@@ -41,6 +41,7 @@
     CGFloat percentX = (index + 0.6) / self.items.count;
     CGFloat x = ceilf(percentX * tabFrame.size.width);
     CGFloat y = ceilf(0.1 * tabFrame.size.height);
+    
     // 圆形大小为10
     badgeView.frame = CGRectMake(x - ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad ? rectX : 0.0), y, 10.0, 10.0);
     [self addSubview:badgeView];

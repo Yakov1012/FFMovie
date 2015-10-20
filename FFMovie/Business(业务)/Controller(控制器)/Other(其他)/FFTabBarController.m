@@ -39,7 +39,7 @@
 
     // 显示状态栏
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-    //状态栏样式
+    // 状态栏样式
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     // 监听更换皮肤的通知
@@ -85,8 +85,42 @@
  *  初始化TabBar
  */
 - (void)setUpTabBar {
+    // 背景
     UIImage *tabBarBackgroundImage = [[FFSkinUtils shareInstance] getImageWithNameBySkin:@"Root/TabBar_Background" resizable:YES];
     self.tabBar.barTintColor = [UIColor colorWithPatternImage:tabBarBackgroundImage];
+
+    // 文字、图标 数组
+    NSArray *itemTitleArr = @[@"电影", @"新闻", @"Top250", @"影院", @"更多"];
+    NSArray *itemImageNameArr = @[@"Home", @"Board", @"Found", @"Message", @"My"];
+
+    // items数组
+    NSMutableArray *items = [NSMutableArray array];
+    for (NSInteger index = 0; index < itemTitleArr.count; index++) {
+        NSString *title = itemTitleArr[index];
+        UIImage *normalimage = [[FFSkinUtils shareInstance] getImageWithNameBySkin:[NSString stringWithFormat:@"Root/%@_Normal", itemImageNameArr[index]]];
+        UIImage *selectedImage = [[FFSkinUtils shareInstance] getImageWithNameBySkin:[NSString stringWithFormat:@"Root/%@_Highlighted", itemImageNameArr[index]]];
+
+        [items addObject:@{ @"Title": title, @"Image": normalimage, @"SelectedImage": selectedImage }];
+    }
+
+    // 设置tabBarItem
+    [self setUpTabBarItem:items translucent:YES];
+
+    // 字体
+    UIFont *font = [UIFont systemFontOfSize:12.0];
+    self.normalFont = font;
+    self.selectedFont = font;
+
+    // 颜色
+    UIColor *normalColor = [[FFSkinUtils shareInstance] getColorWithNameBySkin:@"TabBarItem_Normal_Color"];
+    self.normalColor = normalColor;
+    UIColor *selectedColor = [[FFSkinUtils shareInstance] getColorWithNameBySkin:@"TabBarItem_Highlighted_Color"];
+    [self setSelectedColor:selectedColor];
+    
+    // 设置小红点
+    [self setUpBadgeValue:0];
+    [self setUpBadgeValue:1 badgeValue:@"新消息"];
+    [self setUpBadgeValue:2 badgeValue:@"99"];
 }
 
 

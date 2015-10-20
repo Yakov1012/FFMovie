@@ -29,13 +29,14 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+
     // 监听更换皮肤的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skinDidChangeNotification:) name:nSkinDidChangeNotification object:nil];
 
     // 加载皮肤
     [self loadSkin];
 }
+
 
 #pragma mark - SetUp
 /**
@@ -46,6 +47,7 @@
     self.view.backgroundColor = backgroundColor;
 }
 
+
 #pragma mark - Action
 /**
  *  加载皮肤
@@ -53,6 +55,7 @@
 - (void)loadSkin {
     [self setUpBackgroudColor];
 }
+
 
 #pragma mark - Notification
 - (void)skinDidChangeNotification:(NSNotification *)notification {
