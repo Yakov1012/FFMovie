@@ -10,4 +10,9 @@
 
 @interface FFBaseViewController : UIViewController
 
+/**
+ *  加载皮肤
+ */
+- (void)loadSkin;
+
 @end

@@ -1,0 +1,16 @@
+@charset "utf-8";
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, img, strong, ul, li, form, label, article, hgroup, section, input { margin: 0; padding: 0; border: none; outline: 0; font-size: 100%; font: inherit; vertical-align: baseline; word-break: break-all; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { font-family: arial, sans-serif; background: #0e121a; color: #73808c }
+ol, ul { list-style: none; }
+input, img { vertical-align: middle; opacity: 0.5; }
+a { text-decoration: none; color: #0e121a }
+a:visited { text-decoration: none; color: #333 }
+.mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0e121a; opacity: 0.6; z-index: 9999; }
+.wrap { margin: 0 12px; overflow: hidden; }
+hgroup { padding: 15px 0; border-bottom: 1px solid #24282d; margin-bottom: 15px; }
+hgroup img { width: 50px; height: 50px; float: left; margin-right: 10px; margin-top: -5px; }
+hgroup h1 { font-size: 1.2rem; margin-bottom: 6px; }
+hgroup h2 { font-size: 0.8rem; color: #48525f; }
+.content p { margin-bottom: 8px; font-size: .9rem; line-height: 1.5; }
+.content a { color: #e22f1c; }

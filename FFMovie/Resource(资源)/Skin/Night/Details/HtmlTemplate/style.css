@@ -1,0 +1,43 @@
+@charset "utf-8";
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, em, img, strong, tt, b, u, i, center, dl, dt, dd, ol, ul, li, form, label, article, aside, hgroup, section, input { margin: 0; padding: 0; border: none; outline: 0; font-size: 100%; font: inherit; vertical-align: baseline; word-break: break-all; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { font-family: arial, sans-serif; background: #0e121a; }
+ol, ul { list-style: none; }
+input, img { vertical-align: middle; opacity:0.6; }
+a { text-decoration: none; color: #bad5ee; }
+hgroup h1 em, hgroup h2 span:nth-child(1):before, hgroup h2 span:nth-child(2):before, .msrc ul li:after, .msrc ul li:nth-child(1) div a:before { background: url(spri.png) no-repeat; background-size: 20px auto; }
+hgroup { padding: 15px 10px 10px 10px; border-bottom: 1px solid #2c323c; background: #0e121a; color: #bad5ee; overflow: hidden; }
+hgroup h1 em { display: inline-block; content: ""; width: 25px; height: 22px; background-position: 0 0; position: relative; top: 5px; }
+hgroup h1 { margin-bottom: 15px; font-size: 1.2rem; }
+hgroup h2, hgroup h2 a { color: #4d617e; font-size: .7rem; line-height: 19px; }
+hgroup h2 span:nth-child(1):before { display: inline-block; content: ""; width: 20px; height: 10px; background-position: -1px -25px; }
+hgroup h2 span:nth-child(1) { display: inline-block; margin-right: 15px; }
+hgroup h2 span:nth-child(2):before { display: inline-block; content: ""; width: 20px; height: 10px; background-position: 0 -42px; }
+hgroup h2 span:nth-child(3) { float: right; }
+.floor { margin-top: 15px; padding: 0 10px 10px 10px; border-bottom: 1px solid #2c323c; }
+.author { margin-bottom: 10px; position: relative; }
+.author img { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; position: absolute; left: 0; top: 0; }
+.author div { margin-left: 50px; height: 40px; position: relative; overflow: hidden; line-height: 1.35rem; }
+.author div h3, .author div h3 a { font-size: .9rem; color: #48586f; }
+.author div h3 em { display: inline-block; width: 24px; height: 13px; line-height: 13px; background: #b61818; border-radius: 3px; color: #010d19; position: relative; top: -2px; margin-left: 6px; font-size: .5rem; font-weight: normal; text-align: center; }
+.author div h3 span { color: #4d617e; position: absolute; right: 0; top: 0; font-weight: normal; font-size: .7rem; }
+.author div p { font-size: .6rem; color: #4d617e; overflow: hidden; }
+.floor .Cont { font-size: 1rem; line-height: 1.5rem; color: #4d617e; }
+.floor .Cont blockquote { overflow: hidden; clear: both; font-size: .9rem; border-top: 1px solid #2c323c; padding: 5px 0; margin-top: 10px; }
+.floor .Cont blockquote span { color: #48586f; font-size: .8rem; display: block; }
+.quotelink { border-top: 1px solid #2c323c; line-height: 35px; color: #4d617e; font-size: .7rem; display: block; text-align: center }
+.msrc { height: 25px; line-height: 25px; font-size: .7rem; color: #4d617e; margin-top: 10px; }
+.msrc ul { float: right; }
+.msrc ul li { float: left; position: relative; width: 60px; }
+.msrc ul li a { display: block; width: 60px; height: 25px; line-height: 25px; color: #4d617e; }
+.msrc ul li:after { display: inline-block; content: ""; position: absolute; right: 18px; top: 7px; }
+.msrc ul li:nth-child(1):after { width: 18px; height: 11px; background-position: -1px -58px; }
+.msrc ul li:nth-child(2):after { width: 15px; height: 12px; background-position: -3px -76px; }
+.msrc ul li:nth-child(1) div { display: none; position: absolute; left: -157px; top: -6px; padding: 3px 0; width: 180px; background: #343e4c; border-radius: 5px; z-index: 999; }
+.msrc ul li:nth-child(1) div a { display: inline-block; width: 89px; height: 30px; line-height: 30px; color: #161c26; text-align: center; }
+.msrc ul li:nth-child(1) div a:before { display: inline-block; content: ""; position: relative; top: 4px; }
+.msrc ul li:nth-child(1) div a:nth-child(1) { border-right: 1px solid #292f37; }
+.msrc ul li:nth-child(1) div a:nth-child(1):before { width: 22px; height: 15px; background-position: -1px -91px; }
+.msrc ul li:nth-child(1) div a:nth-child(2):before { width: 20px; height: 16px; background-position: -2px -113px; }
+.imgURL { width: 100%; height: auto; }
+.player img { margin-top: -3px; padding-right: 3px; }

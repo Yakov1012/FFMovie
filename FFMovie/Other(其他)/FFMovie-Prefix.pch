@@ -12,7 +12,15 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
-#import "FFImageUtils.h"
+#import "FFSkinUtils.h"
+#import "UIView+FFExtension.h"
+
+
+/// 更换皮肤的通知
+#define nSkinDidChangeNotification @"nSkinDidChangeNotification"
+
+/// 本地皮肤名称的key
+#define kSkinName @"kSkinName"
 
 /// 当前设备的屏幕宽度
 #define wScreenWidth ([UIScreen mainScreen].bounds.size.width)

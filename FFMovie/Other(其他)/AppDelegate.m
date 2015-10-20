@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 #import "FFTabBarController.h"
-#import "FFBaseView.h"
+#import "FFUserDefaultsUtils.h"
 
 @interface AppDelegate ()
 
@@ -17,16 +17,19 @@
 
 @implementation AppDelegate
 
-
+#pragma mark - LifeCycle
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
     FFTabBarController *rootViewController = [[FFTabBarController alloc] init];
     self.window.rootViewController = rootViewController;
+    
+    // 设置主题
+    [self setUpSkin];
 
     return YES;
 }
@@ -51,6 +54,15 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - setUp
+/**
+ *  设置主题
+ */
+- (void)setUpSkin {
+    NSString *skinName = [FFUserDefaultsUtils getUserDefaults:kSkinName defaultValue:@"SkinDay"];
+    [FFSkinUtils shareInstance].skinName = skinName;
 }
 
 @end
