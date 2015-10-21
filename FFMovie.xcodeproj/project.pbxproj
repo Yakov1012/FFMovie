@@ -92,6 +92,8 @@
 		66A813051BD4AAF300D3086C /* FFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813031BD4AAF300D3086C /* FFBaseModel.m */; };
 		66A813091BD4AB0000D3086C /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813081BD4AB0000D3086C /* FFBaseView.m */; };
 		66A8130A1BD4AB0000D3086C /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813081BD4AB0000D3086C /* FFBaseView.m */; };
+		66DEAE831BD73F6A00929D2C /* FFHorizontalScrollBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEAE821BD73F6A00929D2C /* FFHorizontalScrollBar.m */; settings = {ASSET_TAGS = (); }; };
+		66DEAE841BD73F6A00929D2C /* FFHorizontalScrollBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEAE821BD73F6A00929D2C /* FFHorizontalScrollBar.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +194,8 @@
 		66A813031BD4AAF300D3086C /* FFBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseModel.m; sourceTree = "<group>"; };
 		66A813071BD4AB0000D3086C /* FFBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseView.h; sourceTree = "<group>"; };
 		66A813081BD4AB0000D3086C /* FFBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseView.m; sourceTree = "<group>"; };
+		66DEAE811BD73F6A00929D2C /* FFHorizontalScrollBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHorizontalScrollBar.h; sourceTree = "<group>"; };
+		66DEAE821BD73F6A00929D2C /* FFHorizontalScrollBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHorizontalScrollBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +331,8 @@
 			isa = PBXGroup;
 			children = (
 				667124EB1BD4D26D0079C884 /* AFNetworking */,
+				66DEAE811BD73F6A00929D2C /* FFHorizontalScrollBar.h */,
+				66DEAE821BD73F6A00929D2C /* FFHorizontalScrollBar.m */,
 				667125341BD4ECBA0079C884 /* FFImageUtils */,
 				660DD51E1BD61F0900DE1A90 /* FFSkinUtils */,
 				660DD5221BD61F0900DE1A90 /* FFUserDefaultsUtils */,
@@ -733,6 +739,7 @@
 				660DD5251BD61F0900DE1A90 /* FFSkinUtils.m in Sources */,
 				667125281BD4E6630079C884 /* FFNavigationController.m in Sources */,
 				667125011BD4D26D0079C884 /* AFHTTPRequestOperationManager.m in Sources */,
+				66DEAE831BD73F6A00929D2C /* FFHorizontalScrollBar.m in Sources */,
 				6671250B1BD4D26D0079C884 /* AFURLRequestSerialization.m in Sources */,
 				667124CD1BD4D12F0079C884 /* NewsModel.m in Sources */,
 				667124D51BD4D18D0079C884 /* FFBaseTableViewCell.m in Sources */,
@@ -790,6 +797,7 @@
 				6671250C1BD4D26D0079C884 /* AFURLRequestSerialization.m in Sources */,
 				660DD52A1BD61F0900DE1A90 /* FFUserDefaultsUtils.m in Sources */,
 				66A8130A1BD4AB0000D3086C /* FFBaseView.m in Sources */,
+				66DEAE841BD73F6A00929D2C /* FFHorizontalScrollBar.m in Sources */,
 				667125041BD4D26D0079C884 /* AFHTTPSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
