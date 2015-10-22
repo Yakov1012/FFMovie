@@ -44,7 +44,7 @@
 #pragma mark - Set
 - (void)setAllItemsNameArr:(NSMutableArray *)allItemsNameArr {
     _allItemsNameArr = allItemsNameArr;
-    
+
     [self setUpArrowButton];
     [self setUpItemsScrollBar];
     [self setUpItemsManageBar];
@@ -98,7 +98,7 @@
  */
 - (void)setUpItemsListScrollView {
     if (!self.itemsListScrollView) {
-        
+
         CGFloat itemsListScrollViewH = hScreenHeight - (self.itemsScrollBar.frame.origin.y + self.itemsScrollBar.frame.size.height + 64.0);
         self.itemsListScrollView = [[FFItemsListScrollView alloc] initWithFrame:CGRectMake(0.0, -itemsListScrollViewH, wScreenWidth, itemsListScrollViewH)];
         self.itemsListScrollView.allItemsNameArr = [NSMutableArray arrayWithArray:self.allItemsNameArr];
@@ -135,15 +135,17 @@
     self.itemsScrollBar.hidden = !self.itemsScrollBar.hidden;
     self.itemsManageBar.hidden = !self.itemsManageBar.hidden;
     self.tabBarController.tabBar.hidden = self.itemsScrollBar.hidden;
-    CGRect itemsListScrollViewRect = self.itemsListScrollView.frame;
-    if (self.itemsScrollBar.hidden) {
-        itemsListScrollViewRect.origin.y = hArrowHeight;
-    } else {
-        itemsListScrollViewRect.origin.y = -(self.itemsListScrollView.frame.size.height + hArrowHeight);
-    }
-    self.itemsListScrollView.frame = itemsListScrollViewRect;
+
     [UIView animateWithDuration:.8
                      animations:^{
+                         CGRect itemsListScrollViewRect = self.itemsListScrollView.frame;
+                         if (self.itemsScrollBar.hidden) {
+                             itemsListScrollViewRect.origin.y = hArrowHeight;
+                         } else {
+                             itemsListScrollViewRect.origin.y = -(self.itemsListScrollView.frame.size.height + hArrowHeight);
+                         }
+                         self.itemsListScrollView.frame = itemsListScrollViewRect;
+
                          CGAffineTransform rotation = button.imageView.transform;
                          button.imageView.transform = CGAffineTransformRotate(rotation, M_PI);
                      }];
