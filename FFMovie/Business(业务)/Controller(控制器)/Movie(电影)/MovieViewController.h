@@ -6,8 +6,8 @@
 //  Copyright © 2015年 Yakov. All rights reserved.
 //
 
-#import "FFBaseViewController.h"
+#import "FFItemsScrollController.h"
 
-@interface MovieViewController : FFBaseViewController
+@interface MovieViewController : FFItemsScrollController
 
 @end

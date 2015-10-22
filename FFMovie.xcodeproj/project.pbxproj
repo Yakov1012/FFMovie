@@ -14,6 +14,16 @@
 		660DD5281BD61F0900DE1A90 /* SkinConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 660DD5211BD61F0900DE1A90 /* SkinConfig.plist */; settings = {ASSET_TAGS = (); }; };
 		660DD5291BD61F0900DE1A90 /* FFUserDefaultsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 660DD5241BD61F0900DE1A90 /* FFUserDefaultsUtils.m */; settings = {ASSET_TAGS = (); }; };
 		660DD52A1BD61F0900DE1A90 /* FFUserDefaultsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 660DD5241BD61F0900DE1A90 /* FFUserDefaultsUtils.m */; settings = {ASSET_TAGS = (); }; };
+		6649DBD31BD8E68000909976 /* Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6649DBCA1BD8E68000909976 /* Arrow@2x.png */; settings = {ASSET_TAGS = (); }; };
+		6649DBD41BD8E68000909976 /* Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6649DBCA1BD8E68000909976 /* Arrow@2x.png */; settings = {ASSET_TAGS = (); }; };
+		6649DBD51BD8E68000909976 /* FFItemsListScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6649DBCC1BD8E68000909976 /* FFItemsListScrollView.m */; settings = {ASSET_TAGS = (); }; };
+		6649DBD61BD8E68000909976 /* FFItemsListScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6649DBCC1BD8E68000909976 /* FFItemsListScrollView.m */; settings = {ASSET_TAGS = (); }; };
+		6649DBD71BD8E68000909976 /* FFItemsManageBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6649DBCE1BD8E68000909976 /* FFItemsManageBar.m */; settings = {ASSET_TAGS = (); }; };
+		6649DBD81BD8E68000909976 /* FFItemsManageBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6649DBCE1BD8E68000909976 /* FFItemsManageBar.m */; settings = {ASSET_TAGS = (); }; };
+		6649DBD91BD8E68000909976 /* FFItemsScrollBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6649DBD01BD8E68000909976 /* FFItemsScrollBar.m */; settings = {ASSET_TAGS = (); }; };
+		6649DBDA1BD8E68000909976 /* FFItemsScrollBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6649DBD01BD8E68000909976 /* FFItemsScrollBar.m */; settings = {ASSET_TAGS = (); }; };
+		6649DBDB1BD8E68000909976 /* FFItemsScrollController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6649DBD21BD8E68000909976 /* FFItemsScrollController.m */; settings = {ASSET_TAGS = (); }; };
+		6649DBDC1BD8E68000909976 /* FFItemsScrollController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6649DBD21BD8E68000909976 /* FFItemsScrollController.m */; settings = {ASSET_TAGS = (); }; };
 		665E3C8A1BD12C7400282D71 /* UIView+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C7C1BD12C7400282D71 /* UIView+FFExtension.m */; };
 		665E3C8B1BD12C7400282D71 /* UIView+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 665E3C7C1BD12C7400282D71 /* UIView+FFExtension.m */; };
 		665E3C8C1BD12C7400282D71 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665E3C7D1BD12C7400282D71 /* Images.xcassets */; };
@@ -92,8 +102,6 @@
 		66A813051BD4AAF300D3086C /* FFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813031BD4AAF300D3086C /* FFBaseModel.m */; };
 		66A813091BD4AB0000D3086C /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813081BD4AB0000D3086C /* FFBaseView.m */; };
 		66A8130A1BD4AB0000D3086C /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813081BD4AB0000D3086C /* FFBaseView.m */; };
-		66DEAE831BD73F6A00929D2C /* FFHorizontalScrollBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEAE821BD73F6A00929D2C /* FFHorizontalScrollBar.m */; settings = {ASSET_TAGS = (); }; };
-		66DEAE841BD73F6A00929D2C /* FFHorizontalScrollBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEAE821BD73F6A00929D2C /* FFHorizontalScrollBar.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +121,15 @@
 		660DD5211BD61F0900DE1A90 /* SkinConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SkinConfig.plist; sourceTree = "<group>"; };
 		660DD5231BD61F0900DE1A90 /* FFUserDefaultsUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFUserDefaultsUtils.h; sourceTree = "<group>"; };
 		660DD5241BD61F0900DE1A90 /* FFUserDefaultsUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFUserDefaultsUtils.m; sourceTree = "<group>"; };
+		6649DBCA1BD8E68000909976 /* Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow@2x.png"; sourceTree = "<group>"; };
+		6649DBCB1BD8E68000909976 /* FFItemsListScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFItemsListScrollView.h; sourceTree = "<group>"; };
+		6649DBCC1BD8E68000909976 /* FFItemsListScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFItemsListScrollView.m; sourceTree = "<group>"; };
+		6649DBCD1BD8E68000909976 /* FFItemsManageBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFItemsManageBar.h; sourceTree = "<group>"; };
+		6649DBCE1BD8E68000909976 /* FFItemsManageBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFItemsManageBar.m; sourceTree = "<group>"; };
+		6649DBCF1BD8E68000909976 /* FFItemsScrollBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFItemsScrollBar.h; sourceTree = "<group>"; };
+		6649DBD01BD8E68000909976 /* FFItemsScrollBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFItemsScrollBar.m; sourceTree = "<group>"; };
+		6649DBD11BD8E68000909976 /* FFItemsScrollController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFItemsScrollController.h; sourceTree = "<group>"; };
+		6649DBD21BD8E68000909976 /* FFItemsScrollController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFItemsScrollController.m; sourceTree = "<group>"; };
 		665E3C7B1BD12C7400282D71 /* UIView+FFExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FFExtension.h"; sourceTree = "<group>"; };
 		665E3C7C1BD12C7400282D71 /* UIView+FFExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FFExtension.m"; sourceTree = "<group>"; };
 		665E3C7D1BD12C7400282D71 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -194,8 +211,6 @@
 		66A813031BD4AAF300D3086C /* FFBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseModel.m; sourceTree = "<group>"; };
 		66A813071BD4AB0000D3086C /* FFBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseView.h; sourceTree = "<group>"; };
 		66A813081BD4AB0000D3086C /* FFBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseView.m; sourceTree = "<group>"; };
-		66DEAE811BD73F6A00929D2C /* FFHorizontalScrollBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHorizontalScrollBar.h; sourceTree = "<group>"; };
-		66DEAE821BD73F6A00929D2C /* FFHorizontalScrollBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHorizontalScrollBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +248,22 @@
 				660DD5241BD61F0900DE1A90 /* FFUserDefaultsUtils.m */,
 			);
 			path = FFUserDefaultsUtils;
+			sourceTree = "<group>";
+		};
+		6649DBC91BD8E68000909976 /* FFItemsScrollController */ = {
+			isa = PBXGroup;
+			children = (
+				6649DBCA1BD8E68000909976 /* Arrow@2x.png */,
+				6649DBCB1BD8E68000909976 /* FFItemsListScrollView.h */,
+				6649DBCC1BD8E68000909976 /* FFItemsListScrollView.m */,
+				6649DBCD1BD8E68000909976 /* FFItemsManageBar.h */,
+				6649DBCE1BD8E68000909976 /* FFItemsManageBar.m */,
+				6649DBCF1BD8E68000909976 /* FFItemsScrollBar.h */,
+				6649DBD01BD8E68000909976 /* FFItemsScrollBar.m */,
+				6649DBD11BD8E68000909976 /* FFItemsScrollController.h */,
+				6649DBD21BD8E68000909976 /* FFItemsScrollController.m */,
+			);
+			path = FFItemsScrollController;
 			sourceTree = "<group>";
 		};
 		665E3C5C1BD12C7400282D71 /* FFMovie */ = {
@@ -331,9 +362,8 @@
 			isa = PBXGroup;
 			children = (
 				667124EB1BD4D26D0079C884 /* AFNetworking */,
-				66DEAE811BD73F6A00929D2C /* FFHorizontalScrollBar.h */,
-				66DEAE821BD73F6A00929D2C /* FFHorizontalScrollBar.m */,
 				667125341BD4ECBA0079C884 /* FFImageUtils */,
+				6649DBC91BD8E68000909976 /* FFItemsScrollController */,
 				660DD51E1BD61F0900DE1A90 /* FFSkinUtils */,
 				660DD5221BD61F0900DE1A90 /* FFUserDefaultsUtils */,
 			);
@@ -688,6 +718,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6649DBD31BD8E68000909976 /* Arrow@2x.png in Resources */,
 				660DD5271BD61F0900DE1A90 /* SkinConfig.plist in Resources */,
 				665E3C8C1BD12C7400282D71 /* Images.xcassets in Resources */,
 				660DD5101BD5E44F00DE1A90 /* Skin in Resources */,
@@ -698,6 +729,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6649DBD41BD8E68000909976 /* Arrow@2x.png in Resources */,
 				660DD5281BD61F0900DE1A90 /* SkinConfig.plist in Resources */,
 				66A812F91BD4813B00D3086C /* Info.plist in Resources */,
 				665E3C8D1BD12C7400282D71 /* Images.xcassets in Resources */,
@@ -725,6 +757,7 @@
 				667124AD1BD4D0B40079C884 /* CinemaViewController.m in Sources */,
 				667125131BD4D9E50079C884 /* FFBaseTabBarController.m in Sources */,
 				66A812FF1BD4AAE700D3086C /* FFBaseViewController.m in Sources */,
+				6649DBD51BD8E68000909976 /* FFItemsListScrollView.m in Sources */,
 				6671251B1BD4DA390079C884 /* FFTabBarController.m in Sources */,
 				667125371BD4ECFD0079C884 /* FFImageUtils.m in Sources */,
 				665E3C921BD12C7400282D71 /* main.m in Sources */,
@@ -736,10 +769,11 @@
 				667124E91BD4D1EB0079C884 /* Top250TableViewCell.m in Sources */,
 				667125051BD4D26D0079C884 /* AFNetworkReachabilityManager.m in Sources */,
 				66A813091BD4AB0000D3086C /* FFBaseView.m in Sources */,
+				6649DBD71BD8E68000909976 /* FFItemsManageBar.m in Sources */,
+				6649DBDB1BD8E68000909976 /* FFItemsScrollController.m in Sources */,
 				660DD5251BD61F0900DE1A90 /* FFSkinUtils.m in Sources */,
 				667125281BD4E6630079C884 /* FFNavigationController.m in Sources */,
 				667125011BD4D26D0079C884 /* AFHTTPRequestOperationManager.m in Sources */,
-				66DEAE831BD73F6A00929D2C /* FFHorizontalScrollBar.m in Sources */,
 				6671250B1BD4D26D0079C884 /* AFURLRequestSerialization.m in Sources */,
 				667124CD1BD4D12F0079C884 /* NewsModel.m in Sources */,
 				667124D51BD4D18D0079C884 /* FFBaseTableViewCell.m in Sources */,
@@ -749,6 +783,7 @@
 				667125171BD4DA040079C884 /* FFBaseNavigationController.m in Sources */,
 				667124C51BD4D1100079C884 /* MoreModel.m in Sources */,
 				667124E11BD4D1C90079C884 /* MovieTableViewCell.m in Sources */,
+				6649DBD91BD8E68000909976 /* FFItemsScrollBar.m in Sources */,
 				667124DD1BD4D1BD0079C884 /* MoreTableViewCell.m in Sources */,
 				667124E51BD4D1DC0079C884 /* NewsTableViewCell.m in Sources */,
 			);
@@ -761,11 +796,13 @@
 				667125081BD4D26D0079C884 /* AFSecurityPolicy.m in Sources */,
 				66A80F671BD095BD0094CF29 /* FFMovieTests.m in Sources */,
 				667124E21BD4D1C90079C884 /* MovieTableViewCell.m in Sources */,
+				6649DBD81BD8E68000909976 /* FFItemsManageBar.m in Sources */,
 				667124D21BD4D13C0079C884 /* Top250Model.m in Sources */,
 				667124C21BD4D1050079C884 /* CinemaModel.m in Sources */,
 				6671250A1BD4D26D0079C884 /* AFURLConnectionOperation.m in Sources */,
 				667124B61BD4D0D00079C884 /* MovieViewController.m in Sources */,
 				665E3C911BD12C7400282D71 /* AppDelegate.m in Sources */,
+				6649DBDC1BD8E68000909976 /* FFItemsScrollController.m in Sources */,
 				667124CE1BD4D12F0079C884 /* NewsModel.m in Sources */,
 				667125101BD4D26D0079C884 /* AFURLSessionManager.m in Sources */,
 				667124C61BD4D1100079C884 /* MoreModel.m in Sources */,
@@ -785,6 +822,7 @@
 				667124DE1BD4D1BD0079C884 /* MoreTableViewCell.m in Sources */,
 				667124B21BD4D0C70079C884 /* MoreViewController.m in Sources */,
 				665E3C931BD12C7400282D71 /* main.m in Sources */,
+				6649DBD61BD8E68000909976 /* FFItemsListScrollView.m in Sources */,
 				667125061BD4D26D0079C884 /* AFNetworkReachabilityManager.m in Sources */,
 				667125291BD4E6630079C884 /* FFNavigationController.m in Sources */,
 				667124AE1BD4D0B40079C884 /* CinemaViewController.m in Sources */,
@@ -796,8 +834,8 @@
 				667125181BD4DA040079C884 /* FFBaseNavigationController.m in Sources */,
 				6671250C1BD4D26D0079C884 /* AFURLRequestSerialization.m in Sources */,
 				660DD52A1BD61F0900DE1A90 /* FFUserDefaultsUtils.m in Sources */,
+				6649DBDA1BD8E68000909976 /* FFItemsScrollBar.m in Sources */,
 				66A8130A1BD4AB0000D3086C /* FFBaseView.m in Sources */,
-				66DEAE841BD73F6A00929D2C /* FFHorizontalScrollBar.m in Sources */,
 				667125041BD4D26D0079C884 /* AFHTTPSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

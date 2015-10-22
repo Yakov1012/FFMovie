@@ -8,32 +8,40 @@
 
 #import "NewsViewController.h"
 
+#import "FFUserDefaultsUtils.h"
+
 @interface NewsViewController ()
 
 @end
 
 @implementation NewsViewController
 
+#pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     self.title = @"新闻";
+
+    UIButton *skinButton = [[UIButton alloc] initWithFrame:CGRectMake((wScreenWidth - 100.0) / 2.0, (hScreenHeight - 100.0) / 2.0, 100.0, 100.0)];
+    skinButton.backgroundColor = [UIColor orangeColor];
+    [skinButton addTarget:self action:@selector(skinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:skinButton];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - Action
+- (void)skinButtonClick:(UIButton *)button {
+    if ([FFSkinUtils shareInstance].skinType == SkinTypeDay) {
+        [FFSkinUtils shareInstance].skinName = @"SkinNight";
+        [FFUserDefaultsUtils setUserDefaults:kSkinName value:@"SkinNight"];
+    } else if ([FFSkinUtils shareInstance].skinType == SkinTypeNight) {
+        [FFSkinUtils shareInstance].skinName = @"SkinDay";
+        [FFUserDefaultsUtils setUserDefaults:kSkinName value:@"SkinDay"];
+    } else {
+        [FFSkinUtils shareInstance].skinName = @"SkinNight";
+    }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [[NSNotificationCenter defaultCenter] postNotificationName:nSkinDidChangeNotification object:nil];
 }
-*/
 
 @end

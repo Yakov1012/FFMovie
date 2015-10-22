@@ -8,9 +8,6 @@
 
 #import "MovieViewController.h"
 
-#import "FFUserDefaultsUtils.h"
-#import "FFHorizontalScrollBar.h"
-
 @interface MovieViewController ()
 
 @end
@@ -23,43 +20,8 @@
     // Do any additional setup after loading the view.
 
     self.title = @"电影";
-
-    UIButton *skinButton = [[UIButton alloc] initWithFrame:CGRectMake((wScreenWidth - 100.0) / 2.0, (hScreenHeight - 100.0) / 2.0, 100.0, 100.0)];
-    skinButton.backgroundColor = [UIColor orangeColor];
-    [skinButton addTarget:self action:@selector(skinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:skinButton];
-
-
-    FFHorizontalScrollBar *horizontalScrollBar = [[FFHorizontalScrollBar alloc] initWithFrame:CGRectMake(0.0, 0.0, wScreenWidth, 30.0)];
-    horizontalScrollBar.itemsNameArr = [[NSMutableArray alloc] initWithArray:@[@"推荐",@"热点",@"杭州",@"社会",@"娱乐",@"科技",@"汽车",@"体育",@"订阅",@"财经",@"军事",@"国际",@"正能量",@"段子",@"趣图",@"美女",@"健康",@"教育",@"特卖",@"彩票",@"辟谣"]];
-    horizontalScrollBar.arrowChange = ^() {
-        
-    };
-    horizontalScrollBar.itemClickBlock = ^(NSString *itemName, NSInteger itemIndex) {
-   
-    };
-    [self.view addSubview:horizontalScrollBar];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-#pragma mark - Action
-- (void)skinButtonClick:(UIButton *)button {
-    if ([FFSkinUtils shareInstance].skinType == SkinTypeDay) {
-        [FFSkinUtils shareInstance].skinName = @"SkinNight";
-        [FFUserDefaultsUtils setUserDefaults:kSkinName value:@"SkinNight"];
-    } else if ([FFSkinUtils shareInstance].skinType == SkinTypeNight) {
-        [FFSkinUtils shareInstance].skinName = @"SkinDay";
-        [FFUserDefaultsUtils setUserDefaults:kSkinName value:@"SkinDay"];
-    } else {
-        [FFSkinUtils shareInstance].skinName = @"SkinNight";
-    }
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:nSkinDidChangeNotification object:nil];
+    
+    self.allItemsNameArr = [[NSMutableArray alloc] initWithObjects:@[@"推荐", @"热点", @"杭州", @"社会", @"娱乐", @"科技", @"汽车", @"体育", @"订阅", @"财经", @"军事", @"国际", @"正能量", @"段子", @"趣图", @"美女", @"健康", @"教育", @"特卖", @"彩票", @"辟谣"], @[@"电影",@"数码",@"时尚",@"奇葩",@"游戏",@"旅游",@"育儿",@"减肥",@"养生",@"美食",@"政务",@"历史",@"探索",@"故事",@"美文",@"情感",@"语录",@"美图",@"房产",@"家居",@"搞笑",@"星座",@"文化",@"毕业生",@"视频",@"搞笑",@"星座",@"文化",@"毕业生",@"视频",@"搞笑",@"星座",@"文化",@"毕业生",@"视频",@"搞笑",@"星座",@"文化",@"毕业生",@"视频"], nil];
 }
 
 @end

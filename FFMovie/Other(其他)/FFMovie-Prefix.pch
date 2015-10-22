@@ -27,4 +27,8 @@
 /// 当前设备的屏幕高度
 #define hScreenHeight ([UIScreen mainScreen].bounds.size.height)
 
+/// block中需用如下self
+#define sWeakBlock(weakSelf) __weak __typeof(&*self) weakSelf = self;
+#define sStrongBlock(strongSelf) __strong __typeof(&*weakSelf) strongSelf = weakSelf;
+
 #endif

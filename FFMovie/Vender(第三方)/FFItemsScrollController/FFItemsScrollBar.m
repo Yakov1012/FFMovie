@@ -6,14 +6,14 @@
 //  Copyright © 2015年 Yakov. All rights reserved.
 //
 
-#import "FFHorizontalScrollBar.h"
+#import "FFItemsScrollBar.h"
 
 #define dDistanceBetweenItem 32.0
 #define gGapFromEdge 20.0
 #define sItemFontSize 13.0
 #define cRGBColor(r, g, b) [UIColor colorWithRed:(r) / 255.0 green:(g) / 255.0 blue:(b) / 255.0 alpha:1.0]
 
-@interface FFHorizontalScrollBar ()
+@interface FFItemsScrollBar ()
 
 /// 各个item的X坐标
 @property (nonatomic, assign) CGFloat itemX;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation FFHorizontalScrollBar
+@implementation FFItemsScrollBar
 
 #pragma mark - LifeCycle
 /**
@@ -40,7 +40,6 @@
  *  @return <#return value description#>
  */
 - (instancetype)initWithFrame:(CGRect)frame {
-    frame.size.width = [UIScreen mainScreen].bounds.size.width;
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = cRGBColor(238.0, 238.0, 238.0);
@@ -49,6 +48,7 @@
 
         self.itemX = gGapFromEdge;
         self.itemsNameArr = [NSMutableArray arrayWithCapacity:1];
+        self.itemsArr = [NSMutableArray arrayWithCapacity:1];
     }
     return self;
 }
@@ -153,12 +153,12 @@
                              animations:^{
                                  CGPoint contentOffset = self.contentOffset;
 
-                                 if (sender.frame.origin.x <= wScreenWidth / 2.0 && self.contentOffset.x != 0.0) {
+                                 if (sender.frame.origin.x <= self.frame.size.width / 2.0 && self.contentOffset.x != 0.0) {
                                      contentOffset = CGPointMake(0.0, 0.0);
-                                 } else if (sender.frame.origin.x > wScreenWidth / 2.0 && sender.frame.origin.x <= self.contentSize.width - wScreenWidth / 2.0 && self.contentSize.width > wScreenWidth) {
-                                     contentOffset = CGPointMake((sender.frame.origin.x - (wScreenWidth - sender.frame.size.width) / 2.0), 0);
-                                 } else if (sender.frame.origin.x > wScreenWidth / 2.0 && sender.frame.origin.x > self.contentSize.width - wScreenWidth / 2.0 && self.contentSize.width > wScreenWidth) {
-                                     contentOffset = CGPointMake(self.contentSize.width - wScreenWidth, 0);
+                                 } else if (sender.frame.origin.x > self.frame.size.width / 2.0 && sender.frame.origin.x <= self.contentSize.width - self.frame.size.width / 2.0 && self.contentSize.width > self.frame.size.width) {
+                                     contentOffset = CGPointMake((sender.frame.origin.x - (self.frame.size.width - sender.frame.size.width) / 2.0), 0);
+                                 } else if (sender.frame.origin.x > self.frame.size.width / 2.0 && sender.frame.origin.x > self.contentSize.width - self.frame.size.width / 2.0 && self.contentSize.width > self.frame.size.width) {
+                                     contentOffset = CGPointMake(self.contentSize.width - self.frame.size.width, 0);
                                  }
                                  self.contentOffset = contentOffset;
                              }];

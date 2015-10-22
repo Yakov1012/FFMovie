@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, AnimateType){
 /**
  *  横向滚动条
  */
-@interface FFHorizontalScrollBar : UIScrollView
+@interface FFItemsScrollBar : UIScrollView
 
 ///
 @property (nonatomic, copy) void (^arrowChange)();
