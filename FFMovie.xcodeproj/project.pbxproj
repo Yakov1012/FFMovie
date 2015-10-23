@@ -102,6 +102,10 @@
 		66A813051BD4AAF300D3086C /* FFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813031BD4AAF300D3086C /* FFBaseModel.m */; };
 		66A813091BD4AB0000D3086C /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813081BD4AB0000D3086C /* FFBaseView.m */; };
 		66A8130A1BD4AB0000D3086C /* FFBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A813081BD4AB0000D3086C /* FFBaseView.m */; };
+		66FF11351BD9C5520009BDBC /* FFItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 66FF11341BD9C5520009BDBC /* FFItem.m */; settings = {ASSET_TAGS = (); }; };
+		66FF11361BD9C5520009BDBC /* FFItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 66FF11341BD9C5520009BDBC /* FFItem.m */; settings = {ASSET_TAGS = (); }; };
+		66FF11381BD9CF590009BDBC /* Delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FF11371BD9CF590009BDBC /* Delete@2x.png */; settings = {ASSET_TAGS = (); }; };
+		66FF11391BD9CF590009BDBC /* Delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FF11371BD9CF590009BDBC /* Delete@2x.png */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +215,10 @@
 		66A813031BD4AAF300D3086C /* FFBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseModel.m; sourceTree = "<group>"; };
 		66A813071BD4AB0000D3086C /* FFBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBaseView.h; sourceTree = "<group>"; };
 		66A813081BD4AB0000D3086C /* FFBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBaseView.m; sourceTree = "<group>"; };
+		66FF11331BD9C5520009BDBC /* FFItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFItem.h; sourceTree = "<group>"; };
+		66FF11341BD9C5520009BDBC /* FFItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFItem.m; sourceTree = "<group>"; };
+		66FF11371BD9CF590009BDBC /* Delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete@2x.png"; sourceTree = "<group>"; };
+		66FF113B1BD9D52A0009BDBC /* FFItemsMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFItemsMacro.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,8 +262,12 @@
 			isa = PBXGroup;
 			children = (
 				6649DBCA1BD8E68000909976 /* Arrow@2x.png */,
+				66FF11371BD9CF590009BDBC /* Delete@2x.png */,
+				66FF11331BD9C5520009BDBC /* FFItem.h */,
+				66FF11341BD9C5520009BDBC /* FFItem.m */,
 				6649DBCB1BD8E68000909976 /* FFItemsListScrollView.h */,
 				6649DBCC1BD8E68000909976 /* FFItemsListScrollView.m */,
+				66FF113B1BD9D52A0009BDBC /* FFItemsMacro.h */,
 				6649DBCD1BD8E68000909976 /* FFItemsManageBar.h */,
 				6649DBCE1BD8E68000909976 /* FFItemsManageBar.m */,
 				6649DBCF1BD8E68000909976 /* FFItemsScrollBar.h */,
@@ -721,6 +733,7 @@
 				6649DBD31BD8E68000909976 /* Arrow@2x.png in Resources */,
 				660DD5271BD61F0900DE1A90 /* SkinConfig.plist in Resources */,
 				665E3C8C1BD12C7400282D71 /* Images.xcassets in Resources */,
+				66FF11381BD9CF590009BDBC /* Delete@2x.png in Resources */,
 				660DD5101BD5E44F00DE1A90 /* Skin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -732,6 +745,7 @@
 				6649DBD41BD8E68000909976 /* Arrow@2x.png in Resources */,
 				660DD5281BD61F0900DE1A90 /* SkinConfig.plist in Resources */,
 				66A812F91BD4813B00D3086C /* Info.plist in Resources */,
+				66FF11391BD9CF590009BDBC /* Delete@2x.png in Resources */,
 				665E3C8D1BD12C7400282D71 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -765,6 +779,7 @@
 				6671250F1BD4D26D0079C884 /* AFURLSessionManager.m in Sources */,
 				667124B91BD4D0D90079C884 /* NewsViewController.m in Sources */,
 				667124D91BD4D1AA0079C884 /* CinemaTableViewCell.m in Sources */,
+				66FF11351BD9C5520009BDBC /* FFItem.m in Sources */,
 				667125031BD4D26D0079C884 /* AFHTTPSessionManager.m in Sources */,
 				667124E91BD4D1EB0079C884 /* Top250TableViewCell.m in Sources */,
 				667125051BD4D26D0079C884 /* AFNetworkReachabilityManager.m in Sources */,
@@ -832,6 +847,7 @@
 				6671251C1BD4DA390079C884 /* FFTabBarController.m in Sources */,
 				667124CA1BD4D1250079C884 /* MovieModel.m in Sources */,
 				667125181BD4DA040079C884 /* FFBaseNavigationController.m in Sources */,
+				66FF11361BD9C5520009BDBC /* FFItem.m in Sources */,
 				6671250C1BD4D26D0079C884 /* AFURLRequestSerialization.m in Sources */,
 				660DD52A1BD61F0900DE1A90 /* FFUserDefaultsUtils.m in Sources */,
 				6649DBDA1BD8E68000909976 /* FFItemsScrollBar.m in Sources */,

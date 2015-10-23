@@ -14,8 +14,7 @@
 #import "FFItemsManageBar.h"
 #import "FFItemsListScrollView.h"
 
-#define hArrowHeight 30.0
-#define wArrowWidth 30.0
+
 
 @interface FFItemsScrollController () <UIScrollViewDelegate>
 
@@ -89,6 +88,11 @@
     if (!self.itemsManageBar) {
         self.itemsManageBar = [[FFItemsManageBar alloc] initWithFrame:CGRectMake(0.0, 0.0, wScreenWidth - wArrowWidth, hArrowHeight)];
         self.itemsManageBar.hidden = YES;
+        sWeakBlock(weakSelf);
+        self.itemsManageBar.manageButtonClick = ^(BOOL isDone) {
+            sStrongBlock(strongSelf);
+            strongSelf.itemsListScrollView.isHiddenBottom = isDone;
+        };
         [self.view addSubview:self.itemsManageBar];
     }
 }
@@ -99,10 +103,19 @@
 - (void)setUpItemsListScrollView {
     if (!self.itemsListScrollView) {
 
-        CGFloat itemsListScrollViewH = hScreenHeight - (self.itemsScrollBar.frame.origin.y + self.itemsScrollBar.frame.size.height + 64.0);
-        self.itemsListScrollView = [[FFItemsListScrollView alloc] initWithFrame:CGRectMake(0.0, -itemsListScrollViewH, wScreenWidth, itemsListScrollViewH)];
+        self.itemsListScrollView = [[FFItemsListScrollView alloc] initWithFrame:CGRectMake(0.0, 64.0 + hArrowHeight, wScreenWidth, 0.0)];
         self.itemsListScrollView.allItemsNameArr = [NSMutableArray arrayWithArray:self.allItemsNameArr];
-        [self.view addSubview:self.itemsListScrollView];
+        sWeakBlock(weakSelf);
+        self.itemsListScrollView.operationBlock = ^(ItemOperationType itemOperationType, NSString *itemName) {
+            if (itemOperationType == ItemOperationTypeBottomClick) {
+                sStrongBlock(strongSelf);
+                [strongSelf.itemsScrollBar addItem:itemName];
+            } else if (itemOperationType == ItemOperationTypeDelete) {
+                sStrongBlock(strongSelf);
+                [strongSelf.itemsScrollBar deleteItem:itemName];
+            }
+        };
+        [[UIApplication sharedApplication].keyWindow addSubview:self.itemsListScrollView];
     }
 }
 
@@ -134,17 +147,20 @@
 - (void)arrowButtonClick:(UIButton *)button {
     self.itemsScrollBar.hidden = !self.itemsScrollBar.hidden;
     self.itemsManageBar.hidden = !self.itemsManageBar.hidden;
-    self.tabBarController.tabBar.hidden = self.itemsScrollBar.hidden;
-
-    [UIView animateWithDuration:.8
+    self.itemsListScrollView.isHiddenBottom = NO;
+    
+    CGFloat itemsListScrollViewH = hScreenHeight - (self.itemsScrollBar.frame.origin.y + self.itemsScrollBar.frame.size.height + 64.0);
+    sWeakBlock(weakSelf);
+    [UIView animateWithDuration:.5
                      animations:^{
-                         CGRect itemsListScrollViewRect = self.itemsListScrollView.frame;
-                         if (self.itemsScrollBar.hidden) {
-                             itemsListScrollViewRect.origin.y = hArrowHeight;
+                         sStrongBlock(strongSelf);
+                         CGRect itemsListScrollViewRect = strongSelf.itemsListScrollView.frame;
+                         if (strongSelf.itemsScrollBar.hidden) {
+                             itemsListScrollViewRect.size.height = itemsListScrollViewH;
                          } else {
-                             itemsListScrollViewRect.origin.y = -(self.itemsListScrollView.frame.size.height + hArrowHeight);
+                             itemsListScrollViewRect.size.height = 0.0;
                          }
-                         self.itemsListScrollView.frame = itemsListScrollViewRect;
+                         strongSelf.itemsListScrollView.frame = itemsListScrollViewRect;
 
                          CGAffineTransform rotation = button.imageView.transform;
                          button.imageView.transform = CGAffineTransformRotate(rotation, M_PI);
@@ -165,7 +181,7 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger itemIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
-    [self.itemsScrollBar itemClickByScrollerWithIndex:itemIndex];
+    [self.itemsScrollBar itemScrollToIndex:itemIndex];
 }
 
 @end

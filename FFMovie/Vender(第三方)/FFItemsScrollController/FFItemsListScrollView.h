@@ -7,20 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FFItemsMacro.h"
 
 #import "FFItemsScrollBar.h"
 
 @interface FFItemsListScrollView : UIScrollView
 
-@property (nonatomic, strong) NSMutableArray *topView;
-@property (nonatomic, strong) NSMutableArray *bottomView;
+/// 是否隐藏bottom部分
+@property (nonatomic, assign) BOOL isHiddenBottom;
 
 /// 所有items名称数组
 @property (nonatomic, strong) NSMutableArray *allItemsNameArr;
 
-
-@property (nonatomic, copy) void (^longPressedBlock)();
-@property (nonatomic, copy) void (^opertionFromItemBlock)(AnimateType type, NSString *itemName, int index);
-- (void)itemRespondFromListBarClickWithItemName:(NSString *)itemName;
+/// item点击
+@property (nonatomic, copy) void (^operationBlock)(ItemOperationType type, NSString *itemName);
 
 @end

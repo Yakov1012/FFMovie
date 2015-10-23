@@ -8,10 +8,6 @@
 
 #import "FFItemsScrollBar.h"
 
-#define dDistanceBetweenItem 32.0
-#define gGapFromEdge 20.0
-#define sItemFontSize 13.0
-#define cRGBColor(r, g, b) [UIColor colorWithRed:(r) / 255.0 green:(g) / 255.0 blue:(b) / 255.0 alpha:1.0]
 
 @interface FFItemsScrollBar ()
 
@@ -46,7 +42,7 @@
         //        self.contentInset = UIEdgeInsetsMake(0, 0, 0, 50);
         self.showsHorizontalScrollIndicator = NO;
 
-        self.itemX = gGapFromEdge;
+        self.itemX = gEdgeGap;
         self.itemsNameArr = [NSMutableArray arrayWithCapacity:1];
         self.itemsArr = [NSMutableArray arrayWithCapacity:1];
     }
@@ -78,7 +74,7 @@
  */
 - (void)setUpItemsBackgroudView {
     if (!self.itemsBackgroudView) {
-        self.itemsBackgroudView = [[UIView alloc] initWithFrame:CGRectMake(gGapFromEdge / 2.0, (self.frame.size.height - 20) / 2, 46.0, 20.0)];
+        self.itemsBackgroudView = [[UIView alloc] initWithFrame:CGRectMake(gEdgeGap / 2.0, (self.frame.size.height - 20) / 2, 46.0, 20.0)];
         self.itemsBackgroudView.backgroundColor = cRGBColor(202.0, 51.0, 54.0);
         self.itemsBackgroudView.layer.cornerRadius = 5;
         [self addSubview:self.itemsBackgroudView];
@@ -98,10 +94,8 @@
     UIButton *item = [[UIButton alloc] initWithFrame:CGRectMake(self.itemX, 0, itemWidth, self.frame.size.height)];
     item.titleLabel.font = [UIFont systemFontOfSize:sItemFontSize];
     [item setTitle:title forState:0];
-    [item setTitleColor:cRGBColor(111.0, 111.0, 111.0) forState:0];
-    [item setTitleColor:cRGBColor(111.0, 111.0, 111.0) forState:1 << 0];
-    [item setTitleColor:[UIColor whiteColor] forState:1 << 2];
-    [item addTarget:self action:@selector(itemClick:) forControlEvents:1 << 6];
+    [item setTitleColor:cRGBColor(111.0, 111.0, 111.0) forState:UIControlStateNormal];
+    [item addTarget:self action:@selector(itemClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.itemsArr addObject:item];
     [self addSubview:item];
 
@@ -143,8 +137,8 @@
         animations:^{
             // items的背景视图位置变化
             CGRect itemsBackgroudViewRect = self.itemsBackgroudView.frame;
-            itemsBackgroudViewRect.size.width = sender.frame.size.width + gGapFromEdge;
-            itemsBackgroudViewRect.origin.x = sender.frame.origin.x - gGapFromEdge / 2.0;
+            itemsBackgroudViewRect.size.width = sender.frame.size.width + gEdgeGap;
+            itemsBackgroudViewRect.origin.x = sender.frame.origin.x - gEdgeGap / 2.0;
             self.itemsBackgroudView.frame = itemsBackgroudViewRect;
         }
         completion:^(BOOL finished) {
@@ -152,7 +146,6 @@
             [UIView animateWithDuration:0.3
                              animations:^{
                                  CGPoint contentOffset = self.contentOffset;
-
                                  if (sender.frame.origin.x <= self.frame.size.width / 2.0 && self.contentOffset.x != 0.0) {
                                      contentOffset = CGPointMake(0.0, 0.0);
                                  } else if (sender.frame.origin.x > self.frame.size.width / 2.0 && sender.frame.origin.x <= self.contentSize.width - self.frame.size.width / 2.0 && self.contentSize.width > self.frame.size.width) {
@@ -165,23 +158,6 @@
         }];
 }
 
-- (void)switchPositionWithItemName:(NSString *)itemName index:(NSInteger)index {
-    UIButton *button = self.itemsArr[[self findIndexOfListsWithTitle:itemName]];
-    [self.itemsNameArr removeObject:itemName];
-    [self.itemsArr removeObject:button];
-    [self.itemsNameArr insertObject:itemName atIndex:index];
-    [self.itemsArr insertObject:button atIndex:index];
-    [self itemClick:self.selectedItem];
-    [self resetFrame];
-}
-
-- (void)removeItemWithTitle:(NSString *)title {
-    NSInteger index = [self findIndexOfListsWithTitle:title];
-    UIButton *select_button = self.itemsArr[index];
-    [self.itemsArr[index] removeFromSuperview];
-    [self.itemsArr removeObject:select_button];
-    [self.itemsNameArr removeObject:title];
-}
 
 - (NSInteger)findIndexOfListsWithTitle:(NSString *)title {
     for (int i = 0; i < self.itemsNameArr.count; i++) {
@@ -225,40 +201,43 @@
 
 
 #pragma mark - Public
-- (void)itemClickByScrollerWithIndex:(NSInteger)index {
+- (void)itemScrollToIndex:(NSInteger)index {
     UIButton *item = (UIButton *)self.itemsArr[index];
     [self itemClick:item];
 }
 
+- (void)addItem:(NSString *)itemName {
+    [self.itemsNameArr addObject:itemName];
 
-- (void)operationFromBlock:(AnimateType)type itemName:(NSString *)itemName index:(int)index {
-    switch (type) {
-    case TopViewClick: // 点击
-        [self itemClick:self.itemsArr[[self findIndexOfListsWithTitle:itemName]]];
-        if (self.arrowChange) {
-            self.arrowChange();
+    // 计算item的宽度
+    CGFloat itemWidth = [self calculateSizeWithFont:sItemFontSize Text:itemName].size.width;
+
+    // item
+    UIButton *item = [[UIButton alloc] initWithFrame:CGRectMake(self.itemX, 0, itemWidth, self.frame.size.height)];
+    item.titleLabel.font = [UIFont systemFontOfSize:sItemFontSize];
+    [item setTitle:itemName forState:0];
+    [item setTitleColor:cRGBColor(111.0, 111.0, 111.0) forState:UIControlStateNormal];
+    [item addTarget:self action:@selector(itemClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.itemsArr addObject:item];
+    [self addSubview:item];
+
+    // 累加item的X坐标
+    self.itemX += (itemWidth + dDistanceBetweenItem);
+
+    // 设置滑动视图的contentSize
+    self.contentSize = CGSizeMake(self.itemX - (dDistanceBetweenItem - 20.0), self.frame.size.height);
+}
+
+- (void)deleteItem:(NSString *)itemName {
+    for (NSInteger i = 0; i < self.itemsNameArr.count; i ++) {
+        NSString *name = self.itemsNameArr[i];
+        [self.itemsArr removeAllObjects];
+        if ([name isEqualToString:itemName]) {
+            [self.itemsNameArr removeObjectAtIndex:i];
         }
-        break;
-    case FromTopToTop:
-        [self switchPositionWithItemName:itemName index:index];
-        break;
-    case FromTopToTopLast:
-        [self switchPositionWithItemName:itemName index:self.itemsNameArr.count - 1];
-        break;
-    case FromTopToBottomHead:
-        if ([self.selectedItem.titleLabel.text isEqualToString:itemName]) {
-            [self itemClick:self.itemsArr[0]];
-        }
-        [self removeItemWithTitle:itemName];
-        [self resetFrame];
-        break;
-    case FromBottomToTopLast:
-        [self.itemsNameArr addObject:itemName];
-        [self setUpItemWithTitle:itemName];
-        break;
-    default:
-        break;
     }
+    
+    [self setItemsNameArr:self.itemsNameArr];
 }
 
 @end

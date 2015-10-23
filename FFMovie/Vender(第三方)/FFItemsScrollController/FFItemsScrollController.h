@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FFItemsMacro.h"
 
 /**
  *  横线滚动的控制器

@@ -7,15 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-/// 操作类型
-typedef NS_ENUM(NSInteger, AnimateType){
-    TopViewClick = 0,
-    FromTopToTop = 1,
-    FromTopToTopLast = 2,
-    FromTopToBottomHead = 3,
-    FromBottomToTopLast = 4
-};
+#import "FFItemsMacro.h"
 
 
 /**
@@ -23,16 +15,31 @@ typedef NS_ENUM(NSInteger, AnimateType){
  */
 @interface FFItemsScrollBar : UIScrollView
 
-///
-@property (nonatomic, copy) void (^arrowChange)();
-
 /// 点击item的block回调
 @property (nonatomic, copy) void (^itemClickBlock)(NSString *itemName, NSInteger itemIndex);
 
 /// items名称数组
 @property (nonatomic, strong) NSMutableArray *itemsNameArr;
 
-- (void)operationFromBlock:(AnimateType)type itemName:(NSString *)itemName index:(int)index;
-- (void)itemClickByScrollerWithIndex:(NSInteger)index;
+/**
+ *  滑动到选中item的位置
+ *
+ *  @param index 选中item的index
+ */
+- (void)itemScrollToIndex:(NSInteger)index;
+
+/**
+ *  添加新的item
+ *
+ *  @param itemName 名
+ */
+- (void)addItem:(NSString *)itemName;
+
+/**
+ *  删除item
+ *
+ *  @param itemName <#itemName description#>
+ */
+- (void)deleteItem:(NSString *)itemName;
 
 @end

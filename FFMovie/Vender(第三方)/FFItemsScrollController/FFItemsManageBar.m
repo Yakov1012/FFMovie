@@ -10,13 +10,9 @@
 
 @interface FFItemsManageBar ()
 
-/**
- *  标题
- */
+/// 标题
 @property (strong, nonatomic) UILabel *titleLabel;
-/**
- *  管理按钮(排序、完成)
- */
+/// 管理按钮(排序、完成)
 @property (strong, nonatomic) UIButton *manageButton;
 
 @end
@@ -33,6 +29,16 @@
     return self;
 }
 
+#pragma mark - Set
+- (void)setHidden:(BOOL)hidden {
+    [super setHidden:hidden];
+
+    if (!hidden) {
+        [self.manageButton setTitle:@"排序" forState:UIControlStateNormal];
+        self.titleLabel.text = @"切换栏目";
+        self.manageButton.selected = NO;
+    }
+}
 
 #pragma mark - SetUp
 /**
@@ -40,8 +46,8 @@
  */
 - (void)setUpTitleLabel {
     if (!self.titleLabel) {
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, self.frame.size.height)];
-        self.titleLabel.font = [UIFont systemFontOfSize:11];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, 100.0, self.frame.size.height)];
+        self.titleLabel.font = [UIFont systemFontOfSize:sItemFontSize];
         self.titleLabel.text = @"切换栏目";
         self.titleLabel.textColor = [UIColor grayColor];
         [self addSubview:self.titleLabel];
@@ -72,13 +78,19 @@
     if (button.selected) {
         [button setTitle:@"排序" forState:UIControlStateNormal];
         self.titleLabel.text = @"切换栏目";
+        if (self.manageButtonClick) {
+            self.manageButtonClick(NO);
+        }
     } else {
         [button setTitle:@"完成" forState:UIControlStateNormal];
         self.titleLabel.text = @"拖拽可以排序";
+        if (self.manageButtonClick) {
+            self.manageButtonClick(YES);
+        }
     }
 
     button.selected = !button.selected;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"sortBtnClick" object:button userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:nManagerNotification object:nil];
 }
 
 @end
