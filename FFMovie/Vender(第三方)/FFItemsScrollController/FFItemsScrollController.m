@@ -8,13 +8,9 @@
 
 #import "FFItemsScrollController.h"
 
-#import "FFBaseViewController.h"
-
 #import "FFItemsScrollBar.h"
 #import "FFItemsManageBar.h"
 #import "FFItemsListScrollView.h"
-
-
 
 @interface FFItemsScrollController () <UIScrollViewDelegate>
 
@@ -28,6 +24,8 @@
 @property (strong, nonatomic) FFItemsListScrollView *itemsListScrollView;
 /// 底部主滑动视图
 @property (strong, nonatomic) UIScrollView *mainScrollView;
+/// 底部主滑动视图上的控制器数组
+@property (strong, nonatomic) NSMutableArray *vcArr;
 
 @end
 
@@ -37,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.vcArr = [NSMutableArray arrayWithCapacity:1];
 }
 
 
@@ -113,6 +113,20 @@
             } else if (itemOperationType == ItemOperationTypeDelete) {
                 sStrongBlock(strongSelf);
                 [strongSelf.itemsScrollBar deleteItem:itemName];
+                
+                NSMutableArray *topItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[0]];
+                NSMutableArray *bottomItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[1]];
+                static NSInteger deleteItemLocation;
+                for (NSInteger i = 0; i < topItemsNameArr.count; i ++) {
+                    if ([itemName isEqualToString:topItemsNameArr[i]]) {
+                        [topItemsNameArr removeObjectAtIndex:i];
+                        [bottomItemsNameArr addObject:itemName];
+                        strongSelf.allItemsNameArr = [NSMutableArray arrayWithObjects:topItemsNameArr, bottomItemsNameArr, nil];
+                        deleteItemLocation = i;
+                        break;
+                    }
+                }
+                [strongSelf deletViewController:deleteItemLocation];
             }
         };
         [[UIApplication sharedApplication].keyWindow addSubview:self.itemsListScrollView];
@@ -148,7 +162,7 @@
     self.itemsScrollBar.hidden = !self.itemsScrollBar.hidden;
     self.itemsManageBar.hidden = !self.itemsManageBar.hidden;
     self.itemsListScrollView.isHiddenBottom = NO;
-    
+
     CGFloat itemsListScrollViewH = hScreenHeight - (self.itemsScrollBar.frame.origin.y + self.itemsScrollBar.frame.size.height + 64.0);
     sWeakBlock(weakSelf);
     [UIView animateWithDuration:.5
@@ -168,13 +182,32 @@
 }
 
 - (void)addViewToMainScrollViewWithItemName:(NSString *)itemName index:(NSInteger)index {
-    FFBaseViewController *viewController = [[FFBaseViewController alloc] init];
+    UIViewController *viewController = [[UIViewController alloc] init];
     viewController.view.frame = CGRectMake(index * self.mainScrollView.frame.size.width, 0.0, self.mainScrollView.frame.size.width, self.mainScrollView.frame.size.height);
     viewController.view.backgroundColor = index % 2 == 0 ? [UIColor redColor] : [UIColor orangeColor];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 60.0, 20.0)];
     label.text = [NSString stringWithFormat:@"%@", itemName];
     [viewController.view addSubview:label];
     [self.mainScrollView addSubview:viewController.view];
+    
+    [self.vcArr addObject:viewController];
+}
+
+- (void)deletViewController:(NSInteger)index {
+    UIViewController *viewController = self.vcArr[index];
+    [viewController.view removeFromSuperview];
+    [self.vcArr removeObjectAtIndex:index];
+    
+    for (NSInteger i = index; i < self.vcArr.count; i ++) {
+        UIViewController *viewController = self.vcArr[i];
+        CGRect vcRect = viewController.view.frame;
+        vcRect.origin.x -= self.mainScrollView.frame.size.width;
+        viewController.view.frame = vcRect;
+    }
+    
+    CGSize contentSize = self.mainScrollView.contentSize;
+    contentSize.width -= self.mainScrollView.frame.size.width;
+    self.mainScrollView.contentSize = contentSize;
 }
 
 

@@ -99,13 +99,25 @@
         item.itemName = topItemsNameArr[i];
         item.itemLocation = ItemLocationTop;
         sWeakBlock(weakSelf);
+        sStrongBlock(strongSelf);
         item.operationBlock = ^(ItemOperationType itemOperationType, FFItem *item) {
+            // bottom部分点击
+            if (itemOperationType == ItemLocationBottom) {
+                [strongSelf.bottomItemsArr removeObject:item];
+                [strongSelf.topItemsArr addObject:item];
+                [strongSelf changeItemLocation:itemOperationType andItem:item];
+            }
+
             // top部分删除
-            if (itemOperationType == ItemOperationTypeDelete) {
-                sStrongBlock(strongSelf);
+            else if (itemOperationType == ItemOperationTypeDelete) {
                 [strongSelf.topItemsArr removeObject:item];
                 [strongSelf.bottomItemsArr insertObject:item atIndex:0];
                 [strongSelf changeItemLocation:itemOperationType andItem:item];
+            }
+
+            // top部分移动
+            else if (itemOperationType == ItemOperationTypeMove) {
+                [strongSelf moveItem:item];
             }
         };
         [self.topView addSubview:item];
@@ -145,10 +157,19 @@
         item.itemLocation = ItemLocationBottom;
         sWeakBlock(weakSelf);
         item.operationBlock = ^(ItemOperationType itemOperationType, FFItem *item) {
+            // bottom部分点击
             if (itemOperationType == ItemLocationBottom) {
                 sStrongBlock(strongSelf);
                 [strongSelf.bottomItemsArr removeObject:item];
                 [strongSelf.topItemsArr addObject:item];
+                [strongSelf changeItemLocation:itemOperationType andItem:item];
+            }
+
+            // top部分删除
+            else if (itemOperationType == ItemOperationTypeDelete) {
+                sStrongBlock(strongSelf);
+                [strongSelf.topItemsArr removeObject:item];
+                [strongSelf.bottomItemsArr insertObject:item atIndex:0];
                 [strongSelf changeItemLocation:itemOperationType andItem:item];
             }
         };
@@ -164,6 +185,8 @@
         [self bottomItemClick:item];
     } else if (itemOperationType == ItemOperationTypeDelete) {
         [self deleteButtonClick:item];
+    } else if (itemOperationType == ItemOperationTypeMove) {
+        [self moveItem:item];
     }
 }
 
@@ -218,10 +241,10 @@
 
 - (void)deleteButtonClick:(FFItem *)item {
     [item removeFromSuperview];
-    
+
     item.itemLocation = ItemLocationBottom;
     [self.bottomView addSubview:item];
-    
+
     // bottom部分，item坐标变化
     UIView *bottomHeaderView = [self.bottomView viewWithTag:999];
     for (NSInteger i = 0; i < self.bottomItemsArr.count; i++) {
@@ -231,41 +254,64 @@
         itemRect.origin.y = bottomHeaderView.frame.origin.y + bottomHeaderView.frame.size.height + gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
         item.frame = itemRect;
     }
-    
+
     // topView、bottomView的frame变化
     self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1);
     self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
-    
+
     CGRect topViewRect = self.topView.frame;
     topViewRect.size.height = self.topViewHeight;
     self.topView.frame = topViewRect;
-    
+
     CGRect bottomViewRect = self.bottomView.frame;
     bottomViewRect.origin.y = self.topViewHeight;
     bottomViewRect.size.height = self.bottomViewHeight;
     self.bottomView.frame = bottomViewRect;
-    
+
     // top部分items位置动画变化
     sWeakBlock(weakSelf);
     [UIView animateWithDuration:0.3
-                          delay:0
-                        options:UIViewAnimationOptionLayoutSubviews
-                     animations:^{
-                         sStrongBlock(strongSelf);
-                         for (int i = 0; i < strongSelf.topItemsArr.count; i++) {
-                             FFItem *item = (FFItem *)strongSelf.topItemsArr[i];
-                             CGRect itemRect = item.frame;
-                             itemRect.origin.x = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
-                             itemRect.origin.y = gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
-                             item.frame = itemRect;
-                         }
-                     }
-                     completion:^(BOOL finished) {
-                         sStrongBlock(strongSelf);
-                         if (strongSelf.operationBlock) {
-                             strongSelf.operationBlock(ItemOperationTypeDelete, item.titleLabel.text);
-                         }
-                     }];
+        delay:0
+        options:UIViewAnimationOptionLayoutSubviews
+        animations:^{
+            sStrongBlock(strongSelf);
+            for (int i = 0; i < strongSelf.topItemsArr.count; i++) {
+                FFItem *item = (FFItem *)strongSelf.topItemsArr[i];
+                CGRect itemRect = item.frame;
+                itemRect.origin.x = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
+                itemRect.origin.y = gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
+                item.frame = itemRect;
+            }
+        }
+        completion:^(BOOL finished) {
+            sStrongBlock(strongSelf);
+            if (strongSelf.operationBlock) {
+                strongSelf.operationBlock(ItemOperationTypeDelete, item.titleLabel.text);
+            }
+        }];
+}
+
+- (void)moveItem:(FFItem *)item {
+    UIPanGestureRecognizer *panGesture = item.panGesture;
+    if (panGesture.state == UIGestureRecognizerStateBegan) {
+        [UIView animateWithDuration:0.1
+            animations:^{
+                CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.2, 1.2);
+                [item setTransform:newTRansform];
+            }
+            completion:^(BOOL finished){
+
+            }];
+    } else if (panGesture.state == UIGestureRecognizerStateEnded) {
+        [UIView animateWithDuration:0.1
+            animations:^{
+                CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.0, 1.0);
+                [item setTransform:newTRansform];
+            }
+            completion:^(BOOL finished){
+
+            }];
+    }
 }
 
 

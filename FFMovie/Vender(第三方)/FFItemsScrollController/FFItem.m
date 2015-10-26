@@ -31,7 +31,7 @@
         self.clipsToBounds = NO;
         [self addTarget:self action:@selector(itemClick:) forControlEvents:UIControlEventTouchUpInside];
 
-        /// 排序通知
+        // 排序通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managerNotification:) name:nManagerNotification object:nil];
     }
 
@@ -51,8 +51,13 @@
 
     if (itemLocation == ItemLocationTop) {
         [self setUpDeleteBtn];
+        [self setUpPanGesture];
+    } else {
+        [self.deleteBtn removeFromSuperview];
+        [self removeGestureRecognizer:self.panGesture];
     }
 }
+
 
 #pragma mark - SetUp
 - (void)setUpDeleteBtn {
@@ -64,6 +69,13 @@
         self.deleteBtn.backgroundColor = [UIColor grayColor];
         [self.deleteBtn addTarget:self action:@selector(deleteBtnClcik:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.deleteBtn];
+    }
+}
+
+- (void)setUpPanGesture {
+    if (!self.panGesture) {
+        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        [self addGestureRecognizer:self.panGesture];
     }
 }
 
@@ -88,6 +100,13 @@
         self.operationBlock(ItemOperationTypeDelete, self);
     }
 }
+
+- (void)panGesture:(UIPanGestureRecognizer *)gesture {
+    if (self.operationBlock) {
+        self.operationBlock(ItemOperationTypeMove, self);
+    }
+}
+
 
 #pragma mark - ManagerNotification
 - (void)managerNotification:(NSNotification *)notification {

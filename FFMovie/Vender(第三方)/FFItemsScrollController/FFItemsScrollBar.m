@@ -229,15 +229,30 @@
 }
 
 - (void)deleteItem:(NSString *)itemName {
-    for (NSInteger i = 0; i < self.itemsNameArr.count; i ++) {
+    static NSInteger deleteItemLocation;
+    for (NSInteger i = 0; i < self.itemsNameArr.count; i++) {
         NSString *name = self.itemsNameArr[i];
-        [self.itemsArr removeAllObjects];
         if ([name isEqualToString:itemName]) {
             [self.itemsNameArr removeObjectAtIndex:i];
+            UIButton *item = self.itemsArr[i];
+            [item removeFromSuperview];
+            [self.itemsArr removeObjectAtIndex:i];
+            deleteItemLocation = i;
+            break;
         }
     }
-    
-    [self setItemsNameArr:self.itemsNameArr];
+
+    // 计算被删除item所占用的宽度
+    CGFloat itemWidth = [self calculateSizeWithFont:sItemFontSize Text:itemName].size.width;
+    for (NSInteger i = deleteItemLocation; i < self.itemsArr.count; i++) {
+        // item
+        UIButton *item = self.itemsArr[i];
+        CGRect itemRect = item.frame;
+        itemRect.origin.x -= (itemWidth + dDistanceBetweenItem);
+        item.frame = itemRect;
+    }
+    self.itemX -= (itemWidth + dDistanceBetweenItem);
+    self.contentSize = CGSizeMake(self.itemX - (dDistanceBetweenItem - 20.0), self.frame.size.height);
 }
 
 @end

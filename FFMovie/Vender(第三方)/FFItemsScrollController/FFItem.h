@@ -19,6 +19,9 @@
 /// 当前的item在itemsListScrollView中所处的位置
 @property (nonatomic, assign) ItemLocation itemLocation;
 
+/// 拖拽
+@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+
 /// item点击
 @property (nonatomic, copy) void (^operationBlock)(ItemOperationType type, FFItem *item);
 
