@@ -292,26 +292,74 @@
 }
 
 - (void)moveItem:(FFItem *)item {
+    // 让item的位置跟随拖拽的位置
     UIPanGestureRecognizer *panGesture = item.panGesture;
-    if (panGesture.state == UIGestureRecognizerStateBegan) {
-        [UIView animateWithDuration:0.1
-            animations:^{
-                CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.2, 1.2);
-                [item setTransform:newTRansform];
-            }
-            completion:^(BOOL finished){
+    [item.superview exchangeSubviewAtIndex:[item.superview.subviews indexOfObject:item] withSubviewAtIndex:[[item.superview subviews] count] - 1];
+    CGPoint translation = [panGesture translationInView:panGesture.view];
+    CGPoint center = panGesture.view.center;
+    center.x += translation.x;
+    center.y += translation.y;
+    panGesture.view.center = center;
+    [panGesture setTranslation:CGPointZero inView:panGesture.view];
+    
+    switch (panGesture.state) {
+        case UIGestureRecognizerStateBegan:{
+            [UIView animateWithDuration:0.1
+                             animations:^{
+                                 CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.2, 1.2);
+                                 [item setTransform:newTRansform];
+                             }
+                             completion:^(BOOL finished){
+                                 
+                             }];
+        }
+            break;
+        case UIGestureRecognizerStateChanged:{
+//            BOOL InTopView = [self whetherInAreaWithArray:topView Point:center];
+//            if (InTopView) {
+//                NSInteger indexX = (center.x <= kItemW+2*padding)? 0 : (center.x - kItemW-2*padding)/(padding+kItemW) + 1;
+//                NSInteger indexY = (center.y <= kItemH+2*padding)? 0 : (center.y - kItemH-2*padding)/(padding+kItemH) + 1;
+//                
+//                NSInteger index = indexX + indexY*itemPerLine;
+//                index = (index == 0)? 1:index;
+//                [locateView removeObject:self];
+//                [topView insertObject:self atIndex:index];
+//                locateView = topView;
+//                [self animationForTopView];
+//                if (self.operationBlock) {
+//                    self.operationBlock(FromTopToTop,self.titleLabel.text,(int)index);
+//                }
+//            }
+//            else if (!InTopView && center.y < [self TopViewMaxY]+50) {
+//                [locateView removeObject:self];
+//                [topView insertObject:self atIndex:topView.count];
+//                locateView = topView;
+//                [self animationForTopView];
+//                if (self.operationBlock) {
+//                    self.operationBlock(FromTopToTopLast,self.titleLabel.text,0);
+//                }
+//            }
+//            else if (center.y > [self TopViewMaxY]+50){
+//                [self changeFromTopToBottom];
+//            }
+        }
+            break;
+        case UIGestureRecognizerStateEnded:{
+            [UIView animateWithDuration:0.1
+                             animations:^{
+                                 CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.0, 1.0);
+                                 [item setTransform:newTRansform];
+                             }
+                             completion:^(BOOL finished){
+                                 
+                             }];
+        }
 
-            }];
-    } else if (panGesture.state == UIGestureRecognizerStateEnded) {
-        [UIView animateWithDuration:0.1
-            animations:^{
-                CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.0, 1.0);
-                [item setTransform:newTRansform];
-            }
-            completion:^(BOOL finished){
-
-            }];
+            break;
+        default:
+            break;
     }
+
 }
 
 
