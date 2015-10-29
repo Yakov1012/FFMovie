@@ -315,32 +315,25 @@
         }
             break;
         case UIGestureRecognizerStateChanged:{
-//            BOOL InTopView = [self whetherInAreaWithArray:topView Point:center];
-//            if (InTopView) {
-//                NSInteger indexX = (center.x <= kItemW+2*padding)? 0 : (center.x - kItemW-2*padding)/(padding+kItemW) + 1;
-//                NSInteger indexY = (center.y <= kItemH+2*padding)? 0 : (center.y - kItemH-2*padding)/(padding+kItemH) + 1;
-//                
-//                NSInteger index = indexX + indexY*itemPerLine;
-//                index = (index == 0)? 1:index;
-//                [locateView removeObject:self];
-//                [topView insertObject:self atIndex:index];
-//                locateView = topView;
-//                [self animationForTopView];
-//                if (self.operationBlock) {
-//                    self.operationBlock(FromTopToTop,self.titleLabel.text,(int)index);
-//                }
-//            }
-//            else if (!InTopView && center.y < [self TopViewMaxY]+50) {
-//                [locateView removeObject:self];
-//                [topView insertObject:self atIndex:topView.count];
-//                locateView = topView;
-//                [self animationForTopView];
-//                if (self.operationBlock) {
-//                    self.operationBlock(FromTopToTopLast,self.titleLabel.text,0);
-//                }
-//            }
-//            else if (center.y > [self TopViewMaxY]+50){
-//                [self changeFromTopToBottom];
+            NSInteger indexX = (center.x <= wItemWidth+2*gEdgeGap)? 0 : (center.x - wItemWidth-2*gEdgeGap)/(gEdgeGap+wItemWidth) + 1;
+            NSInteger indexY = (center.y <= hItemHight+2*gEdgeGap)? 0 : (center.y - hItemHight-2*gEdgeGap)/(gEdgeGap+hItemHight) + 1;
+            
+            NSInteger index = indexX + indexY*itemsPerLine;
+            index = (index == 0)? 1:index;
+            [self.topItemsArr removeObject:self];
+            [self.topItemsArr insertObject:self atIndex:index];
+            
+            for (int i = 0; i < self.topItemsArr.count; i++){
+                if ([self.topItemsArr objectAtIndex:i] != self){
+                    FFItem *loacationItem = self.topItemsArr[i];
+                    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                        loacationItem.frame = CGRectMake(gEdgeGap+(gEdgeGap+wItemWidth)*(i%itemsPerLine), gEdgeGap+(hItemHight + gEdgeGap)*(i/itemsPerLine), wItemWidth, hItemHight);
+                    } completion:^(BOOL finished){}];
+                }
+            }
+
+//            if (self.operationBlock) {
+//                self.operationBlock(FromTopToTop,self.titleLabel.text,(int)index);
 //            }
         }
             break;
