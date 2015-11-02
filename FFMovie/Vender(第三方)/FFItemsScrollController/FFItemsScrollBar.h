@@ -42,4 +42,12 @@
  */
 - (void)deleteItem:(NSString *)itemName;
 
+/**
+ *  移动item
+ *
+ *  @param itemName <#itemName description#>
+ *  @param index    目标位置
+ */
+- (void)moveItem:(NSString *)itemName toIndex:(NSInteger)index;
+
 @end

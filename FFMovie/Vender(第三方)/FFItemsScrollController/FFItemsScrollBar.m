@@ -255,4 +255,49 @@
     self.contentSize = CGSizeMake(self.itemX - (dDistanceBetweenItem - 20.0), self.frame.size.height);
 }
 
+- (void)moveItem:(NSString *)itemName toIndex:(NSInteger)index {
+    // 获取当前位置
+    NSInteger currentIndex = 0;
+    NSString *currentItemName = @"";
+    for (NSInteger i = 0; i < self.itemsNameArr.count; i++) {
+        if ([currentItemName isEqualToString:itemName]) {
+            currentIndex = i;
+            currentItemName = self.itemsNameArr[i];
+        } else {
+            return;
+        }
+    }
+
+    [self.itemsNameArr removeObjectAtIndex:currentIndex];
+    [self.itemsNameArr insertObject:currentItemName atIndex:index];
+
+    // 起点
+    NSInteger startPoint;
+    // 终点
+    NSInteger endPoint;
+
+    if (currentIndex <= index) {
+        startPoint = currentIndex;
+        endPoint = index;
+
+    } else {
+        startPoint = index;
+        endPoint = currentIndex;
+    }
+
+    UIButton *starItem = self.itemsArr[startPoint];
+    CGRect starItemRect = starItem.frame;
+    for (NSInteger i = startPoint; i <= endPoint; i++) {
+        NSString *itemName = self.itemsNameArr[i];
+        CGFloat itemWidth = [self calculateSizeWithFont:sItemFontSize Text:itemName].size.width;
+        starItemRect.size.width = itemWidth;
+
+        UIButton *item = self.itemsArr[i];
+        [item setTitle:itemName forState:UIControlStateNormal];
+        item.frame = starItemRect;
+
+        starItemRect.origin.x += starItemRect.size.width;
+    }
+}
+
 @end

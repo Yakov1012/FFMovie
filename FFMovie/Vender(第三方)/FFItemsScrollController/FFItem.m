@@ -82,28 +82,26 @@
 
 #pragma mark - Action
 - (void)itemClick:(UIButton *)button {
-    NSLog(@"%@", self.itemName);
-
     if (self.itemLocation == ItemLocationTop) {
-        if (self.operationBlock) {
-            self.operationBlock(ItemOperationTypeTopClick, self);
+        if (self.FFItemOperationBlock) {
+            self.FFItemOperationBlock(ItemOperationTypeTopClick, self);
         }
     } else if (self.itemLocation == ItemLocationBottom) {
-        if (self.operationBlock) {
-            self.operationBlock(ItemOperationTypeBottomClick, self);
+        if (self.FFItemOperationBlock) {
+            self.FFItemOperationBlock(ItemOperationTypeBottomClick, self);
         }
     }
 }
 
 - (void)deleteBtnClcik:(UIButton *)button {
-    if (self.operationBlock) {
-        self.operationBlock(ItemOperationTypeDelete, self);
+    if (self.FFItemOperationBlock) {
+        self.FFItemOperationBlock(ItemOperationTypeDelete, self);
     }
 }
 
 - (void)panGesture:(UIPanGestureRecognizer *)gesture {
-    if (self.operationBlock) {
-        self.operationBlock(ItemOperationTypeMove, self);
+    if (self.FFItemOperationBlock) {
+        self.FFItemOperationBlock(ItemOperationTypeMove, self);
     }
 }
 

@@ -23,6 +23,6 @@
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 
 /// item点击
-@property (nonatomic, copy) void (^operationBlock)(ItemOperationType type, FFItem *item);
+@property (nonatomic, copy) void (^FFItemOperationBlock)(ItemOperationType type, FFItem *item);
 
 @end

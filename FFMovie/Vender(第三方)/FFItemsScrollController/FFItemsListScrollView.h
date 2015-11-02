@@ -16,10 +16,10 @@
 /// 是否隐藏bottom部分
 @property (nonatomic, assign) BOOL isHiddenBottom;
 
-/// 所有items名称数组
+/// 所有items名称数组[@[], @[]]
 @property (nonatomic, strong) NSMutableArray *allItemsNameArr;
 
 /// item点击
-@property (nonatomic, copy) void (^operationBlock)(ItemOperationType type, NSString *itemName);
+@property (nonatomic, copy) void (^FFItemListOperationBlock)(ItemOperationType type, NSString *itemName);
 
 @end

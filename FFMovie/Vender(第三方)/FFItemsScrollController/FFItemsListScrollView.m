@@ -50,20 +50,29 @@
 
         self.isHiddenBottom = NO;
 
-        self.topItemsArr = [NSMutableArray arrayWithCapacity:1];
-        self.bottomItemsArr = [NSMutableArray arrayWithCapacity:1];
+        self.topItemsArr = [NSMutableArray arrayWithCapacity:0];
+        self.bottomItemsArr = [NSMutableArray arrayWithCapacity:0];
     }
     return self;
 }
 
 #pragma mark - Set
+/**
+ *  <#Description#>
+ *
+ *  @param allItemsNameArr <#allItemsNameArr description#>
+ */
 - (void)setAllItemsNameArr:(NSMutableArray *)allItemsNameArr {
     _allItemsNameArr = allItemsNameArr;
 
     NSArray *topItemsNameArr = allItemsNameArr[0];
     NSArray *bottomItemsNameArr = allItemsNameArr[1];
+
+    // top部分的高度
     self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((topItemsNameArr.count - 1) / itemsPerLine + 1);
+    // bottom部分的高度
     self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((bottomItemsNameArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
+    // 内容视图的高度
     CGFloat contentSizeHight = self.topViewHeight + self.bottomViewHeight;
     self.contentSize = CGSizeMake(wScreenWidth, contentSizeHight);
 
@@ -71,6 +80,11 @@
     [self setUpBottomView];
 }
 
+/**
+ *  <#Description#>
+ *
+ *  @param isHiddenBottom <#isHiddenBottom description#>
+ */
 - (void)setIsHiddenBottom:(BOOL)isHiddenBottom {
     _isHiddenBottom = isHiddenBottom;
 
@@ -95,17 +109,19 @@
     for (int i = 0; i < topItemsNameArr.count; i++) {
         CGFloat itemX = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
         CGFloat itemY = gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
+
+        // 初始化ffItem
         FFItem *item = [[FFItem alloc] initWithFrame:CGRectMake(itemX, itemY, wItemWidth, hItemHight)];
         item.itemName = topItemsNameArr[i];
         item.itemLocation = ItemLocationTop;
+
+        // ffItem回调
         sWeakBlock(weakSelf);
         sStrongBlock(strongSelf);
-        item.operationBlock = ^(ItemOperationType itemOperationType, FFItem *item) {
-            // bottom部分点击
-            if (itemOperationType == ItemLocationBottom) {
-                [strongSelf.bottomItemsArr removeObject:item];
-                [strongSelf.topItemsArr addObject:item];
-                [strongSelf changeItemLocation:itemOperationType andItem:item];
+        item.FFItemOperationBlock = ^(ItemOperationType itemOperationType, FFItem *item) {
+            // top部分点击
+            if (itemOperationType == ItemOperationTypeTopClick) {
+                [strongSelf topItemClick:item];
             }
 
             // top部分删除
@@ -119,10 +135,18 @@
             else if (itemOperationType == ItemOperationTypeMove) {
                 [strongSelf moveItem:item];
             }
+
+            // bottom部分点击
+            else if (itemOperationType == ItemOperationTypeBottomClick) {
+                [strongSelf.bottomItemsArr removeObject:item];
+                [strongSelf.topItemsArr addObject:item];
+                [strongSelf changeItemLocation:itemOperationType andItem:item];
+            }
         };
         [self.topView addSubview:item];
         [self.topItemsArr addObject:item];
 
+        // 设置选中item
         if (!self.selectedItem) {
             [item setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             self.selectedItem = item;
@@ -152,26 +176,40 @@
     for (int i = 0; i < bottomItemsNameArr.count; i++) {
         CGFloat itemX = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
         CGFloat itemY = bottomHeaderView.frame.origin.y + bottomHeaderView.frame.size.height + gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
+
+        // 初始化ffItem
         FFItem *item = [[FFItem alloc] initWithFrame:CGRectMake(itemX, itemY, wItemWidth, hItemHight)];
         item.itemName = bottomItemsNameArr[i];
         item.itemLocation = ItemLocationBottom;
+
+        // ffItem回调
         sWeakBlock(weakSelf);
-        item.operationBlock = ^(ItemOperationType itemOperationType, FFItem *item) {
+        sStrongBlock(strongSelf);
+        item.FFItemOperationBlock = ^(ItemOperationType itemOperationType, FFItem *item) {
+            // top部分点击
+            if (itemOperationType == ItemOperationTypeTopClick) {
+                [strongSelf topItemClick:item];
+            }
+
+            // top部分删除
+            else if (itemOperationType == ItemOperationTypeDelete) {
+                [strongSelf.topItemsArr removeObject:item];
+                [strongSelf.bottomItemsArr insertObject:item atIndex:0];
+                [strongSelf changeItemLocation:itemOperationType andItem:item];
+            }
+
+            // top部分移动
+            else if (itemOperationType == ItemOperationTypeMove) {
+                [strongSelf moveItem:item];
+            }
+
             // bottom部分点击
-            if (itemOperationType == ItemLocationBottom) {
-                sStrongBlock(strongSelf);
+            else if (itemOperationType == ItemOperationTypeBottomClick) {
                 [strongSelf.bottomItemsArr removeObject:item];
                 [strongSelf.topItemsArr addObject:item];
                 [strongSelf changeItemLocation:itemOperationType andItem:item];
             }
 
-            // top部分删除
-            else if (itemOperationType == ItemOperationTypeDelete) {
-                sStrongBlock(strongSelf);
-                [strongSelf.topItemsArr removeObject:item];
-                [strongSelf.bottomItemsArr insertObject:item atIndex:0];
-                [strongSelf changeItemLocation:itemOperationType andItem:item];
-            }
         };
         [self.bottomView addSubview:item];
         [self.bottomItemsArr addObject:item];
@@ -180,65 +218,33 @@
 
 
 #pragma mark - Action
+/**
+ *  改变ffItem位置(top部分，bottom部分)
+ *
+ *  @param itemOperationType <#itemOperationType description#>
+ *  @param item              <#item description#>
+ */
 - (void)changeItemLocation:(ItemOperationType)itemOperationType andItem:(FFItem *)item {
-    if (itemOperationType == ItemOperationTypeBottomClick) {
-        [self bottomItemClick:item];
-    } else if (itemOperationType == ItemOperationTypeDelete) {
+    if (itemOperationType == ItemOperationTypeDelete) {
         [self deleteButtonClick:item];
-    } else if (itemOperationType == ItemOperationTypeMove) {
-        [self moveItem:item];
+    } else if (itemOperationType == ItemOperationTypeBottomClick) {
+        [self bottomItemClick:item];
     }
 }
 
-- (void)bottomItemClick:(FFItem *)item {
-    self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1);
-    self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
-
-    CGRect itemRect = item.frame;
-    itemRect.origin.y += self.topViewHeight;
-    item.frame = itemRect;
-    [self.topView addSubview:item];
-
-    // 从bottom部分移除
-    sWeakBlock(weakSelf);
-    [UIView animateWithDuration:0.3
-        delay:0
-        options:UIViewAnimationOptionLayoutSubviews
-        animations:^{
-            [item removeFromSuperview];
-            sStrongBlock(strongSelf);
-            item.itemLocation = ItemLocationTop;
-            CGFloat itemX = gEdgeGap + (gEdgeGap + wItemWidth) * ((strongSelf.topItemsArr.count - 1) % itemsPerLine);
-            CGFloat itemY = gEdgeGap + (hItemHight + gEdgeGap) * ((strongSelf.topItemsArr.count - 1) / itemsPerLine);
-            item.frame = CGRectMake(itemX, itemY, wItemWidth, hItemHight);
-            [strongSelf.topView addSubview:item];
-
-            UIView *bottomHeaderView = [strongSelf.bottomView viewWithTag:999];
-            for (NSInteger i = 0; i < strongSelf.bottomItemsArr.count; i++) {
-                FFItem *item = (FFItem *)strongSelf.bottomItemsArr[i];
-                CGRect itemRect = item.frame;
-                itemRect.origin.x = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
-                itemRect.origin.y = bottomHeaderView.frame.origin.y + bottomHeaderView.frame.size.height + gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
-                item.frame = itemRect;
-            }
-
-            CGRect topViewRect = strongSelf.topView.frame;
-            topViewRect.size.height = strongSelf.topViewHeight;
-            strongSelf.topView.frame = topViewRect;
-
-            CGRect bottomViewRect = strongSelf.bottomView.frame;
-            bottomViewRect.origin.y = strongSelf.topViewHeight;
-            bottomViewRect.size.height = strongSelf.bottomViewHeight;
-            strongSelf.bottomView.frame = bottomViewRect;
-        }
-        completion:^(BOOL finished) {
-            sStrongBlock(strongSelf);
-            if (strongSelf.operationBlock) {
-                strongSelf.operationBlock(ItemOperationTypeBottomClick, item.titleLabel.text);
-            }
-        }];
+/**
+ *  top部分点击
+ *
+ *  @param item <#item description#>
+ */
+- (void)topItemClick:(FFItem *)item {
 }
 
+/**
+ *  top部分删除
+ *
+ *  @param item <#item description#>
+ */
 - (void)deleteButtonClick:(FFItem *)item {
     [item removeFromSuperview];
 
@@ -285,12 +291,71 @@
         }
         completion:^(BOOL finished) {
             sStrongBlock(strongSelf);
-            if (strongSelf.operationBlock) {
-                strongSelf.operationBlock(ItemOperationTypeDelete, item.titleLabel.text);
+            if (strongSelf.FFItemListOperationBlock) {
+                strongSelf.FFItemListOperationBlock(ItemOperationTypeDelete, item.titleLabel.text);
             }
         }];
 }
 
+/**
+ *  bottom部分点击
+ *
+ *  @param item <#item description#>
+ */
+- (void)bottomItemClick:(FFItem *)item {
+    self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1);
+    self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
+
+    CGRect itemRect = item.frame;
+    itemRect.origin.y += self.topViewHeight;
+    item.frame = itemRect;
+    [self.topView addSubview:item];
+
+    // 从bottom部分移除
+    sWeakBlock(weakSelf);
+    [UIView animateWithDuration:0.3
+        delay:0
+        options:UIViewAnimationOptionLayoutSubviews
+        animations:^{
+            [item removeFromSuperview];
+            sStrongBlock(strongSelf);
+            item.itemLocation = ItemLocationTop;
+            CGFloat itemX = gEdgeGap + (gEdgeGap + wItemWidth) * ((strongSelf.topItemsArr.count - 1) % itemsPerLine);
+            CGFloat itemY = gEdgeGap + (hItemHight + gEdgeGap) * ((strongSelf.topItemsArr.count - 1) / itemsPerLine);
+            item.frame = CGRectMake(itemX, itemY, wItemWidth, hItemHight);
+            [strongSelf.topView addSubview:item];
+
+            UIView *bottomHeaderView = [strongSelf.bottomView viewWithTag:999];
+            for (NSInteger i = 0; i < strongSelf.bottomItemsArr.count; i++) {
+                FFItem *item = (FFItem *)strongSelf.bottomItemsArr[i];
+                CGRect itemRect = item.frame;
+                itemRect.origin.x = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
+                itemRect.origin.y = bottomHeaderView.frame.origin.y + bottomHeaderView.frame.size.height + gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
+                item.frame = itemRect;
+            }
+
+            CGRect topViewRect = strongSelf.topView.frame;
+            topViewRect.size.height = strongSelf.topViewHeight;
+            strongSelf.topView.frame = topViewRect;
+
+            CGRect bottomViewRect = strongSelf.bottomView.frame;
+            bottomViewRect.origin.y = strongSelf.topViewHeight;
+            bottomViewRect.size.height = strongSelf.bottomViewHeight;
+            strongSelf.bottomView.frame = bottomViewRect;
+        }
+        completion:^(BOOL finished) {
+            sStrongBlock(strongSelf);
+            if (strongSelf.FFItemListOperationBlock) {
+                strongSelf.FFItemListOperationBlock(ItemOperationTypeBottomClick, item.titleLabel.text);
+            }
+        }];
+}
+
+/**
+ *  top部分移动
+ *
+ *  @param item <#item description#>
+ */
 - (void)moveItem:(FFItem *)item {
     // 让item的位置跟随拖拽的位置
     UIPanGestureRecognizer *panGesture = item.panGesture;
@@ -301,59 +366,67 @@
     center.y += translation.y;
     panGesture.view.center = center;
     [panGesture setTranslation:CGPointZero inView:panGesture.view];
-    
+
     switch (panGesture.state) {
-        case UIGestureRecognizerStateBegan:{
-            [UIView animateWithDuration:0.1
-                             animations:^{
-                                 CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.2, 1.2);
-                                 [item setTransform:newTRansform];
-                             }
-                             completion:^(BOOL finished){
-                                 
-                             }];
+    case UIGestureRecognizerStateBegan: {
+        [UIView animateWithDuration:0.1
+            animations:^{
+                CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.2, 1.2);
+                [item setTransform:newTRansform];
+            }
+            completion:^(BOOL finished){
+
+            }];
+    } break;
+    case UIGestureRecognizerStateChanged: {
+        NSInteger indexX = (center.x <= wItemWidth + 2 * gEdgeGap) ? 0 : (center.x - wItemWidth - 2 * gEdgeGap) / (gEdgeGap + wItemWidth) + 1;
+        NSInteger indexY = (center.y <= hItemHight + 2 * gEdgeGap) ? 0 : (center.y - hItemHight - 2 * gEdgeGap) / (gEdgeGap + hItemHight) + 1;
+
+        NSInteger index = indexX + indexY * itemsPerLine;
+        index = (index == 0) ? 1 : index;
+        index = (index < self.topItemsArr.count) ? index : (self.topItemsArr.count - 1);
+        [self.topItemsArr removeObject:item];
+        [self.topItemsArr insertObject:item atIndex:index];
+
+        for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
+            if ([self.topItemsArr objectAtIndex:i] != item) {
+                FFItem *loacationItem = self.topItemsArr[i];
+                [UIView animateWithDuration:0.3
+                    delay:0
+                    options:UIViewAnimationOptionLayoutSubviews
+                    animations:^{
+                        loacationItem.frame = CGRectMake(gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine), gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine), wItemWidth, hItemHight);
+                    }
+                    completion:^(BOOL finished){
+                    }];
+            }
         }
-            break;
-        case UIGestureRecognizerStateChanged:{
-            NSInteger indexX = (center.x <= wItemWidth+2*gEdgeGap)? 0 : (center.x - wItemWidth-2*gEdgeGap)/(gEdgeGap+wItemWidth) + 1;
-            NSInteger indexY = (center.y <= hItemHight+2*gEdgeGap)? 0 : (center.y - hItemHight-2*gEdgeGap)/(gEdgeGap+hItemHight) + 1;
-            
-            NSInteger index = indexX + indexY*itemsPerLine;
-            index = (index == 0)? 1:index;
-            [self.topItemsArr removeObject:self];
-            [self.topItemsArr insertObject:self atIndex:index];
-            
-            for (int i = 0; i < self.topItemsArr.count; i++){
-                if ([self.topItemsArr objectAtIndex:i] != self){
-                    FFItem *loacationItem = self.topItemsArr[i];
-                    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                        loacationItem.frame = CGRectMake(gEdgeGap+(gEdgeGap+wItemWidth)*(i%itemsPerLine), gEdgeGap+(hItemHight + gEdgeGap)*(i/itemsPerLine), wItemWidth, hItemHight);
-                    } completion:^(BOOL finished){}];
+    } break;
+    case UIGestureRecognizerStateEnded: {
+        [UIView animateWithDuration:0.3
+            animations:^{
+                CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.0, 1.0);
+                [item setTransform:newTRansform];
+
+                for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
+                    if ([self.topItemsArr objectAtIndex:i] == item) {
+                        item.frame = CGRectMake(gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine), gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine), wItemWidth, hItemHight);
+                    }
+                }
+
+                if (self.FFItemListOperationBlock) {
+                    self.FFItemListOperationBlock(ItemOperationTypeMove, item.itemName);
                 }
             }
+            completion:^(BOOL finished){
 
-//            if (self.operationBlock) {
-//                self.operationBlock(FromTopToTop,self.titleLabel.text,(int)index);
-//            }
-        }
-            break;
-        case UIGestureRecognizerStateEnded:{
-            [UIView animateWithDuration:0.1
-                             animations:^{
-                                 CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.0, 1.0);
-                                 [item setTransform:newTRansform];
-                             }
-                             completion:^(BOOL finished){
-                                 
-                             }];
-        }
-
-            break;
-        default:
-            break;
+            }];
     }
 
+    break;
+    default:
+        break;
+    }
 }
-
 
 @end

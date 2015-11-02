@@ -106,12 +106,11 @@
         self.itemsListScrollView = [[FFItemsListScrollView alloc] initWithFrame:CGRectMake(0.0, 64.0 + hArrowHeight, wScreenWidth, 0.0)];
         self.itemsListScrollView.allItemsNameArr = [NSMutableArray arrayWithArray:self.allItemsNameArr];
         sWeakBlock(weakSelf);
-        self.itemsListScrollView.operationBlock = ^(ItemOperationType itemOperationType, NSString *itemName) {
+        sStrongBlock(strongSelf);
+        self.itemsListScrollView.FFItemListOperationBlock = ^(ItemOperationType itemOperationType, NSString *itemName) {
             if (itemOperationType == ItemOperationTypeBottomClick) {
-                sStrongBlock(strongSelf);
                 [strongSelf.itemsScrollBar addItem:itemName];
             } else if (itemOperationType == ItemOperationTypeDelete) {
-                sStrongBlock(strongSelf);
                 [strongSelf.itemsScrollBar deleteItem:itemName];
                 
                 NSMutableArray *topItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[0]];
@@ -127,6 +126,8 @@
                     }
                 }
                 [strongSelf deletViewController:deleteItemLocation];
+            } else if (itemOperationType == ItemOperationTypeMove) {
+                
             }
         };
         [[UIApplication sharedApplication].keyWindow addSubview:self.itemsListScrollView];
