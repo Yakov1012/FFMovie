@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     self.vcArr = [NSMutableArray arrayWithCapacity:1];
 }
 
@@ -107,16 +107,19 @@
         self.itemsListScrollView.allItemsNameArr = [NSMutableArray arrayWithArray:self.allItemsNameArr];
         sWeakBlock(weakSelf);
         sStrongBlock(strongSelf);
-        self.itemsListScrollView.FFItemListOperationBlock = ^(ItemOperationType itemOperationType, NSString *itemName) {
-            if (itemOperationType == ItemOperationTypeBottomClick) {
-                [strongSelf.itemsScrollBar addItem:itemName];
-            } else if (itemOperationType == ItemOperationTypeDelete) {
-                [strongSelf.itemsScrollBar deleteItem:itemName];
-                
+        self.itemsListScrollView.FFItemListOperationBlock = ^(ItemOperationType itemOperationType, NSInteger currentIndex, NSInteger toIndex) {
+            if (itemOperationType == ItemOperationTypeTopClick) { // top部分点击
+            }
+
+            else if (itemOperationType == ItemOperationTypeDelete) { // top部分删除
                 NSMutableArray *topItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[0]];
                 NSMutableArray *bottomItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[1]];
+
+                NSString *itemName = topItemsNameArr[currentIndex];
+                [strongSelf.itemsScrollBar deleteItem:itemName];
+
                 static NSInteger deleteItemLocation;
-                for (NSInteger i = 0; i < topItemsNameArr.count; i ++) {
+                for (NSInteger i = 0; i < topItemsNameArr.count; i++) {
                     if ([itemName isEqualToString:topItemsNameArr[i]]) {
                         [topItemsNameArr removeObjectAtIndex:i];
                         [bottomItemsNameArr addObject:itemName];
@@ -126,8 +129,26 @@
                     }
                 }
                 [strongSelf deletViewController:deleteItemLocation];
-            } else if (itemOperationType == ItemOperationTypeMove) {
+            }
+            
+            else if (itemOperationType == ItemOperationTypeMove) { // top部分移动
+                [strongSelf.itemsScrollBar moveItem:currentIndex toIndex:toIndex];
+            }
+
+            else if (itemOperationType == ItemOperationTypeBottomClick) { // bottom部分点击
+                NSMutableArray *topItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[0]];
+                NSMutableArray *bottomItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[1]];
+
+                NSString *itemName = bottomItemsNameArr[currentIndex];
+                [strongSelf.itemsScrollBar addItem:itemName];
+
+                [bottomItemsNameArr removeObjectAtIndex:currentIndex];
+                [topItemsNameArr addObject:itemName];
+
+                strongSelf.allItemsNameArr = [NSMutableArray arrayWithObjects:topItemsNameArr, bottomItemsNameArr, nil];
                 
+                // 添加控制器
+                [strongSelf addViewController:strongSelf.vcArr.count];
             }
         };
         [[UIApplication sharedApplication].keyWindow addSubview:self.itemsListScrollView];
@@ -190,22 +211,39 @@
     label.text = [NSString stringWithFormat:@"%@", itemName];
     [viewController.view addSubview:label];
     [self.mainScrollView addSubview:viewController.view];
-    
+
     [self.vcArr addObject:viewController];
+}
+
+- (void)addViewController:(NSInteger)index {
+    //    UIViewController *viewController = self.vcArr[index];
+    //    [viewController.view removeFromSuperview];
+    //    [self.vcArr removeObjectAtIndex:index];
+    //
+    //    for (NSInteger i = index; i < self.vcArr.count; i ++) {
+    //        UIViewController *viewController = self.vcArr[i];
+    //        CGRect vcRect = viewController.view.frame;
+    //        vcRect.origin.x -= self.mainScrollView.frame.size.width;
+    //        viewController.view.frame = vcRect;
+    //    }
+    //
+    //    CGSize contentSize = self.mainScrollView.contentSize;
+    //    contentSize.width -= self.mainScrollView.frame.size.width;
+    //    self.mainScrollView.contentSize = contentSize;
 }
 
 - (void)deletViewController:(NSInteger)index {
     UIViewController *viewController = self.vcArr[index];
     [viewController.view removeFromSuperview];
     [self.vcArr removeObjectAtIndex:index];
-    
-    for (NSInteger i = index; i < self.vcArr.count; i ++) {
+
+    for (NSInteger i = index; i < self.vcArr.count; i++) {
         UIViewController *viewController = self.vcArr[i];
         CGRect vcRect = viewController.view.frame;
         vcRect.origin.x -= self.mainScrollView.frame.size.width;
         viewController.view.frame = vcRect;
     }
-    
+
     CGSize contentSize = self.mainScrollView.contentSize;
     contentSize.width -= self.mainScrollView.frame.size.width;
     self.mainScrollView.contentSize = contentSize;

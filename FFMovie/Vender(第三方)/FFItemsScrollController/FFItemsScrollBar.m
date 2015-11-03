@@ -255,18 +255,15 @@
     self.contentSize = CGSizeMake(self.itemX - (dDistanceBetweenItem - 20.0), self.frame.size.height);
 }
 
-- (void)moveItem:(NSString *)itemName toIndex:(NSInteger)index {
+/**
+ *  移动item
+ *
+ *  @param currentIndex 当前位置
+ *  @param index        目标位置
+ */
+- (void)moveItem:(NSInteger)currentIndex toIndex:(NSInteger)index {
     // 获取当前位置
-    NSInteger currentIndex = 0;
-    NSString *currentItemName = @"";
-    for (NSInteger i = 0; i < self.itemsNameArr.count; i++) {
-        if ([currentItemName isEqualToString:itemName]) {
-            currentIndex = i;
-            currentItemName = self.itemsNameArr[i];
-        } else {
-            return;
-        }
-    }
+    NSString *currentItemName = self.itemsNameArr[currentIndex];
 
     [self.itemsNameArr removeObjectAtIndex:currentIndex];
     [self.itemsNameArr insertObject:currentItemName atIndex:index];

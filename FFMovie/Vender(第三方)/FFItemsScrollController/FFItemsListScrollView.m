@@ -126,8 +126,6 @@
 
             // top部分删除
             else if (itemOperationType == ItemOperationTypeDelete) {
-                [strongSelf.topItemsArr removeObject:item];
-                [strongSelf.bottomItemsArr insertObject:item atIndex:0];
                 [strongSelf changeItemLocation:itemOperationType andItem:item];
             }
 
@@ -138,8 +136,6 @@
 
             // bottom部分点击
             else if (itemOperationType == ItemOperationTypeBottomClick) {
-                [strongSelf.bottomItemsArr removeObject:item];
-                [strongSelf.topItemsArr addObject:item];
                 [strongSelf changeItemLocation:itemOperationType andItem:item];
             }
         };
@@ -205,11 +201,8 @@
 
             // bottom部分点击
             else if (itemOperationType == ItemOperationTypeBottomClick) {
-                [strongSelf.bottomItemsArr removeObject:item];
-                [strongSelf.topItemsArr addObject:item];
                 [strongSelf changeItemLocation:itemOperationType andItem:item];
             }
-
         };
         [self.bottomView addSubview:item];
         [self.bottomItemsArr addObject:item];
@@ -246,6 +239,16 @@
  *  @param item <#item description#>
  */
 - (void)deleteButtonClick:(FFItem *)item {
+    __block NSInteger currentIndex = 0;
+    for (NSInteger i = 0; i < self.topItemsArr.count; i ++) {
+        if (self.topItemsArr[i] == item) {
+            currentIndex = i;
+            [self.topItemsArr removeObject:item];
+            [self.bottomItemsArr insertObject:item atIndex:0];
+            break;
+        }
+    }
+    
     [item removeFromSuperview];
 
     item.itemLocation = ItemLocationBottom;
@@ -292,7 +295,7 @@
         completion:^(BOOL finished) {
             sStrongBlock(strongSelf);
             if (strongSelf.FFItemListOperationBlock) {
-                strongSelf.FFItemListOperationBlock(ItemOperationTypeDelete, item.titleLabel.text);
+                strongSelf.FFItemListOperationBlock(ItemOperationTypeDelete, currentIndex, currentIndex);
             }
         }];
 }
@@ -303,6 +306,16 @@
  *  @param item <#item description#>
  */
 - (void)bottomItemClick:(FFItem *)item {
+    __block NSInteger currentIndex = 0;
+    for (NSInteger i = 0; i < self.bottomItemsArr.count; i ++) {
+        if (self.bottomItemsArr[i] == item) {
+            currentIndex = i;
+            [self.bottomItemsArr removeObject:item];
+            [self.topItemsArr addObject:item];
+            break;
+        }
+    }
+    
     self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1);
     self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
 
@@ -345,9 +358,11 @@
         }
         completion:^(BOOL finished) {
             sStrongBlock(strongSelf);
+            
             if (strongSelf.FFItemListOperationBlock) {
-                strongSelf.FFItemListOperationBlock(ItemOperationTypeBottomClick, item.titleLabel.text);
+                strongSelf.FFItemListOperationBlock(ItemOperationTypeBottomClick, currentIndex, currentIndex);
             }
+
         }];
 }
 
@@ -357,6 +372,13 @@
  *  @param item <#item description#>
  */
 - (void)moveItem:(FFItem *)item {
+    NSInteger currentIndex = 0;
+    for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
+        if (self.topItemsArr[i] == item) {
+            currentIndex = i;
+        }
+    }
+
     // 让item的位置跟随拖拽的位置
     UIPanGestureRecognizer *panGesture = item.panGesture;
     [item.superview exchangeSubviewAtIndex:[item.superview.subviews indexOfObject:item] withSubviewAtIndex:[[item.superview subviews] count] - 1];
@@ -411,11 +433,12 @@
                 for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
                     if ([self.topItemsArr objectAtIndex:i] == item) {
                         item.frame = CGRectMake(gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine), gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine), wItemWidth, hItemHight);
-                    }
-                }
 
-                if (self.FFItemListOperationBlock) {
-                    self.FFItemListOperationBlock(ItemOperationTypeMove, item.itemName);
+                        if (self.FFItemListOperationBlock) {
+                            self.FFItemListOperationBlock(ItemOperationTypeMove, currentIndex, i);
+                            break;
+                        }
+                    }
                 }
             }
             completion:^(BOOL finished){

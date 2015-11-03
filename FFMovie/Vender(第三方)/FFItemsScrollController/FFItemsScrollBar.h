@@ -45,9 +45,9 @@
 /**
  *  移动item
  *
- *  @param itemName <#itemName description#>
- *  @param index    目标位置
+ *  @param currentIndex 当前位置
+ *  @param index        目标位置
  */
-- (void)moveItem:(NSString *)itemName toIndex:(NSInteger)index;
+- (void)moveItem:(NSInteger)currentIndex toIndex:(NSInteger)index;
 
 @end

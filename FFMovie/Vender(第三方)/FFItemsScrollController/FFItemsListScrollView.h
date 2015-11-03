@@ -19,7 +19,7 @@
 /// 所有items名称数组[@[], @[]]
 @property (nonatomic, strong) NSMutableArray *allItemsNameArr;
 
-/// item点击
-@property (nonatomic, copy) void (^FFItemListOperationBlock)(ItemOperationType type, NSString *itemName);
+/// item事件（top部分点击，top部分删除，top部分移动，bottom部分点击）
+@property (nonatomic, copy) void (^FFItemListOperationBlock)(ItemOperationType itemOperationType, NSInteger currentIndex, NSInteger toIndex);
 
 @end
