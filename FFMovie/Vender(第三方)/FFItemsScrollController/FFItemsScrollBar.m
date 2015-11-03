@@ -201,11 +201,21 @@
 
 
 #pragma mark - Public
+/**
+ *  滑动到指定位置
+ *
+ *  @param index <#index description#>
+ */
 - (void)itemScrollToIndex:(NSInteger)index {
     UIButton *item = (UIButton *)self.itemsArr[index];
     [self itemClick:item];
 }
 
+/**
+ *  添加item
+ *
+ *  @param itemName <#itemName description#>
+ */
 - (void)addItem:(NSString *)itemName {
     [self.itemsNameArr addObject:itemName];
 
@@ -228,13 +238,22 @@
     self.contentSize = CGSizeMake(self.itemX - (dDistanceBetweenItem - 20.0), self.frame.size.height);
 }
 
+/**
+ *  删除item
+ *
+ *  @param itemName <#itemName description#>
+ */
 - (void)deleteItem:(NSString *)itemName {
+    // 删除相关的item
     static NSInteger deleteItemLocation;
     for (NSInteger i = 0; i < self.itemsNameArr.count; i++) {
         NSString *name = self.itemsNameArr[i];
         if ([name isEqualToString:itemName]) {
             [self.itemsNameArr removeObjectAtIndex:i];
             UIButton *item = self.itemsArr[i];
+            if (self.selectedItem == item) {
+                [self itemScrollToIndex:(i - 1)];
+            }
             [item removeFromSuperview];
             [self.itemsArr removeObjectAtIndex:i];
             deleteItemLocation = i;
@@ -253,6 +272,14 @@
     }
     self.itemX -= (itemWidth + dDistanceBetweenItem);
     self.contentSize = CGSizeMake(self.itemX - (dDistanceBetweenItem - 20.0), self.frame.size.height);
+
+    // 移动背景
+    for (NSInteger i = 0; i < self.itemsArr.count; i++) {
+        UIButton *item = self.itemsArr[i];
+        if (self.selectedItem == item) {
+            [self itemScrollToIndex:i];
+        }
+    }
 }
 
 /**

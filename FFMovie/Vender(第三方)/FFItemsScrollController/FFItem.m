@@ -108,7 +108,9 @@
 
 #pragma mark - ManagerNotification
 - (void)managerNotification:(NSNotification *)notification {
-    self.deleteBtn.hidden = !self.deleteBtn.hidden;
+    BOOL hiddenDeleteBtn = [[notification object] boolValue];
+    self.deleteBtn.hidden = hiddenDeleteBtn;
+    
     self.panGesture.enabled = !self.deleteBtn.hidden;
 }
 

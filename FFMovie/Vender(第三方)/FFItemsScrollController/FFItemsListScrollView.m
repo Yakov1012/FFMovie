@@ -189,8 +189,6 @@
 
             // top部分删除
             else if (itemOperationType == ItemOperationTypeDelete) {
-                [strongSelf.topItemsArr removeObject:item];
-                [strongSelf.bottomItemsArr insertObject:item atIndex:0];
                 [strongSelf changeItemLocation:itemOperationType andItem:item];
             }
 
@@ -240,7 +238,7 @@
  */
 - (void)deleteButtonClick:(FFItem *)item {
     __block NSInteger currentIndex = 0;
-    for (NSInteger i = 0; i < self.topItemsArr.count; i ++) {
+    for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
         if (self.topItemsArr[i] == item) {
             currentIndex = i;
             [self.topItemsArr removeObject:item];
@@ -248,7 +246,7 @@
             break;
         }
     }
-    
+
     [item removeFromSuperview];
 
     item.itemLocation = ItemLocationBottom;
@@ -307,7 +305,7 @@
  */
 - (void)bottomItemClick:(FFItem *)item {
     __block NSInteger currentIndex = 0;
-    for (NSInteger i = 0; i < self.bottomItemsArr.count; i ++) {
+    for (NSInteger i = 0; i < self.bottomItemsArr.count; i++) {
         if (self.bottomItemsArr[i] == item) {
             currentIndex = i;
             [self.bottomItemsArr removeObject:item];
@@ -315,7 +313,7 @@
             break;
         }
     }
-    
+
     self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1);
     self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
 
@@ -358,7 +356,7 @@
         }
         completion:^(BOOL finished) {
             sStrongBlock(strongSelf);
-            
+
             if (strongSelf.FFItemListOperationBlock) {
                 strongSelf.FFItemListOperationBlock(ItemOperationTypeBottomClick, currentIndex, currentIndex);
             }

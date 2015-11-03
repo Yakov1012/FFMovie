@@ -89,8 +89,8 @@
         }
     }
 
+    [[NSNotificationCenter defaultCenter] postNotificationName:nManagerNotification object:@(button.selected)];
     button.selected = !button.selected;
-    [[NSNotificationCenter defaultCenter] postNotificationName:nManagerNotification object:nil];
 }
 
 @end

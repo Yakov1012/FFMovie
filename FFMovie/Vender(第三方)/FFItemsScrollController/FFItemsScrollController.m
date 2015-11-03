@@ -118,19 +118,13 @@
                 NSString *itemName = topItemsNameArr[currentIndex];
                 [strongSelf.itemsScrollBar deleteItem:itemName];
 
-                static NSInteger deleteItemLocation;
-                for (NSInteger i = 0; i < topItemsNameArr.count; i++) {
-                    if ([itemName isEqualToString:topItemsNameArr[i]]) {
-                        [topItemsNameArr removeObjectAtIndex:i];
-                        [bottomItemsNameArr addObject:itemName];
-                        strongSelf.allItemsNameArr = [NSMutableArray arrayWithObjects:topItemsNameArr, bottomItemsNameArr, nil];
-                        deleteItemLocation = i;
-                        break;
-                    }
-                }
-                [strongSelf deletViewController:deleteItemLocation];
+                [topItemsNameArr removeObjectAtIndex:currentIndex];
+                [bottomItemsNameArr insertObject:itemName atIndex:0];
+                strongSelf.allItemsNameArr = [NSMutableArray arrayWithObjects:topItemsNameArr, bottomItemsNameArr, nil];
+
+                [strongSelf deletViewController:currentIndex];
             }
-            
+
             else if (itemOperationType == ItemOperationTypeMove) { // top部分移动
                 [strongSelf.itemsScrollBar moveItem:currentIndex toIndex:toIndex];
             }
@@ -146,9 +140,9 @@
                 [topItemsNameArr addObject:itemName];
 
                 strongSelf.allItemsNameArr = [NSMutableArray arrayWithObjects:topItemsNameArr, bottomItemsNameArr, nil];
-                
+
                 // 添加控制器
-                [strongSelf addViewController:strongSelf.vcArr.count];
+                [strongSelf addViewToMainScrollViewWithItemName:itemName index:strongSelf.vcArr.count];
             }
         };
         [[UIApplication sharedApplication].keyWindow addSubview:self.itemsListScrollView];
@@ -185,6 +179,9 @@
     self.itemsManageBar.hidden = !self.itemsManageBar.hidden;
     self.itemsListScrollView.isHiddenBottom = NO;
 
+    // 发通知，隐藏删除按钮
+    [[NSNotificationCenter defaultCenter] postNotificationName:nManagerNotification object:@(!self.itemsListScrollView.isHiddenBottom)];
+
     CGFloat itemsListScrollViewH = hScreenHeight - (self.itemsScrollBar.frame.origin.y + self.itemsScrollBar.frame.size.height + 64.0);
     sWeakBlock(weakSelf);
     [UIView animateWithDuration:.5
@@ -203,6 +200,12 @@
                      }];
 }
 
+/**
+ *  添加viewController
+ *
+ *  @param itemName <#itemName description#>
+ *  @param index    <#index description#>
+ */
 - (void)addViewToMainScrollViewWithItemName:(NSString *)itemName index:(NSInteger)index {
     UIViewController *viewController = [[UIViewController alloc] init];
     viewController.view.frame = CGRectMake(index * self.mainScrollView.frame.size.width, 0.0, self.mainScrollView.frame.size.width, self.mainScrollView.frame.size.height);
@@ -211,27 +214,16 @@
     label.text = [NSString stringWithFormat:@"%@", itemName];
     [viewController.view addSubview:label];
     [self.mainScrollView addSubview:viewController.view];
-
     [self.vcArr addObject:viewController];
+    
+    self.mainScrollView.contentSize = self.mainScrollView.contentSize = CGSizeMake(wScreenWidth * self.vcArr.count, self.mainScrollView.frame.size.height);;
 }
 
-- (void)addViewController:(NSInteger)index {
-    //    UIViewController *viewController = self.vcArr[index];
-    //    [viewController.view removeFromSuperview];
-    //    [self.vcArr removeObjectAtIndex:index];
-    //
-    //    for (NSInteger i = index; i < self.vcArr.count; i ++) {
-    //        UIViewController *viewController = self.vcArr[i];
-    //        CGRect vcRect = viewController.view.frame;
-    //        vcRect.origin.x -= self.mainScrollView.frame.size.width;
-    //        viewController.view.frame = vcRect;
-    //    }
-    //
-    //    CGSize contentSize = self.mainScrollView.contentSize;
-    //    contentSize.width -= self.mainScrollView.frame.size.width;
-    //    self.mainScrollView.contentSize = contentSize;
-}
-
+/**
+ *  移除viewController
+ *
+ *  @param index <#index description#>
+ */
 - (void)deletViewController:(NSInteger)index {
     UIViewController *viewController = self.vcArr[index];
     [viewController.view removeFromSuperview];
@@ -251,6 +243,11 @@
 
 
 #pragma mark - UIScrollViewDelegate
+/**
+ *  <#Description#>
+ *
+ *  @param scrollView <#scrollView description#>
+ */
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger itemIndex = scrollView.contentOffset.x / scrollView.frame.size.width;
     [self.itemsScrollBar itemScrollToIndex:itemIndex];
