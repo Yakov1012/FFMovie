@@ -46,10 +46,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.showsVerticalScrollIndicator = NO;
+
+        // 设置背景色，子视图的透明度不受影响
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9];
 
+        // bottom部分隐藏
         self.isHiddenBottom = NO;
 
+        // items数组
         self.topItemsArr = [NSMutableArray arrayWithCapacity:0];
         self.bottomItemsArr = [NSMutableArray arrayWithCapacity:0];
     }
@@ -72,10 +76,12 @@
     self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((topItemsNameArr.count - 1) / itemsPerLine + 1);
     // bottom部分的高度
     self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((bottomItemsNameArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
-    // 内容视图的高度
-    CGFloat contentSizeHight = self.topViewHeight + self.bottomViewHeight;
-    self.contentSize = CGSizeMake(wScreenWidth, contentSizeHight);
 
+    // 内容视图的高度
+    CGFloat contentSizeHight = self.isHiddenBottom ? self.topViewHeight : (self.topViewHeight + self.bottomViewHeight);
+    self.contentSize = CGSizeMake(wScreenWidth, MAX(contentSizeHight, self.frame.size.height));
+
+    // 初始化top、bottom
     [self setUpTopView];
     [self setUpBottomView];
 }
@@ -93,6 +99,10 @@
     } else {
         self.bottomView.hidden = NO;
     }
+
+    // 内容视图的高度
+    CGFloat contentSizeHight = self.isHiddenBottom ? self.topViewHeight : (self.topViewHeight + self.bottomViewHeight);
+    self.contentSize = CGSizeMake(wScreenWidth, MAX(contentSizeHight, self.frame.size.height));
 }
 
 
@@ -104,7 +114,7 @@
     self.topView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.frame.size.width, self.topViewHeight)];
     [self addSubview:self.topView];
 
-    // 已添加items
+    // 添加items
     NSArray *topItemsNameArr = self.allItemsNameArr[0];
     for (int i = 0; i < topItemsNameArr.count; i++) {
         CGFloat itemX = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
@@ -167,7 +177,7 @@
     [bottomHeaderView addSubview:moreTextLabel];
     [self.bottomView addSubview:bottomHeaderView];
 
-    // bottom部分items
+    // 添加items
     NSArray *bottomItemsNameArr = self.allItemsNameArr[1];
     for (int i = 0; i < bottomItemsNameArr.count; i++) {
         CGFloat itemX = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
@@ -210,7 +220,7 @@
 
 #pragma mark - Action
 /**
- *  改变ffItem位置(top部分，bottom部分)
+ *  bottom部分点击，top部分删除，改变ffItem位置(top部分，bottom部分)
  *
  *  @param itemOperationType <#itemOperationType description#>
  *  @param item              <#item description#>
@@ -229,6 +239,18 @@
  *  @param item <#item description#>
  */
 - (void)topItemClick:(FFItem *)item {
+    // items数组相应变化，及获取当前操作的item的位置
+    __block NSInteger currentIndex = 0;
+    for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
+        if (self.topItemsArr[i] == item) {
+            currentIndex = i;
+            break;
+        }
+    }
+
+    if (self.FFItemListOperationBlock) {
+        self.FFItemListOperationBlock(ItemOperationTypeTopClick, currentIndex, currentIndex);
+    }
 }
 
 /**
@@ -237,6 +259,7 @@
  *  @param item <#item description#>
  */
 - (void)deleteButtonClick:(FFItem *)item {
+    // items数组相应变化，及获取当前操作的item的位置
     __block NSInteger currentIndex = 0;
     for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
         if (self.topItemsArr[i] == item) {
@@ -246,9 +269,9 @@
             break;
         }
     }
-
     [item removeFromSuperview];
 
+    // 改变item的top|bottom
     item.itemLocation = ItemLocationBottom;
     [self.bottomView addSubview:item];
 
@@ -263,7 +286,7 @@
     }
 
     // topView、bottomView的frame变化
-    self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1);
+    self.topViewHeight = self.topItemsArr.count == 0 ? 0.0 : (gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1));
     self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
 
     CGRect topViewRect = self.topView.frame;
@@ -274,6 +297,13 @@
     bottomViewRect.origin.y = self.topViewHeight;
     bottomViewRect.size.height = self.bottomViewHeight;
     self.bottomView.frame = bottomViewRect;
+
+    // 内容视图的高度
+    CGFloat contentSizeHight = self.isHiddenBottom ? self.topViewHeight : (self.topViewHeight + self.bottomViewHeight);
+    self.contentSize = CGSizeMake(wScreenWidth, MAX(contentSizeHight, self.frame.size.height));
+
+    // 如果bottom部分无item，隐藏提示View
+    bottomHeaderView.hidden = self.topItemsArr.count == 0 ? YES : NO;
 
     // top部分items位置动画变化
     sWeakBlock(weakSelf);
@@ -304,6 +334,7 @@
  *  @param item <#item description#>
  */
 - (void)bottomItemClick:(FFItem *)item {
+    // items数组相应变化，及获取当前操作的item的位置
     __block NSInteger currentIndex = 0;
     for (NSInteger i = 0; i < self.bottomItemsArr.count; i++) {
         if (self.bottomItemsArr[i] == item) {
@@ -314,13 +345,22 @@
         }
     }
 
+    // topView、bottomView的frame变化
     self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1);
-    self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
+    self.bottomViewHeight = self.bottomItemsArr.count == 0 ? 0.0 : (gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight);
 
     CGRect itemRect = item.frame;
     itemRect.origin.y += self.topViewHeight;
     item.frame = itemRect;
     [self.topView addSubview:item];
+
+    // 内容视图的高度
+    CGFloat contentSizeHight = self.isHiddenBottom ? self.topViewHeight : (self.topViewHeight + self.bottomViewHeight);
+    self.contentSize = CGSizeMake(wScreenWidth, MAX(contentSizeHight, self.frame.size.height));
+
+    // 如果bottom部分无item，隐藏提示View
+    UIView *bottomHeaderView = [self.bottomView viewWithTag:999];
+    bottomHeaderView.hidden = self.bottomItemsArr.count == 0 ? YES : NO;
 
     // 从bottom部分移除
     sWeakBlock(weakSelf);
@@ -360,7 +400,6 @@
             if (strongSelf.FFItemListOperationBlock) {
                 strongSelf.FFItemListOperationBlock(ItemOperationTypeBottomClick, currentIndex, currentIndex);
             }
-
         }];
 }
 
@@ -370,12 +409,8 @@
  *  @param item <#item description#>
  */
 - (void)moveItem:(FFItem *)item {
-    NSInteger currentIndex = 0;
-    for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
-        if (self.topItemsArr[i] == item) {
-            currentIndex = i;
-        }
-    }
+    // 获取移动时的最开始的位置
+    static NSInteger currentIndex = 0;
 
     // 让item的位置跟随拖拽的位置
     UIPanGestureRecognizer *panGesture = item.panGesture;
@@ -389,10 +424,19 @@
 
     switch (panGesture.state) {
     case UIGestureRecognizerStateBegan: {
+        for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
+            if (self.topItemsArr[i] == item) {
+                currentIndex = i;
+                break;
+            }
+        }
+        
         [UIView animateWithDuration:0.1
             animations:^{
                 CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.2, 1.2);
                 [item setTransform:newTRansform];
+
+                
             }
             completion:^(BOOL finished){
 

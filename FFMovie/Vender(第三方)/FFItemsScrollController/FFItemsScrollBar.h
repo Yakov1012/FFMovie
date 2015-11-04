@@ -21,6 +21,10 @@
 /// items名称数组
 @property (nonatomic, strong) NSMutableArray *itemsNameArr;
 
+/// 被选中的index
+@property (nonatomic, assign) NSInteger selectedIndex;
+
+
 /**
  *  滑动到选中item的位置
  *
@@ -38,9 +42,9 @@
 /**
  *  删除item
  *
- *  @param itemName <#itemName description#>
+ *  @param index <#index description#>
  */
-- (void)deleteItem:(NSString *)itemName;
+- (void)deleteItem:(NSInteger)index;
 
 /**
  *  移动item

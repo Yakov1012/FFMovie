@@ -39,7 +39,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = cRGBColor(238.0, 238.0, 238.0);
-        //        self.contentInset = UIEdgeInsetsMake(0, 0, 0, 50);
         self.showsHorizontalScrollIndicator = NO;
 
         self.itemX = gEdgeGap;
@@ -106,6 +105,7 @@
     if (!self.selectedItem) {
         [item setTitleColor:[UIColor whiteColor] forState:0];
         self.selectedItem = item;
+        self.selectedIndex = 0;
     }
 
     // 设置滑动视图的contentSize
@@ -124,6 +124,12 @@
         [self.selectedItem setTitleColor:cRGBColor(111.0, 111.0, 111.0) forState:0];
         [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.selectedItem = sender;
+        for (NSInteger i = 0; i < self.itemsArr.count; i++) {
+            UIButton *item = self.itemsArr[i];
+            if (item == sender) {
+                self.selectedIndex = i;
+            }
+        }
 
         if (self.itemClickBlock) {
             self.itemClickBlock(sender.titleLabel.text, [self findIndexOfListsWithTitle:sender.titleLabel.text]);
@@ -158,7 +164,13 @@
         }];
 }
 
-
+/**
+ *  <#Description#>
+ *
+ *  @param title <#title description#>
+ *
+ *  @return <#return value description#>
+ */
 - (NSInteger)findIndexOfListsWithTitle:(NSString *)title {
     for (int i = 0; i < self.itemsNameArr.count; i++) {
         if ([title isEqualToString:self.itemsNameArr[i]]) {
@@ -166,23 +178,6 @@
         }
     }
     return 0;
-}
-
-- (void)resetFrame {
-    self.itemX = 20;
-    for (int i = 0; i < self.itemsNameArr.count; i++) {
-        [UIView animateWithDuration:0.0001
-            delay:0
-            options:UIViewAnimationOptionLayoutSubviews
-            animations:^{
-                CGFloat itemW = [self calculateSizeWithFont:sItemFontSize Text:self.itemsNameArr[i]].size.width;
-                [[self.itemsArr objectAtIndex:i] setFrame:CGRectMake(self.itemX, 0, itemW, self.frame.size.height)];
-                self.itemX += dDistanceBetweenItem + itemW;
-            }
-            completion:^(BOOL finished){
-            }];
-    }
-    self.contentSize = CGSizeMake(self.itemX, self.frame.size.height);
 }
 
 /**
@@ -241,29 +236,24 @@
 /**
  *  删除item
  *
- *  @param itemName <#itemName description#>
+ *  @param index <#index description#>
  */
-- (void)deleteItem:(NSString *)itemName {
-    // 删除相关的item
-    static NSInteger deleteItemLocation;
-    for (NSInteger i = 0; i < self.itemsNameArr.count; i++) {
-        NSString *name = self.itemsNameArr[i];
-        if ([name isEqualToString:itemName]) {
-            [self.itemsNameArr removeObjectAtIndex:i];
-            UIButton *item = self.itemsArr[i];
-            if (self.selectedItem == item) {
-                [self itemScrollToIndex:(i - 1)];
-            }
-            [item removeFromSuperview];
-            [self.itemsArr removeObjectAtIndex:i];
-            deleteItemLocation = i;
-            break;
-        }
+- (void)deleteItem:(NSInteger)index {
+    NSString *itemName = self.itemsNameArr[index];
+    [self.itemsNameArr removeObjectAtIndex:index];
+    UIButton *item = self.itemsArr[index];
+    self.selectedIndex = index;
+    if (self.selectedItem == item) {
+        [self itemScrollToIndex:(index - 1)];
+        self.selectedIndex = index - 1;
     }
+    [item removeFromSuperview];
+    item = nil;
+    [self.itemsArr removeObjectAtIndex:index];
 
     // 计算被删除item所占用的宽度
     CGFloat itemWidth = [self calculateSizeWithFont:sItemFontSize Text:itemName].size.width;
-    for (NSInteger i = deleteItemLocation; i < self.itemsArr.count; i++) {
+    for (NSInteger i = index; i < self.itemsArr.count; i++) {
         // item
         UIButton *item = self.itemsArr[i];
         CGRect itemRect = item.frame;
@@ -278,6 +268,8 @@
         UIButton *item = self.itemsArr[i];
         if (self.selectedItem == item) {
             [self itemScrollToIndex:i];
+            self.selectedIndex = i;
+            break;
         }
     }
 }
@@ -289,11 +281,10 @@
  *  @param index        目标位置
  */
 - (void)moveItem:(NSInteger)currentIndex toIndex:(NSInteger)index {
-    // 获取当前位置
-    NSString *currentItemName = self.itemsNameArr[currentIndex];
-
+    // items数组
+    NSObject *itemNameObject = self.itemsNameArr[currentIndex];
     [self.itemsNameArr removeObjectAtIndex:currentIndex];
-    [self.itemsNameArr insertObject:currentItemName atIndex:index];
+    [self.itemsNameArr insertObject:itemNameObject atIndex:index];
 
     // 起点
     NSInteger startPoint;
@@ -309,7 +300,14 @@
         endPoint = currentIndex;
     }
 
+    // 开始的button
     UIButton *starItem = self.itemsArr[startPoint];
+
+    //  items数组处理
+    NSObject *itemObject = self.itemsArr[currentIndex];
+    [self.itemsArr removeObjectAtIndex:currentIndex];
+    [self.itemsArr insertObject:itemObject atIndex:index];
+
     CGRect starItemRect = starItem.frame;
     for (NSInteger i = startPoint; i <= endPoint; i++) {
         NSString *itemName = self.itemsNameArr[i];
@@ -317,11 +315,13 @@
         starItemRect.size.width = itemWidth;
 
         UIButton *item = self.itemsArr[i];
-        [item setTitle:itemName forState:UIControlStateNormal];
+        self.selectedIndex = (self.selectedItem == item) ? i : self.selectedIndex;
         item.frame = starItemRect;
 
-        starItemRect.origin.x += starItemRect.size.width;
+        starItemRect.origin.x += (starItemRect.size.width + dDistanceBetweenItem);
     }
+
+    [self itemScrollToIndex:self.selectedIndex];
 }
 
 @end

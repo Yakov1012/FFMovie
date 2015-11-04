@@ -109,24 +109,54 @@
         sStrongBlock(strongSelf);
         self.itemsListScrollView.FFItemListOperationBlock = ^(ItemOperationType itemOperationType, NSInteger currentIndex, NSInteger toIndex) {
             if (itemOperationType == ItemOperationTypeTopClick) { // top部分点击
+                strongSelf.itemsScrollBar.hidden = NO;
+                strongSelf.itemsManageBar.hidden = YES;
+                strongSelf.itemsListScrollView.isHiddenBottom = NO;
+
+                [UIView animateWithDuration:.5
+                                 animations:^{
+                                     CGRect itemsListScrollViewRect = strongSelf.itemsListScrollView.frame;
+                                     itemsListScrollViewRect.size.height = 0.0;
+                                     strongSelf.itemsListScrollView.frame = itemsListScrollViewRect;
+
+                                     CGAffineTransform rotation = strongSelf.arrowButton.imageView.transform;
+                                     strongSelf.arrowButton.imageView.transform = CGAffineTransformRotate(rotation, M_PI);
+                                 }];
+
+                // 移动itemsScrollBar的item
+                [strongSelf.itemsScrollBar itemScrollToIndex:currentIndex];
             }
 
             else if (itemOperationType == ItemOperationTypeDelete) { // top部分删除
                 NSMutableArray *topItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[0]];
                 NSMutableArray *bottomItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[1]];
 
+                // itemsScrollBar移除相应item
                 NSString *itemName = topItemsNameArr[currentIndex];
-                [strongSelf.itemsScrollBar deleteItem:itemName];
+                [strongSelf.itemsScrollBar deleteItem:currentIndex];
 
+                // 重新构建allItemsNameArr
                 [topItemsNameArr removeObjectAtIndex:currentIndex];
                 [bottomItemsNameArr insertObject:itemName atIndex:0];
                 strongSelf.allItemsNameArr = [NSMutableArray arrayWithObjects:topItemsNameArr, bottomItemsNameArr, nil];
 
-                [strongSelf deletViewController:currentIndex];
+                // 删除viewController
+                [strongSelf deleteViewController:currentIndex];
             }
 
             else if (itemOperationType == ItemOperationTypeMove) { // top部分移动
+                NSMutableArray *topItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[0]];
+                NSMutableArray *bottomItemsNameArr = [NSMutableArray arrayWithArray:strongSelf.allItemsNameArr[1]];
+                NSObject *topItemName = topItemsNameArr[currentIndex];
+                [topItemsNameArr removeObjectAtIndex:currentIndex];
+                [topItemsNameArr insertObject:topItemName atIndex:toIndex];
+                strongSelf.allItemsNameArr = [NSMutableArray arrayWithObjects:topItemsNameArr, bottomItemsNameArr, nil];
+
+                // itemsScrollBar相应item移动
                 [strongSelf.itemsScrollBar moveItem:currentIndex toIndex:toIndex];
+
+                // 移动viewController
+                [strongSelf moveViewController:currentIndex toIndex:toIndex];
             }
 
             else if (itemOperationType == ItemOperationTypeBottomClick) { // bottom部分点击
@@ -174,6 +204,11 @@
 
 
 #pragma mark - Action
+/**
+ *  <#Description#>
+ *
+ *  @param button <#button description#>
+ */
 - (void)arrowButtonClick:(UIButton *)button {
     self.itemsScrollBar.hidden = !self.itemsScrollBar.hidden;
     self.itemsManageBar.hidden = !self.itemsManageBar.hidden;
@@ -215,8 +250,9 @@
     [viewController.view addSubview:label];
     [self.mainScrollView addSubview:viewController.view];
     [self.vcArr addObject:viewController];
-    
-    self.mainScrollView.contentSize = self.mainScrollView.contentSize = CGSizeMake(wScreenWidth * self.vcArr.count, self.mainScrollView.frame.size.height);;
+
+    self.mainScrollView.contentSize = self.mainScrollView.contentSize = CGSizeMake(wScreenWidth * self.vcArr.count, self.mainScrollView.frame.size.height);
+    ;
 }
 
 /**
@@ -224,7 +260,7 @@
  *
  *  @param index <#index description#>
  */
-- (void)deletViewController:(NSInteger)index {
+- (void)deleteViewController:(NSInteger)index {
     UIViewController *viewController = self.vcArr[index];
     [viewController.view removeFromSuperview];
     [self.vcArr removeObjectAtIndex:index];
@@ -239,6 +275,45 @@
     CGSize contentSize = self.mainScrollView.contentSize;
     contentSize.width -= self.mainScrollView.frame.size.width;
     self.mainScrollView.contentSize = contentSize;
+
+    self.mainScrollView.contentOffset = CGPointMake(self.itemsScrollBar.selectedIndex * self.mainScrollView.frame.size.width, 0);
+}
+
+/**
+ *  移动viewController
+ *
+ *  @param currentIndex <#currentIndex description#>
+ *  @param toIndex      <#toIndex description#>
+ */
+- (void)moveViewController:(NSInteger)currentIndex toIndex:(NSInteger)toIndex {
+    // 起点
+    NSInteger startPoint;
+    // 终点
+    NSInteger endPoint;
+    if (currentIndex <= toIndex) {
+        startPoint = currentIndex;
+        endPoint = toIndex;
+
+    } else {
+        startPoint = toIndex;
+        endPoint = currentIndex;
+    }
+    // 开始的vc
+    UIViewController *starVC = self.vcArr[startPoint];
+
+    // vc数组
+    NSObject *currentVC = self.vcArr[currentIndex];
+    [self.vcArr removeObjectAtIndex:currentIndex];
+    [self.vcArr insertObject:currentVC atIndex:toIndex];
+
+    CGRect vcRect = starVC.view.frame;
+    for (NSInteger i = startPoint; i <= endPoint; i++) {
+        UIViewController *viewController = self.vcArr[i];
+        viewController.view.frame = vcRect;
+        vcRect.origin.x += viewController.view.frame.size.width;
+    }
+
+    self.mainScrollView.contentOffset = CGPointMake(self.itemsScrollBar.selectedIndex * self.mainScrollView.frame.size.width, 0);
 }
 
 
