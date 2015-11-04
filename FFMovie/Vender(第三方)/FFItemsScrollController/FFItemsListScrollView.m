@@ -48,7 +48,7 @@
         self.showsVerticalScrollIndicator = NO;
 
         // 设置背景色，子视图的透明度不受影响
-        self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9];
+        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.9];
 
         // bottom部分隐藏
         self.isHiddenBottom = NO;

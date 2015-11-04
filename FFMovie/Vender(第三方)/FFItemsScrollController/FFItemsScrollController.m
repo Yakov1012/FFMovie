@@ -186,7 +186,6 @@
     if (!self.mainScrollView) {
         CGFloat mainScrollViewH = hScreenHeight - (hArrowHeight + 64.0 + self.tabBarController.tabBar.frame.size.height);
         self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, hArrowHeight, wScreenWidth, mainScrollViewH)];
-        self.mainScrollView.backgroundColor = [UIColor yellowColor];
         self.mainScrollView.bounces = NO;
         self.mainScrollView.pagingEnabled = YES;
         self.mainScrollView.showsHorizontalScrollIndicator = NO;
@@ -244,8 +243,7 @@
 - (void)addViewToMainScrollViewWithItemName:(NSString *)itemName index:(NSInteger)index {
     UIViewController *viewController = [[UIViewController alloc] init];
     viewController.view.frame = CGRectMake(index * self.mainScrollView.frame.size.width, 0.0, self.mainScrollView.frame.size.width, self.mainScrollView.frame.size.height);
-    viewController.view.backgroundColor = index % 2 == 0 ? [UIColor redColor] : [UIColor orangeColor];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 60.0, 20.0)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 160.0, 20.0)];
     label.text = [NSString stringWithFormat:@"%@", itemName];
     [viewController.view addSubview:label];
     [self.mainScrollView addSubview:viewController.view];
