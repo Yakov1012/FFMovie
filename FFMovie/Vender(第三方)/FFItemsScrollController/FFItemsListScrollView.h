@@ -13,13 +13,13 @@
 
 @interface FFItemsListScrollView : UIScrollView
 
-/// 是否隐藏bottom部分
+/// bottom部分是否隐藏
 @property (nonatomic, assign) BOOL isHiddenBottom;
 
-/// 所有items名称数组[@[], @[]]
+/// 所有items名称数组[@[top部分], @[bottom部分]]
 @property (nonatomic, strong) NSMutableArray *allItemsNameArr;
 
-/// item事件（top部分点击，top部分删除，top部分移动，bottom部分点击）
+/// item事件，处理完后要传给控制器处理
 @property (nonatomic, copy) void (^FFItemListOperationBlock)(ItemOperationType itemOperationType, NSInteger currentIndex, NSInteger toIndex);
 
 @end

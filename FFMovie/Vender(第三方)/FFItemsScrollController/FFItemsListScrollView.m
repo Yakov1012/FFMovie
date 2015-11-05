@@ -22,8 +22,6 @@
 @property (nonatomic, strong) NSMutableArray *topItemsArr;
 /// bottom部分的items
 @property (nonatomic, strong) NSMutableArray *bottomItemsArr;
-/// 被选中的item
-@property (nonatomic, strong) UIButton *selectedItem;
 
 /// top部分视图的高度
 @property (nonatomic, assign) CGFloat topViewHeight;
@@ -79,7 +77,7 @@
 
     // 内容视图的高度
     CGFloat contentSizeHight = self.isHiddenBottom ? self.topViewHeight : (self.topViewHeight + self.bottomViewHeight);
-    self.contentSize = CGSizeMake(wScreenWidth, MAX(contentSizeHight, self.frame.size.height));
+    self.contentSize = CGSizeMake(wMyScreenWidth, MAX(contentSizeHight, self.frame.size.height));
 
     // 初始化top、bottom
     [self setUpTopView];
@@ -102,7 +100,7 @@
 
     // 内容视图的高度
     CGFloat contentSizeHight = self.isHiddenBottom ? self.topViewHeight : (self.topViewHeight + self.bottomViewHeight);
-    self.contentSize = CGSizeMake(wScreenWidth, MAX(contentSizeHight, self.frame.size.height));
+    self.contentSize = CGSizeMake(wMyScreenWidth, MAX(contentSizeHight, self.frame.size.height));
 }
 
 
@@ -136,7 +134,7 @@
 
             // top部分删除
             else if (itemOperationType == ItemOperationTypeDelete) {
-                [strongSelf changeItemLocation:itemOperationType andItem:item];
+                [strongSelf deleteButtonClick:item];
             }
 
             // top部分移动
@@ -146,16 +144,15 @@
 
             // bottom部分点击
             else if (itemOperationType == ItemOperationTypeBottomClick) {
-                [strongSelf changeItemLocation:itemOperationType andItem:item];
+                [strongSelf bottomItemClick:item];
             }
         };
         [self.topView addSubview:item];
         [self.topItemsArr addObject:item];
 
         // 设置选中item
-        if (!self.selectedItem) {
+        if ([item.itemName isEqualToString:@"推荐"]) {
             [item setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-            self.selectedItem = item;
         }
     }
 }
@@ -168,7 +165,7 @@
     [self insertSubview:self.bottomView belowSubview:self.topView];
 
     // bottom部分头部
-    UIView *bottomHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, wScreenWidth, hArrowHeight)];
+    UIView *bottomHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, wMyScreenWidth, hArrowHeight)];
     bottomHeaderView.tag = 999;
     bottomHeaderView.backgroundColor = [UIColor grayColor];
     UILabel *moreTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 0.0, 100.0, bottomHeaderView.frame.size.height)];
@@ -199,7 +196,7 @@
 
             // top部分删除
             else if (itemOperationType == ItemOperationTypeDelete) {
-                [strongSelf changeItemLocation:itemOperationType andItem:item];
+                [strongSelf deleteButtonClick:item];
             }
 
             // top部分移动
@@ -209,7 +206,7 @@
 
             // bottom部分点击
             else if (itemOperationType == ItemOperationTypeBottomClick) {
-                [strongSelf changeItemLocation:itemOperationType andItem:item];
+                [strongSelf bottomItemClick:item];
             }
         };
         [self.bottomView addSubview:item];
@@ -219,20 +216,6 @@
 
 
 #pragma mark - Action
-/**
- *  bottom部分点击，top部分删除，改变ffItem位置(top部分，bottom部分)
- *
- *  @param itemOperationType <#itemOperationType description#>
- *  @param item              <#item description#>
- */
-- (void)changeItemLocation:(ItemOperationType)itemOperationType andItem:(FFItem *)item {
-    if (itemOperationType == ItemOperationTypeDelete) {
-        [self deleteButtonClick:item];
-    } else if (itemOperationType == ItemOperationTypeBottomClick) {
-        [self bottomItemClick:item];
-    }
-}
-
 /**
  *  top部分点击
  *
@@ -275,16 +258,6 @@
     item.itemLocation = ItemLocationBottom;
     [self.bottomView addSubview:item];
 
-    // bottom部分，item坐标变化
-    UIView *bottomHeaderView = [self.bottomView viewWithTag:999];
-    for (NSInteger i = 0; i < self.bottomItemsArr.count; i++) {
-        FFItem *item = (FFItem *)self.bottomItemsArr[i];
-        CGRect itemRect = item.frame;
-        itemRect.origin.x = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
-        itemRect.origin.y = bottomHeaderView.frame.origin.y + bottomHeaderView.frame.size.height + gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
-        item.frame = itemRect;
-    }
-
     // topView、bottomView的frame变化
     self.topViewHeight = self.topItemsArr.count == 0 ? 0.0 : (gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1));
     self.bottomViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight;
@@ -300,20 +273,19 @@
 
     // 内容视图的高度
     CGFloat contentSizeHight = self.isHiddenBottom ? self.topViewHeight : (self.topViewHeight + self.bottomViewHeight);
-    self.contentSize = CGSizeMake(wScreenWidth, MAX(contentSizeHight, self.frame.size.height));
+    self.contentSize = CGSizeMake(wMyScreenWidth, MAX(contentSizeHight, self.frame.size.height));
 
-    // 如果bottom部分无item，隐藏提示View
+    // 如果top部分无item，隐藏提示View
+    UIView *bottomHeaderView = [self.bottomView viewWithTag:999];
     bottomHeaderView.hidden = self.topItemsArr.count == 0 ? YES : NO;
 
-    // top部分items位置动画变化
-    sWeakBlock(weakSelf);
+    // top部分，item坐标变化
     [UIView animateWithDuration:0.3
         delay:0
         options:UIViewAnimationOptionLayoutSubviews
         animations:^{
-            sStrongBlock(strongSelf);
-            for (int i = 0; i < strongSelf.topItemsArr.count; i++) {
-                FFItem *item = (FFItem *)strongSelf.topItemsArr[i];
+            for (int i = 0; i < self.topItemsArr.count; i++) {
+                FFItem *item = (FFItem *)self.topItemsArr[i];
                 CGRect itemRect = item.frame;
                 itemRect.origin.x = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
                 itemRect.origin.y = gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
@@ -321,86 +293,19 @@
             }
         }
         completion:^(BOOL finished) {
-            sStrongBlock(strongSelf);
-            if (strongSelf.FFItemListOperationBlock) {
-                strongSelf.FFItemListOperationBlock(ItemOperationTypeDelete, currentIndex, currentIndex);
+            if (self.FFItemListOperationBlock) {
+                self.FFItemListOperationBlock(ItemOperationTypeDelete, currentIndex, currentIndex);
             }
         }];
-}
 
-/**
- *  bottom部分点击
- *
- *  @param item <#item description#>
- */
-- (void)bottomItemClick:(FFItem *)item {
-    // items数组相应变化，及获取当前操作的item的位置
-    __block NSInteger currentIndex = 0;
+    // bottom部分，item坐标变化
     for (NSInteger i = 0; i < self.bottomItemsArr.count; i++) {
-        if (self.bottomItemsArr[i] == item) {
-            currentIndex = i;
-            [self.bottomItemsArr removeObject:item];
-            [self.topItemsArr addObject:item];
-            break;
-        }
+        FFItem *item = (FFItem *)self.bottomItemsArr[i];
+        CGRect itemRect = item.frame;
+        itemRect.origin.x = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
+        itemRect.origin.y = bottomHeaderView.frame.origin.y + bottomHeaderView.frame.size.height + gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
+        item.frame = itemRect;
     }
-
-    // topView、bottomView的frame变化
-    self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1);
-    self.bottomViewHeight = self.bottomItemsArr.count == 0 ? 0.0 : (gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight);
-
-    CGRect itemRect = item.frame;
-    itemRect.origin.y += self.topViewHeight;
-    item.frame = itemRect;
-    [self.topView addSubview:item];
-
-    // 内容视图的高度
-    CGFloat contentSizeHight = self.isHiddenBottom ? self.topViewHeight : (self.topViewHeight + self.bottomViewHeight);
-    self.contentSize = CGSizeMake(wScreenWidth, MAX(contentSizeHight, self.frame.size.height));
-
-    // 如果bottom部分无item，隐藏提示View
-    UIView *bottomHeaderView = [self.bottomView viewWithTag:999];
-    bottomHeaderView.hidden = self.bottomItemsArr.count == 0 ? YES : NO;
-
-    // 从bottom部分移除
-    sWeakBlock(weakSelf);
-    [UIView animateWithDuration:0.3
-        delay:0
-        options:UIViewAnimationOptionLayoutSubviews
-        animations:^{
-            [item removeFromSuperview];
-            sStrongBlock(strongSelf);
-            item.itemLocation = ItemLocationTop;
-            CGFloat itemX = gEdgeGap + (gEdgeGap + wItemWidth) * ((strongSelf.topItemsArr.count - 1) % itemsPerLine);
-            CGFloat itemY = gEdgeGap + (hItemHight + gEdgeGap) * ((strongSelf.topItemsArr.count - 1) / itemsPerLine);
-            item.frame = CGRectMake(itemX, itemY, wItemWidth, hItemHight);
-            [strongSelf.topView addSubview:item];
-
-            UIView *bottomHeaderView = [strongSelf.bottomView viewWithTag:999];
-            for (NSInteger i = 0; i < strongSelf.bottomItemsArr.count; i++) {
-                FFItem *item = (FFItem *)strongSelf.bottomItemsArr[i];
-                CGRect itemRect = item.frame;
-                itemRect.origin.x = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
-                itemRect.origin.y = bottomHeaderView.frame.origin.y + bottomHeaderView.frame.size.height + gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
-                item.frame = itemRect;
-            }
-
-            CGRect topViewRect = strongSelf.topView.frame;
-            topViewRect.size.height = strongSelf.topViewHeight;
-            strongSelf.topView.frame = topViewRect;
-
-            CGRect bottomViewRect = strongSelf.bottomView.frame;
-            bottomViewRect.origin.y = strongSelf.topViewHeight;
-            bottomViewRect.size.height = strongSelf.bottomViewHeight;
-            strongSelf.bottomView.frame = bottomViewRect;
-        }
-        completion:^(BOOL finished) {
-            sStrongBlock(strongSelf);
-
-            if (strongSelf.FFItemListOperationBlock) {
-                strongSelf.FFItemListOperationBlock(ItemOperationTypeBottomClick, currentIndex, currentIndex);
-            }
-        }];
 }
 
 /**
@@ -430,19 +335,18 @@
                 break;
             }
         }
-        
+
+        // 放大item
         [UIView animateWithDuration:0.1
             animations:^{
                 CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.2, 1.2);
                 [item setTransform:newTRansform];
-
-                
             }
             completion:^(BOOL finished){
-
             }];
     } break;
     case UIGestureRecognizerStateChanged: {
+#warning 整理到此
         NSInteger indexX = (center.x <= wItemWidth + 2 * gEdgeGap) ? 0 : (center.x - wItemWidth - 2 * gEdgeGap) / (gEdgeGap + wItemWidth) + 1;
         NSInteger indexY = (center.y <= hItemHight + 2 * gEdgeGap) ? 0 : (center.y - hItemHight - 2 * gEdgeGap) / (gEdgeGap + hItemHight) + 1;
 
@@ -492,6 +396,81 @@
     default:
         break;
     }
+}
+
+/**
+ *  bottom部分点击
+ *
+ *  @param item <#item description#>
+ */
+- (void)bottomItemClick:(FFItem *)item {
+    // items数组相应变化，及获取当前操作的item的位置
+    __block NSInteger currentIndex = 0;
+    for (NSInteger i = 0; i < self.bottomItemsArr.count; i++) {
+        if (self.bottomItemsArr[i] == item) {
+            currentIndex = i;
+            [self.bottomItemsArr removeObject:item];
+            [self.topItemsArr addObject:item];
+            break;
+        }
+    }
+
+    // topView、bottomView的frame变化
+    self.topViewHeight = gEdgeGap + (gEdgeGap + hItemHight) * ((self.topItemsArr.count - 1) / itemsPerLine + 1);
+    self.bottomViewHeight = self.bottomItemsArr.count == 0 ? 0.0 : (gEdgeGap + (gEdgeGap + hItemHight) * ((self.bottomItemsArr.count - 1) / itemsPerLine + 1) + hArrowHeight);
+
+    CGRect itemRect = item.frame;
+    itemRect.origin.y += self.topViewHeight;
+    item.frame = itemRect;
+    [self.topView addSubview:item];
+
+    // 内容视图的高度
+    CGFloat contentSizeHight = self.isHiddenBottom ? self.topViewHeight : (self.topViewHeight + self.bottomViewHeight);
+    self.contentSize = CGSizeMake(wMyScreenWidth, MAX(contentSizeHight, self.frame.size.height));
+
+    // 如果bottom部分无item，隐藏提示View
+    UIView *bottomHeaderView = [self.bottomView viewWithTag:999];
+    bottomHeaderView.hidden = self.bottomItemsArr.count == 0 ? YES : NO;
+
+    // 从bottom部分移除
+    sWeakBlock(weakSelf);
+    [UIView animateWithDuration:0.3
+        delay:0
+        options:UIViewAnimationOptionLayoutSubviews
+        animations:^{
+            [item removeFromSuperview];
+            sStrongBlock(strongSelf);
+            item.itemLocation = ItemLocationTop;
+            CGFloat itemX = gEdgeGap + (gEdgeGap + wItemWidth) * ((strongSelf.topItemsArr.count - 1) % itemsPerLine);
+            CGFloat itemY = gEdgeGap + (hItemHight + gEdgeGap) * ((strongSelf.topItemsArr.count - 1) / itemsPerLine);
+            item.frame = CGRectMake(itemX, itemY, wItemWidth, hItemHight);
+            [strongSelf.topView addSubview:item];
+
+            UIView *bottomHeaderView = [strongSelf.bottomView viewWithTag:999];
+            for (NSInteger i = 0; i < strongSelf.bottomItemsArr.count; i++) {
+                FFItem *item = (FFItem *)strongSelf.bottomItemsArr[i];
+                CGRect itemRect = item.frame;
+                itemRect.origin.x = gEdgeGap + (gEdgeGap + wItemWidth) * (i % itemsPerLine);
+                itemRect.origin.y = bottomHeaderView.frame.origin.y + bottomHeaderView.frame.size.height + gEdgeGap + (hItemHight + gEdgeGap) * (i / itemsPerLine);
+                item.frame = itemRect;
+            }
+
+            CGRect topViewRect = strongSelf.topView.frame;
+            topViewRect.size.height = strongSelf.topViewHeight;
+            strongSelf.topView.frame = topViewRect;
+
+            CGRect bottomViewRect = strongSelf.bottomView.frame;
+            bottomViewRect.origin.y = strongSelf.topViewHeight;
+            bottomViewRect.size.height = strongSelf.bottomViewHeight;
+            strongSelf.bottomView.frame = bottomViewRect;
+        }
+        completion:^(BOOL finished) {
+            sStrongBlock(strongSelf);
+
+            if (strongSelf.FFItemListOperationBlock) {
+                strongSelf.FFItemListOperationBlock(ItemOperationTypeBottomClick, currentIndex, currentIndex);
+            }
+        }];
 }
 
 @end

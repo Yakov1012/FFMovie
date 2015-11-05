@@ -57,7 +57,7 @@
  */
 - (void)setUpArrowButton {
     if (!self.arrowButton) {
-        self.arrowButton = [[UIButton alloc] initWithFrame:CGRectMake(wScreenWidth - wArrowWidth, 0, wArrowWidth, hArrowHeight)];
+        self.arrowButton = [[UIButton alloc] initWithFrame:CGRectMake(wMyScreenWidth - wArrowWidth, 0, wArrowWidth, hArrowHeight)];
         [self.arrowButton setImage:[UIImage imageNamed:@"Arrow.png"] forState:UIControlStateNormal];
         [self.arrowButton addTarget:self action:@selector(arrowButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.arrowButton];
@@ -69,7 +69,7 @@
  */
 - (void)setUpItemsScrollBar {
     if (!self.itemsScrollBar) {
-        self.itemsScrollBar = [[FFItemsScrollBar alloc] initWithFrame:CGRectMake(0.0, 0.0, wScreenWidth - wArrowWidth, hArrowHeight)];
+        self.itemsScrollBar = [[FFItemsScrollBar alloc] initWithFrame:CGRectMake(0.0, 0.0, wMyScreenWidth - wArrowWidth, hArrowHeight)];
         self.itemsScrollBar.itemsNameArr = [NSMutableArray arrayWithArray:self.allItemsNameArr[0]];
         sWeakBlock(weakSelf);
         self.itemsScrollBar.itemClickBlock = ^(NSString *itemName, NSInteger itemIndex) {
@@ -86,7 +86,7 @@
  */
 - (void)setUpItemsManageBar {
     if (!self.itemsManageBar) {
-        self.itemsManageBar = [[FFItemsManageBar alloc] initWithFrame:CGRectMake(0.0, 0.0, wScreenWidth - wArrowWidth, hArrowHeight)];
+        self.itemsManageBar = [[FFItemsManageBar alloc] initWithFrame:CGRectMake(0.0, 0.0, wMyScreenWidth - wArrowWidth, hArrowHeight)];
         self.itemsManageBar.hidden = YES;
         sWeakBlock(weakSelf);
         self.itemsManageBar.manageButtonClick = ^(BOOL isDone) {
@@ -103,7 +103,7 @@
 - (void)setUpItemsListScrollView {
     if (!self.itemsListScrollView) {
 
-        self.itemsListScrollView = [[FFItemsListScrollView alloc] initWithFrame:CGRectMake(0.0, 64.0 + hArrowHeight, wScreenWidth, 0.0)];
+        self.itemsListScrollView = [[FFItemsListScrollView alloc] initWithFrame:CGRectMake(0.0, 64.0 + hArrowHeight, wMyScreenWidth, 0.0)];
         self.itemsListScrollView.allItemsNameArr = [NSMutableArray arrayWithArray:self.allItemsNameArr];
         sWeakBlock(weakSelf);
         sStrongBlock(strongSelf);
@@ -184,15 +184,15 @@
  */
 - (void)setUpMainScrollView {
     if (!self.mainScrollView) {
-        CGFloat mainScrollViewH = hScreenHeight - (hArrowHeight + 64.0 + self.tabBarController.tabBar.frame.size.height);
-        self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, hArrowHeight, wScreenWidth, mainScrollViewH)];
+        CGFloat mainScrollViewH = hMyScreenHeight - (hArrowHeight + 64.0 + self.tabBarController.tabBar.frame.size.height);
+        self.mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, hArrowHeight, wMyScreenWidth, mainScrollViewH)];
         self.mainScrollView.bounces = NO;
         self.mainScrollView.pagingEnabled = YES;
         self.mainScrollView.showsHorizontalScrollIndicator = NO;
         self.mainScrollView.showsVerticalScrollIndicator = NO;
         self.mainScrollView.delegate = self;
         NSArray *topItemsNameArr = self.allItemsNameArr[0];
-        self.mainScrollView.contentSize = CGSizeMake(wScreenWidth * topItemsNameArr.count, self.mainScrollView.frame.size.height);
+        self.mainScrollView.contentSize = CGSizeMake(wMyScreenWidth * topItemsNameArr.count, self.mainScrollView.frame.size.height);
         [self.view insertSubview:self.mainScrollView atIndex:0];
 
         for (NSInteger i = 0; i < topItemsNameArr.count; i++) {
@@ -216,7 +216,7 @@
     // 发通知，隐藏删除按钮
     [[NSNotificationCenter defaultCenter] postNotificationName:nManagerNotification object:@(!self.itemsListScrollView.isHiddenBottom)];
 
-    CGFloat itemsListScrollViewH = hScreenHeight - (self.itemsScrollBar.frame.origin.y + self.itemsScrollBar.frame.size.height + 64.0);
+    CGFloat itemsListScrollViewH = hMyScreenHeight - (self.itemsScrollBar.frame.origin.y + self.itemsScrollBar.frame.size.height + 64.0);
     sWeakBlock(weakSelf);
     [UIView animateWithDuration:.5
                      animations:^{
@@ -249,7 +249,7 @@
     [self.mainScrollView addSubview:viewController.view];
     [self.vcArr addObject:viewController];
 
-    self.mainScrollView.contentSize = self.mainScrollView.contentSize = CGSizeMake(wScreenWidth * self.vcArr.count, self.mainScrollView.frame.size.height);
+    self.mainScrollView.contentSize = self.mainScrollView.contentSize = CGSizeMake(wMyScreenWidth * self.vcArr.count, self.mainScrollView.frame.size.height);
     ;
 }
 

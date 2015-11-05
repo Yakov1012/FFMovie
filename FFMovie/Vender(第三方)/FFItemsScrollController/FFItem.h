@@ -22,7 +22,7 @@
 /// 拖拽
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 
-/// item点击
+/// item事件
 @property (nonatomic, copy) void (^FFItemOperationBlock)(ItemOperationType type, FFItem *item);
 
 @end
