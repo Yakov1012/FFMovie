@@ -346,16 +346,19 @@
             }];
     } break;
     case UIGestureRecognizerStateChanged: {
-#warning 整理到此
-        NSInteger indexX = (center.x <= wItemWidth + 2 * gEdgeGap) ? 0 : (center.x - wItemWidth - 2 * gEdgeGap) / (gEdgeGap + wItemWidth) + 1;
-        NSInteger indexY = (center.y <= hItemHight + 2 * gEdgeGap) ? 0 : (center.y - hItemHight - 2 * gEdgeGap) / (gEdgeGap + hItemHight) + 1;
+        // 移动过程中，其他item位置变化
+        // 手势所在坐标点
+        NSInteger indexX = (center.x <= wItemWidth + 2 * gEdgeGap) ? 0 : (center.x - (wItemWidth + 2 * gEdgeGap)) / (gEdgeGap + wItemWidth) + 1;
+        NSInteger indexY = (center.y <= hItemHight + 2 * gEdgeGap) ? 0 : (center.y - (hItemHight + 2 * gEdgeGap)) / (gEdgeGap + hItemHight) + 1;
 
+        // 得到手势所在位置对应item数组的位置
         NSInteger index = indexX + indexY * itemsPerLine;
         index = (index == 0) ? 1 : index;
         index = (index < self.topItemsArr.count) ? index : (self.topItemsArr.count - 1);
         [self.topItemsArr removeObject:item];
         [self.topItemsArr insertObject:item atIndex:index];
 
+        // 给除手势所在item的，剩余所有item重新设置位置
         for (NSInteger i = 0; i < self.topItemsArr.count; i++) {
             if ([self.topItemsArr objectAtIndex:i] != item) {
                 FFItem *loacationItem = self.topItemsArr[i];
@@ -371,6 +374,7 @@
         }
     } break;
     case UIGestureRecognizerStateEnded: {
+        // 拖拽结束，给item设置位置，并回复正常大小
         [UIView animateWithDuration:0.3
             animations:^{
                 CGAffineTransform newTRansform = CGAffineTransformMakeScale(1.0, 1.0);
