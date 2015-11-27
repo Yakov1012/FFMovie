@@ -31,8 +31,6 @@
     FFTabBarController *rootViewController = [[FFTabBarController alloc] init];
     self.window.rootViewController = rootViewController;
     
-    
-
     return YES;
 }
 
